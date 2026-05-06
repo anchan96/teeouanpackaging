@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tee Ouan Packaging</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink: #ff69b4;
+      --pink-dark: #d4006e;
+      --pink-mid: #e0459a;
+      --pink-light: #ffe0f0;
+      --cream: #fefce8;
+      --bg: #f5f7ee;
+      --white: #ffffff;
+      --text: #2d2d2d;
+      --text-muted: #6b6b6b;
+      --shadow: 0 4px 24px rgba(0,0,0,0.07);
+      --shadow-hover: 0 8px 36px rgba(255,105,180,0.18);
+      --radius: 20px;
+      --teal: #0097a7;
+      --green: #43a047;
+      --purple: #7b2fa2;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 56px; background: var(--white);
+      border-bottom: 1px solid #f0e0ea;
+      position: sticky; top: 0; z-index: 200;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
+      color: var(--pink); text-decoration: none; cursor: pointer;
+    }
+    .nav-links { display: flex; gap: 6px; list-style: none; }
+    .nav-links li a {
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none; font-size: 0.93rem; font-weight: 500;
+      color: var(--text); padding: 8px 18px; border-radius: 50px;
+      transition: background 0.2s, color 0.2s; cursor: pointer;
+    }
+    .nav-links li a.active { background: var(--pink-light); color: var(--pink-dark); font-weight: 600; }
+    .nav-links li a:hover:not(.active) { background: #f5f5f5; }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* SHARED BUTTONS */
+    .btn-primary {
+      background: var(--pink); color: #fff; border: none; border-radius: 50px;
+      padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer;
+      font-family: 'Poppins', sans-serif; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--pink-mid); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--pink); border: 2px solid var(--pink);
+      border-radius: 50px; padding: 12px 30px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; font-family: 'Poppins', sans-serif; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { background: var(--pink-light); transform: translateY(-2px); }
+
+    /* PRODUCT CARDS (shared) */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+      gap: 28px; max-width: 1100px; margin: 0 auto;
+    }
+    .product-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .product-img-placeholder {
+      width: 100%; height: 220px;
+      display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
+    }
+    .img-boxes  { background: linear-gradient(135deg,#c8b8a2,#a89070); }
+    .img-bubble { background: linear-gradient(135deg,#d0e8f0,#b0d0e8); }
+    .img-bags   { background: linear-gradient(135deg,#d4b896,#b89070); }
+    .img-eco    { background: linear-gradient(135deg,#c8d8b0,#a0b880); }
+    .img-plastic{ background: linear-gradient(135deg,#d0e8f8,#a8ccee); }
+    .product-body { padding: 18px 20px 22px; }
+    .product-tag {
+      display: inline-block; background: var(--pink-light); color: var(--pink-dark);
+      font-size: 0.76rem; font-weight: 600; padding: 4px 12px; border-radius: 50px; margin-bottom: 10px;
+    }
+    .product-name { font-family:'Nunito',sans-serif; font-size:1.15rem; font-weight:800; color:var(--text); margin-bottom:7px; }
+    .product-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px; }
+    .product-footer { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+    .product-price { font-family:'Nunito',sans-serif; font-size:1.45rem; font-weight:900; color:var(--pink); }
+    .product-price span { font-size:0.82rem; font-weight:600; color:var(--text-muted); }
+    .product-stock { font-size:0.83rem; color:var(--text-muted); }
+    .add-to-cart {
+      width:100%; background:var(--pink); color:#fff; border:none; border-radius:50px;
+      padding:13px; font-size:0.95rem; font-weight:700; cursor:pointer;
+      font-family:'Poppins',sans-serif; display:flex; align-items:center; justify-content:center; gap:8px;
+      transition:background 0.2s, transform 0.15s;
+    }
+    .add-to-cart:hover { background:var(--pink-mid); transform:translateY(-1px); }
+
+    /* FOOTER (shared) */
+    footer { background:var(--white); padding:40px 56px 28px; border-top:1px solid #f0e0ea; }
+    .footer-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:48px; margin-bottom:32px; }
+    .footer-brand p { font-size:0.87rem; color:var(--text-muted); line-height:1.7; margin-top:12px; }
+    .footer-col h4 { font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800; color:var(--pink-dark); margin-bottom:14px; }
+    .footer-col p { font-size:0.87rem; color:var(--text-muted); line-height:2; }
+    .footer-bottom { text-align:center; font-size:0.82rem; color:var(--text-muted); padding-top:20px; border-top:1px solid #f0f0f0; }
+
+    /* HELP BUBBLE */
+    .help-bubble {
+      position:fixed; bottom:28px; right:28px; width:46px; height:46px;
+      background:var(--white); border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,0.15);
+      display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+      cursor:pointer; color:var(--text-muted); border:1px solid #eee; z-index:300;
+    }
+
+    /* ─── HOME ─── */
+    .hero { background:var(--cream); text-align:center; padding:80px 48px 90px; }
+    .hero h1 {
+      font-family:'Nunito',sans-serif; font-size:clamp(2.4rem,6vw,4.5rem);
+      font-weight:900; color:var(--pink); letter-spacing:-1px; margin-bottom:14px;
+    }
+    .hero .tagline { font-size:1.15rem; font-weight:600; color:var(--text); margin-bottom:10px; }
+    .hero .desc { font-size:0.97rem; color:var(--text-muted); margin-bottom:40px; }
+    .hero-btns { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; }
+
+    .why { padding:72px 56px; background:var(--bg); }
+    .why h2, .section-title {
+      text-align:center; font-family:'Nunito',sans-serif; font-size:2rem;
+      font-weight:800; color:var(--pink-dark); margin-bottom:48px;
+    }
+    .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:24px; max-width:1100px; margin:0 auto; }
+    .feature-card {
+      background:var(--white); border-radius:var(--radius); padding:36px 24px 32px;
+      text-align:center; box-shadow:var(--shadow); transition:box-shadow 0.2s,transform 0.2s;
+    }
+    .feature-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-4px); }
+    .feature-icon {
+      width:72px; height:72px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 20px; font-size:1.9rem;
+    }
+    .feature-card:nth-child(1) .feature-icon { background:#ffe0f0; }
+    .feature-card:nth-child(2) .feature-icon { background:#e0f7fa; }
+    .feature-card:nth-child(3) .feature-icon { background:#e8f5e9; }
+    .feature-card:nth-child(4) .feature-icon { background:#ede7f6; }
+    .feature-card h3 { font-family:'Nunito',sans-serif; font-size:1.08rem; font-weight:800; margin-bottom:10px; }
+    .feature-card:nth-child(1) h3 { color:var(--pink); }
+    .feature-card:nth-child(2) h3 { color:var(--teal); }
+    .feature-card:nth-child(3) h3 { color:var(--green); }
+    .feature-card:nth-child(4) h3 { color:var(--purple); }
+    .feature-card p { font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+
+    .featured { padding:0 56px 60px; background:var(--bg); }
+    .featured-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; }
+    .featured-header h2 { font-family:'Nunito',sans-serif; font-size:1.8rem; font-weight:800; color:var(--pink); }
+    .view-all { color:var(--pink-dark); font-weight:700; text-decoration:none; font-size:0.95rem; display:flex; align-items:center; gap:4px; cursor:pointer; }
+    .view-all:hover { gap:8px; }
+
+    .cta-section { padding:60px 56px 72px; background:var(--bg); }
+    .cta-card {
+      max-width:1100px; margin:0 auto;
+      background:linear-gradient(135deg,#ffd6e8 0%,#e8c0f0 100%);
+      border-radius:28px; padding:72px 48px; text-align:center;
+    }
+    .cta-card h2 { font-family:'Nunito',sans-serif; font-size:2.2rem; font-weight:900; color:var(--pink-dark); margin-bottom:16px; }
+    .cta-card p { font-size:1rem; color:var(--text); margin-bottom:40px; }
+    .cta-btns { display:flex; align-items:center; justify-content:center; gap:16px; }
+    .btn-white {
+      background:var(--white); color:var(--pink); border:none; border-radius:50px;
+      padding:14px 32px; font-size:1rem; font-weight:700; cursor:pointer;
+      font-family:'Poppins',sans-serif; transition:box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-white:hover { box-shadow:0 4px 16px rgba(0,0,0,0.12); transform:translateY(-2px); }
+    .btn-purple {
+      background:#6d2e96; color:#fff; border:none; border-radius:50px;
+      padding:14px 32px; font-size:1rem; font-weight:700; cursor:pointer;
+      font-family:'Poppins',sans-serif; transition:background 0.2s, transform 0.15s;
+    }
+    .btn-purple:hover { background:#5a1e7a; transform:translateY(-2px); }
+
+    /* ─── PRODUCTS ─── */
+    .page-hero { background:var(--cream); text-align:center; padding:60px 48px 40px; }
+    .page-hero h1 { font-family:'Nunito',sans-serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:var(--pink); margin-bottom:10px; }
+    .page-hero p { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:32px; }
+    .search-bar {
+      max-width:520px; margin:0 auto 28px;
+      display:flex; align-items:center; gap:12px;
+      background:var(--white); border-radius:50px; padding:12px 22px;
+      box-shadow:0 2px 12px rgba(0,0,0,0.08);
+    }
+    .search-bar input { border:none; outline:none; font-size:0.95rem; font-family:'Poppins',sans-serif; width:100%; color:var(--text); background:transparent; }
+    .filter-tabs { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
+    .filter-btn {
+      border:2px solid #ddd; background:var(--white); border-radius:50px;
+      padding:9px 22px; font-size:0.92rem; font-weight:600; cursor:pointer;
+      font-family:'Poppins',sans-serif; color:var(--text); transition:all 0.2s;
+    }
+    .filter-btn.active { background:var(--pink); color:#fff; border-color:var(--pink); }
+    .filter-btn:hover:not(.active) { border-color:var(--pink); color:var(--pink); }
+    .products-list { padding:40px 56px 80px; }
+
+    /* ─── ORDERS ─── */
+    .orders-hero { background:var(--cream); text-align:center; padding:60px 48px 40px; }
+    .orders-hero h1 { font-family:'Nunito',sans-serif; font-size:clamp(2rem,5vw,3rem); font-weight:900; color:var(--pink); margin-bottom:10px; }
+    .orders-hero p { font-size:0.97rem; color:var(--text-muted); margin-bottom:32px; }
+    .order-tab-btns { display:flex; justify-content:center; gap:14px; }
+    .tab-btn {
+      border:none; border-radius:50px; padding:12px 32px; font-size:0.95rem;
+      font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; transition:all 0.2s;
+    }
+    .tab-btn.active { background:var(--pink); color:#fff; }
+    .tab-btn.inactive { background:var(--white); color:var(--text); box-shadow:var(--shadow); }
+    .tab-btn.inactive:hover { background:#f5f5f5; }
+    .orders-list { padding:32px 56px 80px; max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:20px; }
+    .order-card { background:var(--white); border-radius:var(--radius); padding:28px 32px; box-shadow:var(--shadow); }
+    .order-header { display:flex; align-items:center; gap:16px; margin-bottom:18px; }
+    .order-icon { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+    .order-icon.completed { background:#e8f5e9; }
+    .order-icon.processing { background:#e0f7fa; }
+    .order-icon.pending { background:#fff8e1; }
+    .order-meta { flex:1; }
+    .order-id { font-family:'Nunito',sans-serif; font-size:1.1rem; font-weight:800; }
+    .order-customer { font-size:0.85rem; color:var(--text-muted); margin-top:2px; }
+    .order-right { display:flex; align-items:center; gap:20px; margin-left:auto; }
+    .order-date { font-size:0.88rem; color:var(--text-muted); }
+    .status-badge { border-radius:50px; padding:5px 16px; font-size:0.84rem; font-weight:600; }
+    .status-badge.completed { background:#e8f5e9; color:#2e7d32; }
+    .status-badge.processing { background:#e0f7fa; color:#00838f; }
+    .status-badge.pending { background:#fff8e1; color:#f57f17; }
+    .order-divider { border:none; border-top:1px solid #f0f0f0; margin-bottom:16px; }
+    .order-item { display:flex; justify-content:space-between; font-size:0.9rem; color:var(--text); padding:5px 0; }
+    .order-total { display:flex; justify-content:space-between; align-items:center; font-size:0.95rem; font-weight:600; margin-top:8px; padding-top:8px; }
+    .order-total-amount { font-family:'Nunito',sans-serif; font-size:1.5rem; font-weight:900; color:var(--pink); }
+
+    /* ─── ABOUT ─── */
+    .values-section { padding:60px 56px 40px; background:var(--cream); }
+    .values-section h2 { text-align:center; font-family:'Nunito',sans-serif; font-size:2rem; font-weight:800; color:var(--pink-dark); margin-bottom:40px; }
+    .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; max-width:1100px; margin:0 auto; }
+    .value-card { background:var(--white); border-radius:var(--radius); padding:40px 32px 36px; text-align:center; box-shadow:var(--shadow); transition:box-shadow 0.2s, transform 0.2s; }
+    .value-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-4px); }
+    .value-icon { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:2.2rem; }
+    .value-card:nth-child(1) .value-icon { background:#ffe0f0; }
+    .value-card:nth-child(2) .value-icon { background:#e0f7fa; }
+    .value-card:nth-child(3) .value-icon { background:#e8f5e9; }
+    .value-card h3 { font-family:'Nunito',sans-serif; font-size:1.15rem; font-weight:800; margin-bottom:12px; }
+    .value-card:nth-child(1) h3 { color:var(--pink-dark); }
+    .value-card:nth-child(2) h3 { color:var(--teal); }
+    .value-card:nth-child(3) h3 { color:var(--green); }
+    .value-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.6; }
+
+    .services-section { padding:40px 56px; background:var(--cream); }
+    .services-section h2 { text-align:center; font-family:'Nunito',sans-serif; font-size:2rem; font-weight:800; color:var(--pink-dark); margin-bottom:32px; }
+    .services-card { max-width:1100px; margin:0 auto; background:var(--white); border-radius:var(--radius); padding:44px 48px; box-shadow:var(--shadow); }
+    .services-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px 48px; }
+    .service-item { display:flex; align-items:flex-start; gap:18px; }
+    .service-icon { width:52px; height:52px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+    .si-pink { background:var(--pink); }
+    .si-teal { background:#00bcd4; }
+    .si-green { background:#4caf50; }
+    .si-purple { background:#9c27b0; }
+    .service-text h4 { font-family:'Nunito',sans-serif; font-size:1.05rem; font-weight:800; color:var(--text); margin-bottom:6px; }
+    .service-text p { font-size:0.87rem; color:var(--text-muted); line-height:1.6; }
+
+    .contact-section { padding:40px 56px 60px; background:var(--cream); }
+    .contact-gradient { max-width:1100px; margin:0 auto; background:linear-gradient(135deg,#ffd6e8 0%,#e8c0f0 100%); border-radius:28px; padding:48px 56px 0; overflow:hidden; }
+    .contact-gradient h2 { font-family:'Nunito',sans-serif; font-size:2rem; font-weight:800; color:var(--pink-dark); text-align:center; margin-bottom:10px; }
+    .contact-gradient > p { text-align:center; color:var(--text-muted); margin-bottom:36px; font-size:0.95rem; }
+    .contact-info-grid { background:var(--white); border-radius:20px 20px 0 0; padding:40px 48px; display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+    .contact-item { display:flex; align-items:flex-start; gap:18px; }
+    .contact-icon { width:52px; height:52px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+    .ci-pink { background:#ffe0f0; }
+    .ci-teal { background:#e0f7fa; }
+    .ci-green { background:#e8f5e9; }
+    .ci-purple { background:#ede7f6; }
+    .contact-item h4 { font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800; color:var(--text); margin-bottom:6px; }
+    .contact-item p { font-size:0.87rem; color:var(--text-muted); line-height:1.8; }
+
+    @media(max-width:768px){
+      nav { padding:14px 20px; }
+      .why,.featured,.cta-section,.products-list,.orders-list,
+      .values-section,.services-section,.contact-section,footer { padding-left:20px; padding-right:20px; }
+      .services-grid,.contact-info-grid,.footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo" onclick="showPage('home')">
+    <svg width="30" height="30" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
+    Tee Ouan Packaging
+  </span>
+  <ul class="nav-links">
+    <li><a id="nav-home"     onclick="showPage('home')"     class="active">🏠 Home</a></li>
+    <li><a id="nav-products" onclick="showPage('products')">📦 Products</a></li>
+    <li><a id="nav-orders"   onclick="showPage('orders')">🛒 Orders</a></li>
+    <li><a id="nav-about"    onclick="showPage('about')">ℹ️ About Us</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <h1>Tee Ouan Packaging</h1>
+    <p class="tagline">Quality Packaging Supplier – Complete Solutions</p>
+    <p class="desc">Wide variety of products, affordable prices, with express delivery service</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('products')">View All Products</button>
+      <button class="btn-outline" onclick="showPage('orders')">Place Order</button>
+    </div>
+  </section>
+
+  <section class="why">
+    <h2>Why Choose Us</h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">📦</div><h3>Wide Variety</h3><p>All types of packaging to meet every need</p></div>
+      <div class="feature-card"><div class="feature-icon">🏅</div><h3>High Quality</h3><p>Carefully selected premium products</p></div>
+      <div class="feature-card"><div class="feature-icon">🚚</div><h3>Fast Delivery</h3><p>Express delivery nationwide</p></div>
+      <div class="feature-card"><div class="feature-icon">💜</div><h3>Great Service</h3><p>Consultation and close customer care</p></div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="featured-header">
+      <h2>Featured Products</h2>
+      <span class="view-all" onclick="showPage('products')">View All →</span>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img-placeholder img-boxes">📦</div>
+        <div class="product-body">
+          <span class="product-tag">Boxes</span>
+          <div class="product-name">Corrugated Box Size A</div>
+          <div class="product-desc">3-ply corrugated cardboard box, strong and durable, suitable for general packaging</div>
+          <div class="product-footer">
+            <div class="product-price">$15 <span>/pc</span></div>
+            <div class="product-stock">Stock: 500</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-placeholder img-bubble">🫧</div>
+        <div class="product-body">
+          <span class="product-tag">Protective Materials</span>
+          <div class="product-name">Bubble Wrap</div>
+          <div class="product-desc">Bubble wrap for shock protection, prevents product damage, ready to use</div>
+          <div class="product-footer">
+            <div class="product-price">$120 <span>/roll</span></div>
+            <div class="product-stock">Stock: 200</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img-placeholder img-bags">🛍️</div>
+        <div class="product-body">
+          <span class="product-tag">Bags</span>
+          <div class="product-name">Kraft Paper Bags</div>
+          <div class="product-desc">Eco-friendly kraft paper bags with handles, strong and durable</div>
+          <div class="product-footer">
+            <div class="product-price">$5 <span>/pc</span></div>
+            <div class="product-stock">Stock: 1000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-card">
+      <h2>Ready to Order?</h2>
+      <p>Our team is ready to provide consultation and assistance 24/7</p>
+      <div class="cta-btns">
+        <button class="btn-white" onclick="showPage('orders')">Order Now</button>
+        <button class="btn-purple" onclick="showPage('about')">About Us</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo" onclick="showPage('home')">
+          <svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
+          Tee Ouan Packaging
+        </span>
+        <p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p>
+      </div>
+      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 02-XXX-XXXX<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
+      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 8:00 AM - 12:00 PM<br>Sun: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ═══ PRODUCTS ═══ -->
+<div id="page-products" class="page">
+  <section class="page-hero">
+    <h1>Our Products</h1>
+    <p>Choose the right packaging for you</p>
+    <div class="search-bar">
+      <span style="font-size:1.1rem;color:#aaa;">🔍</span>
+      <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()"/>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-btn active" onclick="filterCategory('All',this)">All</button>
+      <button class="filter-btn" onclick="filterCategory('Boxes',this)">Boxes</button>
+      <button class="filter-btn" onclick="filterCategory('Bags',this)">Bags</button>
+      <button class="filter-btn" onclick="filterCategory('Protective Materials',this)">Protective Materials</button>
+      <button class="filter-btn" onclick="filterCategory('Eco-Friendly',this)">Eco-Friendly</button>
+    </div>
+  </section>
+
+  <section class="products-list">
+    <div class="products-grid" id="productsGrid">
+      <div class="product-card" data-category="Boxes" data-name="corrugated box size a">
+        <div class="product-img-placeholder img-boxes">📦</div>
+        <div class="product-body">
+          <span class="product-tag">Boxes</span>
+          <div class="product-name">Corrugated Box Size A</div>
+          <div class="product-desc">3-ply corrugated cardboard box, strong and durable, suitable for general packaging</div>
+          <div class="product-footer"><div class="product-price">$15 <span>/pc</span></div><div class="product-stock">Stock: 500</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-category="Protective Materials" data-name="bubble wrap">
+        <div class="product-img-placeholder img-bubble">🫧</div>
+        <div class="product-body">
+          <span class="product-tag">Protective Materials</span>
+          <div class="product-name">Bubble Wrap</div>
+          <div class="product-desc">Bubble wrap for shock protection, prevents product damage, ready to use</div>
+          <div class="product-footer"><div class="product-price">$120 <span>/roll</span></div><div class="product-stock">Stock: 200</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-category="Bags" data-name="kraft paper bags">
+        <div class="product-img-placeholder img-bags">🛍️</div>
+        <div class="product-body">
+          <span class="product-tag">Bags</span>
+          <div class="product-name">Kraft Paper Bags</div>
+          <div class="product-desc">Eco-friendly kraft paper bags with handles, strong and durable</div>
+          <div class="product-footer"><div class="product-price">$5 <span>/pc</span></div><div class="product-stock">Stock: 1000</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-category="Eco-Friendly" data-name="eco-friendly packaging">
+        <div class="product-img-placeholder img-eco">🌿</div>
+        <div class="product-body">
+          <span class="product-tag">Eco-Friendly</span>
+          <div class="product-name">Eco-Friendly Packaging</div>
+          <div class="product-desc">Biodegradable packaging made from recycled materials, environmentally conscious choice</div>
+          <div class="product-footer"><div class="product-price">$35 <span>/pc</span></div><div class="product-stock">Stock: 150</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-category="Protective Materials" data-name="clear plastic containers">
+        <div class="product-img-placeholder img-plastic">🔵</div>
+        <div class="product-body">
+          <span class="product-tag">Protective Materials</span>
+          <div class="product-name">Clear Plastic Containers</div>
+          <div class="product-desc">Transparent plastic containers for display and protection of products</div>
+          <div class="product-footer"><div class="product-price">$25 <span>/pc</span></div><div class="product-stock">Stock: 300</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-category="Boxes" data-name="corrugated box size b">
+        <div class="product-img-placeholder img-boxes">📫</div>
+        <div class="product-body">
+          <span class="product-tag">Boxes</span>
+          <div class="product-name">Corrugated Box Size B</div>
+          <div class="product-desc">5-ply heavy-duty corrugated box, ideal for heavy or fragile items</div>
+          <div class="product-footer"><div class="product-price">$22 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
+          <button class="add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo" onclick="showPage('home')">
+          <svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
+          Tee Ouan Packaging
+        </span>
+        <p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p>
+      </div>
+      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 02-XXX-XXXX<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
+      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 8:00 AM - 12:00 PM<br>Sun: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ═══ ORDERS ═══ -->
+<div id="page-orders" class="page">
+  <section class="orders-hero">
+    <h1>Orders</h1>
+    <p>Check your orders or place a new order</p>
+    <div class="order-tab-btns">
+      <button class="tab-btn active">All Orders</button>
+      <button class="tab-btn inactive">New Order</button>
+    </div>
+  </section>
+
+  <div class="orders-list">
+    <div class="order-card">
+      <div class="order-header">
+        <div class="order-icon completed">✅</div>
+        <div class="order-meta"><div class="order-id">ORD-2026-001</div><div class="order-customer">ABC Company Ltd.</div></div>
+        <div class="order-right"><div class="order-date">📅 20/3/2569</div><span class="status-badge completed">Completed</span></div>
+      </div>
+      <hr class="order-divider"/>
+      <div class="order-item"><span>Corrugated Box Size A x 200</span><span>3,000 บาท</span></div>
+      <div class="order-item"><span>Bubble Wrap x 10</span><span>1,200 บาท</span></div>
+      <div class="order-total"><span>Total Amount</span><span class="order-total-amount">$4,500</span></div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-header">
+        <div class="order-icon processing">📦</div>
+        <div class="order-meta"><div class="order-id">ORD-2026-002</div><div class="order-customer">XYZ Store</div></div>
+        <div class="order-right"><div class="order-date">📅 22/3/2569</div><span class="status-badge processing">Processing</span></div>
+      </div>
+      <hr class="order-divider"/>
+      <div class="order-item"><span>Kraft Paper Bags x 1000</span><span>5,000 บาท</span></div>
+      <div class="order-total"><span>Total Amount</span><span class="order-total-amount">$5,000</span></div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-header">
+        <div class="order-icon pending">⏰</div>
+        <div class="order-meta"><div class="order-id">ORD-2026-003</div><div class="order-customer">John Smith</div></div>
+        <div class="order-right"><div class="order-date">📅 23/3/2569</div><span class="status-badge pending">Pending</span></div>
+      </div>
+      <hr class="order-divider"/>
+      <div class="order-item"><span>Clear Plastic Containers x 30</span><span>750 บาท</span></div>
+      <div class="order-total"><span>Total Amount</span><span class="order-total-amount">$750</span></div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-header">
+        <div class="order-icon processing">📦</div>
+        <div class="order-meta"><div class="order-id">ORD-2026-004</div><div class="order-customer">EcoGreen Company Ltd.</div></div>
+        <div class="order-right"><div class="order-date">📅 24/3/2569</div><span class="status-badge processing">Processing</span></div>
+      </div>
+      <hr class="order-divider"/>
+      <div class="order-item"><span>Eco-Friendly Packaging x 150</span><span>5,250 บาท</span></div>
+      <div class="order-total"><span>Total Amount</span><span class="order-total-amount">$5,250</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo" onclick="showPage('home')">
+          <svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
+          Tee Ouan Packaging
+        </span>
+        <p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p>
+      </div>
+      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 02-XXX-XXXX<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
+      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 8:00 AM - 12:00 PM<br>Sun: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div id="page-about" class="page">
+  <section class="values-section">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-icon">🎯</div><h3>Customer Focused</h3><p>We listen and understand customer needs to deliver the best solutions</p></div>
+      <div class="value-card"><div class="value-icon">🏅</div><h3>Premium Quality</h3><p>Every product undergoes strict quality selection and inspection</p></div>
+      <div class="value-card"><div class="value-icon">👥</div><h3>Professional Team</h3><p>Knowledgeable and experienced team ready to consult and serve</p></div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-card">
+      <div class="services-grid">
+        <div class="service-item"><div class="service-icon si-pink">📦</div><div class="service-text"><h4>Wide Product Range</h4><p>All types of packaging from boxes, bags, films to protective materials</p></div></div>
+        <div class="service-item"><div class="service-icon si-teal">🏅</div><div class="service-text"><h4>Free Consultation</h4><p>Advice on choosing the right packaging for your business</p></div></div>
+        <div class="service-item"><div class="service-icon si-green">👥</div><div class="service-text"><h4>Custom Design</h4><p>Design and produce custom packaging with logo printing</p></div></div>
+        <div class="service-item"><div class="service-icon si-purple">⏰</div><div class="service-text"><h4>Express Delivery Nationwide</h4><p>Fast delivery service covering all areas across the country</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-gradient">
+      <h2>Contact Us</h2>
+      <p>Ready to serve and answer your questions</p>
+      <div class="contact-info-grid">
+        <div class="contact-item"><div class="contact-icon ci-pink">📞</div><div><h4>Phone</h4><p>02-XXX-XXXX<br>08X-XXX-XXXX</p></div></div>
+        <div class="contact-item"><div class="contact-icon ci-green">📍</div><div><h4>Address</h4><p>123/45 Rama 4 Road<br>Khlong Toei, Khlong Toei<br>Bangkok 10110</p></div></div>
+        <div class="contact-item"><div class="contact-icon ci-teal">✉️</div><div><h4>Email</h4><p>info@teeouanpackaging.com<br>sales@teeouanpackaging.com</p></div></div>
+        <div class="contact-item"><div class="contact-icon ci-purple">⏰</div><div><h4>Business Hours</h4><p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 8:00 AM - 12:00 PM<br>Sun: Closed</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo" onclick="showPage('home')">
+          <svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
+          Tee Ouan Packaging
+        </span>
+        <p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p>
+      </div>
+      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 02-XXX-XXXX<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
+      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 8:00 AM - 12:00 PM<br>Sun: Closed</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
+  </footer>
+</div>
+
+<div class="help-bubble">?</div>
+
+<script>
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('nav-' + page).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function filterCategory(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#productsGrid .product-card').forEach(card => {
+      card.style.display = (cat === 'All' || card.dataset.category === cat) ? '' : 'none';
+    });
+  }
+
+  function filterProducts() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('#productsGrid .product-card').forEach(card => {
+      card.style.display = card.dataset.name.includes(q) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
