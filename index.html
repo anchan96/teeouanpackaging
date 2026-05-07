@@ -80,7 +80,12 @@
       width: 100%; height: 220px;
       display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
     }
-    .img-boxes  { background: linear-gradient(135deg,#c8b8a2,#a89070); }
+    .img-boxes {
+  background-image: url("cup1.jpg"); /* 自分の画像を指定 */
+  background-size: cover;               /* 画像を枠いっぱいに広げる */
+  background-position: center;          /* 画像の中央を表示する */
+  background-repeat: no-repeat;         /* 画像を繰り返さない */
+    }
     .img-bubble { background: linear-gradient(135deg,#d0e8f0,#b0d0e8); }
     .img-bags   { background: linear-gradient(135deg,#d4b896,#b89070); }
     .img-eco    { background: linear-gradient(135deg,#c8d8b0,#a0b880); }
