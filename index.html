@@ -282,22 +282,166 @@
     .contact-item h4 { font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800; color:var(--text); margin-bottom:6px; }
     .contact-item p { font-size:0.87rem; color:var(--text-muted); line-height:1.8; }
 
-    @media(max-width:768px){
-      nav { padding:14px 20px; }
-      .why,.featured,.cta-section,.products-list,.orders-list,
-      .values-section,.services-section,.contact-section,footer { padding-left:20px; padding-right:20px; }
-      .services-grid,.contact-info-grid,.footer-grid { grid-template-columns:1fr; }
+    /* ══════════════════════════════════════
+       HAMBURGER MENU
+    ══════════════════════════════════════ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: transparent;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* モバイルメニューオーバーレイ */
+    .nav-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 150;
+    }
+    .nav-overlay.open { display: block; }
+
+    /* ══════════════════════════════════════
+       TABLET (≤ 1024px)
+    ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      nav { padding: 14px 32px; }
+      .hero { padding: 60px 32px 70px; }
+      .why, .featured, .cta-section { padding-left: 32px; padding-right: 32px; }
+      .products-list { padding-left: 32px; padding-right: 32px; }
+      .orders-list { padding-left: 32px; padding-right: 32px; }
+      .values-section, .services-section, .contact-section { padding-left: 32px; padding-right: 32px; }
+      footer { padding-left: 32px; padding-right: 32px; }
+      .services-card { padding: 36px 32px; }
+      .contact-gradient { padding: 40px 32px 0; }
+      .contact-info-grid { padding: 32px 32px; }
+      .footer-grid { gap: 32px; }
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE (≤ 768px)
+    ══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* NAV → ハンバーガーメニュー */
+      nav { padding: 14px 20px; }
+      .hamburger { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: -280px;
+        width: 260px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        gap: 4px;
+        padding: 80px 20px 32px;
+        box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+        z-index: 200;
+        transition: right 0.3s ease;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links li a { padding: 12px 18px; font-size: 1rem; }
+
+      /* HERO */
+      .hero { padding: 48px 20px 56px; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-outline { width: 100%; text-align: center; }
+
+      /* WHY */
+      .why { padding: 48px 20px; }
+      .why h2 { font-size: 1.7rem; margin-bottom: 32px; }
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .feature-card { padding: 24px 16px 20px; }
+      .feature-icon { width: 56px; height: 56px; font-size: 1.5rem; }
+
+      /* FEATURED */
+      .featured { padding: 0 20px 48px; }
+      .products-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* CTA */
+      .cta-section { padding: 40px 20px 56px; }
+      .cta-card { padding: 48px 24px; }
+      .cta-card h2 { font-size: 1.7rem; }
+      .cta-btns { flex-direction: column; align-items: stretch; }
+      .cta-btns button { width: 100%; }
+
+      /* PRODUCTS PAGE */
+      .page-hero { padding: 40px 20px 32px; }
+      .page-hero h1 { font-size: 2rem; }
+      .search-bar { margin: 0 0 20px; }
+      .filter-tabs { gap: 8px; }
+      .filter-btn { padding: 7px 14px; font-size: 0.82rem; }
+      .products-list { padding: 28px 20px 56px; }
+
+      /* ORDERS */
+      .orders-hero { padding: 40px 20px 32px; }
+      .orders-list { padding: 20px 20px 56px; }
+      .order-card { padding: 20px 18px; }
+      .order-header { flex-wrap: wrap; gap: 10px; }
+      .order-right { margin-left: 0; width: 100%; justify-content: space-between; }
+      .order-item { font-size: 0.83rem; flex-wrap: wrap; gap: 4px; }
+      .order-tab-btns { flex-direction: row; }
+
+      /* ABOUT */
+      .values-section { padding: 48px 20px 32px; }
+      .values-section h2 { font-size: 1.7rem; margin-bottom: 28px; }
+      .values-grid { grid-template-columns: 1fr; gap: 16px; }
+      .value-card { padding: 28px 24px; }
+      .services-section { padding: 32px 20px; }
+      .services-section h2 { font-size: 1.7rem; margin-bottom: 24px; }
+      .services-card { padding: 28px 20px; }
+      .services-grid { grid-template-columns: 1fr; gap: 24px; }
+      .contact-section { padding: 32px 20px 48px; }
+      .contact-gradient { padding: 36px 20px 0; border-radius: 20px; }
+      .contact-gradient h2 { font-size: 1.7rem; }
+      .contact-info-grid { grid-template-columns: 1fr; padding: 28px 20px; gap: 24px; }
+
+      /* FOOTER */
+      footer { padding: 36px 20px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* ══════════════════════════════════════
+       SMALL MOBILE (≤ 480px)
+    ══════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-card { display: flex; align-items: center; gap: 16px; text-align: left; padding: 20px; }
+      .feature-icon { margin: 0; flex-shrink: 0; }
+      .logo { font-size: 1rem; }
+      .logo svg { width: 24px; height: 24px; }
+      .order-id { font-size: 0.97rem; }
+      .order-total-amount { font-size: 1.25rem; }
+      .product-price { font-size: 1.25rem; }
     }
   </style>
 </head>
 <body>
 
+<div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
 <nav>
   <span class="logo" onclick="showPage('home')">
     <svg width="30" height="30" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg>
     Tee Ouan Packaging
   </span>
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a id="nav-home"     onclick="showPage('home')"     class="active">🏠 Home</a></li>
     <li><a id="nav-products" onclick="showPage('products')">📦 Products</a></li>
     <li><a id="nav-orders"   onclick="showPage('orders')">🛒 Orders</a></li>
@@ -627,12 +771,28 @@
 <div class="help-bubble">?</div>
 
 <script>
+  function toggleMenu() {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('hamburger');
+    const overlay = document.getElementById('navOverlay');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('open');
+  }
+
   function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
     document.getElementById('nav-' + page).classList.add('active');
     window.scrollTo(0, 0);
+    closeMenu();
   }
 
   function filterCategory(cat, btn) {
