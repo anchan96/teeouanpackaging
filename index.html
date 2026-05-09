@@ -138,12 +138,12 @@
       background-size: cover; background-position: center;
       background-repeat: no-repeat; background-color: #eee;
     }
-    .img-box-a  { background-image: url('sizeA.JPG'); }
-    .img-box-b  { background-image: url('sizeB.JPG'); }
-    .img-bubble { background-image: url('Bubble Wrap.JPG'); }
-    .img-bags   { background-image: url('IMG_3754.JPG'); }
-    .img-eco    { background-image: url('IMG_3755.JPG'); }
-    .img-cont   { background-image: url('IMG_3757.JPG'); }
+    .img-box-a  { background-image: url('photoo/sizeA.JPG'); }
+    .img-box-b  { background-image: url('photoo/sizeB.JPG'); }
+    .img-bubble { background-image: url('photoo/Bubble Wrap.JPG'); }
+    .img-bags   { background-image: url('photoo/IMG_3754.JPG'); }
+    .img-eco    { background-image: url('photoo/IMG_3755.JPG'); }
+    .img-cont   { background-image: url('photoo/IMG_3757.JPG'); }
 
     /* ─── PRODUCT CARDS ─── */
     .products-grid {
@@ -338,11 +338,11 @@
       flex: 0 0 20%;
       background-size: cover; background-position: center; background-repeat: no-repeat;
     }
-    .hero-slide:nth-child(1) { background-image: url('sizeA.JPG'); }
-    .hero-slide:nth-child(2) { background-image: url('Bubble Wrap.JPG'); }
-    .hero-slide:nth-child(3) { background-image: url('IMG_3754.JPG'); }
-    .hero-slide:nth-child(4) { background-image: url('IMG_3755.JPG'); }
-    .hero-slide:nth-child(5) { background-image: url('IMG_3757.JPG'); }
+    .hero-slide:nth-child(1) { background-image: url('photoo/sizeA.JPG'); }
+    .hero-slide:nth-child(2) { background-image: url('photoo/Bubble Wrap.JPG'); }
+    .hero-slide:nth-child(3) { background-image: url('photoo/IMG_3754.JPG'); }
+    .hero-slide:nth-child(4) { background-image: url('photoo/IMG_3755.JPG'); }
+    .hero-slide:nth-child(5) { background-image: url('photoo/IMG_3757.JPG'); }
     @keyframes heroSlide {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-80%); }
@@ -808,8 +808,6 @@
 <!-- ════════════════════════════════════════
      MODALS
 ════════════════════════════════════════ -->
-<!-- 避難所 -->
-<div id="modal-container"></div>
 
 <!-- ── Checkout Modal (要求5) ── -->
 <div class="modal-overlay" id="modalCheckout">
@@ -887,32 +885,51 @@
   </div>
 </div>
 
-<!-- ── Account Modal (要求6) ── -->
+<!-- ── Account Modal (要求3: セットアップ→ログイン→設定) ── -->
 <div class="modal-overlay" id="modalAccount">
   <div class="modal-box" style="max-width:520px;">
     <button class="modal-close" onclick="closeModal('modalAccount')">✕</button>
     <h2>👤 Account</h2>
-    <p class="modal-subtitle">Manage your profile and saved preferences.</p>
 
-    <!-- Lock screen -->
-    <div id="accLockScreen">
+    <!-- ① 初回セットアップ画面 -->
+    <div id="accSetupScreen">
+      <p class="modal-subtitle">Welcome! Please create your account.</p>
+      <div class="success-toast" id="setupToast">✅ Account created! Please log in.</div>
+      <div class="form-group">
+        <label>👤 Account Name (Username)</label>
+        <input type="text" id="setup-username" placeholder="Your username…"/>
+      </div>
+      <div class="form-group">
+        <label>🔑 Password</label>
+        <input type="password" id="setup-pass1" placeholder="Enter password…"/>
+      </div>
+      <div class="form-group">
+        <label>🔑 Confirm Password</label>
+        <input type="password" id="setup-pass2" placeholder="Re-enter password…"/>
+      </div>
+      <div class="err-msg" id="setupErr"></div>
+      <button class="btn-primary btn-full" style="margin-top:8px;" onclick="createAccount()">Create Account</button>
+    </div>
+
+    <!-- ② ログイン画面 -->
+    <div id="accLoginScreen" style="display:none;">
       <div class="acc-lock">
         <div class="lock-icon">🔒</div>
-        <p>Enter your password to access account settings.</p>
+        <p id="loginGreeting">Enter your password to continue.</p>
         <div class="pass-row">
-          <input type="password" id="passInput" placeholder="Password…"
-                 onkeydown="if(event.key==='Enter')checkPass()"/>
-          <button class="btn-primary" style="padding:11px 24px;font-size:0.9rem;" onclick="checkPass()">Enter</button>
+          <input type="password" id="loginPassInput" placeholder="Password…"
+                 onkeydown="if(event.key==='Enter')doLogin()"/>
+          <button class="btn-primary" style="padding:11px 24px;font-size:0.9rem;" onclick="doLogin()">Login</button>
         </div>
-        <div class="err-msg" id="passErr"></div>
-        <p class="default-pass-note">Default password: <strong>1234</strong></p>
+        <div class="err-msg" id="loginErr"></div>
+        <button style="margin-top:20px;background:none;border:none;font-size:0.78rem;color:#bbb;cursor:pointer;text-decoration:underline;" onclick="resetAccountConfirm()">Reset account</button>
       </div>
     </div>
 
-    <!-- Account form (shown after unlock) -->
+    <!-- ③ 設定画面 -->
     <div id="accFormScreen" style="display:none;">
+      <p class="modal-subtitle" id="accWelcomeMsg">Welcome!</p>
       <div class="success-toast" id="accToast">✅ Saved successfully!</div>
-
       <div class="form-row">
         <div class="form-group">
           <label>👤 Name</label>
@@ -947,17 +964,14 @@
           <option value="card">Credit Card</option>
         </select>
       </div>
-
       <hr class="modal-divider"/>
-
       <div class="form-group">
         <label>🔑 Change Password <span style="font-weight:400;color:#bbb;">(leave blank to keep current)</span></label>
         <input type="password" id="acc-newpass" placeholder="New password…"/>
       </div>
-
       <div class="acc-actions">
         <button class="btn-primary btn-full" onclick="saveAccount()">Save Changes</button>
-        <button class="btn-lock" onclick="lockAccount()">🔒 Lock</button>
+        <button class="btn-lock" onclick="logoutAccount()">🔒 Logout</button>
       </div>
     </div>
   </div>
@@ -1106,102 +1120,11 @@
       <span style="font-size:1.1rem;color:#aaa;">🔍</span>
       <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()"/>
     </div>
-    <div class="filter-tabs">
-      <button class="filter-btn active" onclick="filterCategory('All',this)">All</button>
-      <button class="filter-btn" onclick="filterCategory('Boxes',this)">Boxes</button>
-      <button class="filter-btn" onclick="filterCategory('Bags',this)">Bags</button>
-      <button class="filter-btn" onclick="filterCategory('Protective Materials',this)">Protective Materials</button>
-      <button class="filter-btn" onclick="filterCategory('Eco-Friendly',this)">Eco-Friendly</button>
-    </div>
+    <div class="filter-tabs" id="filterTabs"></div>
   </section>
 
   <section class="products-list">
     <div class="products-grid" id="productsGrid">
-
-      <div class="product-card" data-category="Boxes" data-name="corrugated box size a"
-           data-id="box-a" data-price="15" data-unit="/pc" data-img="img-box-a">
-        <div class="product-img-fixed img-box-a" onclick="openDetail('box-a')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('box-a')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Boxes</span>
-          <div class="product-name">Corrugated Box Size A</div>
-          <div class="product-desc">3-ply corrugated cardboard box, strong and durable, suitable for general packaging</div>
-          <div class="product-footer"><div class="product-price">$15 <span>/pc</span></div><div class="product-stock">Stock: 500</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="Protective Materials" data-name="bubble wrap"
-           data-id="bubble" data-price="120" data-unit="/roll" data-img="img-bubble">
-        <div class="product-img-fixed img-bubble" onclick="openDetail('bubble')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('bubble')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Protective Materials</span>
-          <div class="product-name">Bubble Wrap</div>
-          <div class="product-desc">Bubble wrap for shock protection, prevents product damage, ready to use</div>
-          <div class="product-footer"><div class="product-price">$120 <span>/roll</span></div><div class="product-stock">Stock: 200</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="Bags" data-name="kraft paper bags"
-           data-id="bags" data-price="5" data-unit="/pc" data-img="img-bags">
-        <div class="product-img-fixed img-bags" onclick="openDetail('bags')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('bags')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Bags</span>
-          <div class="product-name">Kraft Paper Bags</div>
-          <div class="product-desc">Eco-friendly kraft paper bags with handles, strong and durable</div>
-          <div class="product-footer"><div class="product-price">$5 <span>/pc</span></div><div class="product-stock">Stock: 1000</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="Eco-Friendly" data-name="eco-friendly packaging"
-           data-id="eco" data-price="35" data-unit="/pc" data-img="img-eco">
-        <div class="product-img-fixed img-eco" onclick="openDetail('eco')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('eco')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Eco-Friendly</span>
-          <div class="product-name">Eco-Friendly Packaging</div>
-          <div class="product-desc">Biodegradable packaging made from recycled materials, environmentally conscious choice</div>
-          <div class="product-footer"><div class="product-price">$35 <span>/pc</span></div><div class="product-stock">Stock: 150</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="Protective Materials" data-name="clear plastic containers"
-           data-id="cont" data-price="25" data-unit="/pc" data-img="img-cont">
-        <div class="product-img-fixed img-cont" onclick="openDetail('cont')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('cont')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Protective Materials</span>
-          <div class="product-name">Clear Plastic Containers</div>
-          <div class="product-desc">Transparent plastic containers for display and protection of products</div>
-          <div class="product-footer"><div class="product-price">$25 <span>/pc</span></div><div class="product-stock">Stock: 300</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="Boxes" data-name="corrugated box size b"
-           data-id="box-b" data-price="22" data-unit="/pc" data-img="img-box-b">
-        <div class="product-img-fixed img-box-b" onclick="openDetail('box-b')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('box-b')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Boxes</span>
-          <div class="product-name">Corrugated Box Size B</div>
-          <div class="product-desc">5-ply heavy-duty corrugated box, ideal for heavy or fragile items</div>
-          <div class="product-footer"><div class="product-price">$22 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
-        </div>
-        <div style="padding:0 20px 20px;">
-          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -1459,16 +1382,17 @@ function addToCart(btn) {
   const name     = card.querySelector('.product-name').textContent.trim();
   const price    = parseFloat(card.dataset.price);
   const unit     = card.dataset.unit;
-  const imgClass = card.dataset.img;
+  // 動的商品のため PRODUCTS から画像URLを取得
+  const p = PRODUCTS[id];
+  const imgUrl = (p && p.images && p.images[0]) ? p.images[0] : '';
 
   const existing = cart.find(i => i.id === id);
   if (existing) {
     existing.qty++;
   } else {
-    cart.push({ id, name, price, unit, imgClass, qty: 1 });
+    cart.push({ id, name, price, unit, imgUrl, qty: 1 });
   }
 
-  // Visual feedback
   const orig = btn.innerHTML;
   btn.innerHTML = '✅ Added!';
   btn.classList.add('added');
@@ -1531,7 +1455,7 @@ function renderCart() {
     // 要求3: カート内に商品画像を表示（imgClassをそのまま使用）
     html += `
       <div class="cart-item">
-        <div class="cart-thumb ${item.imgClass}"></div>
+        <div class="cart-thumb" style="background-image:url('${item.imgUrl}');background-size:cover;background-position:center;background-color:#eee;"></div>
         <div class="cart-info">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-unit">$${item.price}${item.unit}</div>
@@ -1574,7 +1498,7 @@ function openCheckout() {
     total += line;
     html += `
       <div class="co-row">
-        <div class="co-thumb ${item.imgClass}"></div>
+        <div class="co-thumb" style="background-image:url('${item.imgUrl}');background-size:cover;background-position:center;background-color:#eee;"></div>
         <div class="co-detail">
           <strong>${item.name}</strong>
           <span>x ${item.qty} (${item.unit})</span>
@@ -1620,6 +1544,9 @@ function confirmOrder() {
 /* ─── ACCOUNT (要求6) ─── */
 const ACC_KEY = 'teeouanAcc';
 
+/* ─── ACCOUNT (要求3: セットアップ→ログイン→設定) ─── */
+const ACC_KEY = 'teeouanAcc';
+
 function loadAccount() {
   try { return JSON.parse(localStorage.getItem(ACC_KEY) || '{}'); }
   catch { return {}; }
@@ -1629,23 +1556,60 @@ function saveAccountData(data) {
 }
 
 function openAccountModal() {
-  // Always start locked
-  document.getElementById('accLockScreen').style.display = 'block';
-  document.getElementById('accFormScreen').style.display = 'none';
-  document.getElementById('passInput').value = '';
-  document.getElementById('passErr').textContent = '';
+  const acc = loadAccount();
+  // 3画面をすべて非表示にリセット
+  document.getElementById('accSetupScreen').style.display  = 'none';
+  document.getElementById('accLoginScreen').style.display  = 'none';
+  document.getElementById('accFormScreen').style.display   = 'none';
+  document.getElementById('setupErr').textContent  = '';
+  document.getElementById('loginErr').textContent  = '';
+  document.getElementById('setupToast').style.display = 'none';
+
+  if (!acc.username) {
+    // 初回：アカウント未作成 → セットアップ画面
+    document.getElementById('accSetupScreen').style.display = 'block';
+  } else {
+    // アカウントあり → ログイン画面
+    document.getElementById('loginGreeting').textContent =
+      `Welcome back, ${acc.username}! Enter your password.`;
+    document.getElementById('loginPassInput').value = '';
+    document.getElementById('accLoginScreen').style.display = 'block';
+  }
   openModal('modalAccount');
 }
 
-function checkPass() {
-  const entered = document.getElementById('passInput').value;
-  const acc = loadAccount();
-  const stored = acc.password || '1234'; // default password
+function createAccount() {
+  const username = document.getElementById('setup-username').value.trim();
+  const pass1    = document.getElementById('setup-pass1').value;
+  const pass2    = document.getElementById('setup-pass2').value;
+  const errEl    = document.getElementById('setupErr');
 
-  if (entered === stored) {
-    // Show form, load data
-    document.getElementById('accLockScreen').style.display = 'none';
-    document.getElementById('accFormScreen').style.display = 'block';
+  if (!username) { errEl.textContent = '⚠️ Please enter a username.'; return; }
+  if (!pass1)    { errEl.textContent = '⚠️ Please enter a password.'; return; }
+  if (pass1 !== pass2) { errEl.textContent = '⚠️ Passwords do not match.'; return; }
+  errEl.textContent = '';
+
+  saveAccountData({ username, password: pass1 });
+
+  // アカウント作成成功 → ログイン画面へ切り替え
+  document.getElementById('setupToast').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('setupToast').style.display = 'none';
+    document.getElementById('accSetupScreen').style.display  = 'none';
+    document.getElementById('loginGreeting').textContent = `Welcome, ${username}! Enter your password.`;
+    document.getElementById('loginPassInput').value = '';
+    document.getElementById('accLoginScreen').style.display  = 'block';
+  }, 1400);
+}
+
+function doLogin() {
+  const entered = document.getElementById('loginPassInput').value;
+  const acc = loadAccount();
+  if (entered === acc.password) {
+    document.getElementById('loginErr').textContent = '';
+    document.getElementById('accLoginScreen').style.display = 'none';
+    // プロフィール情報を読み込んで設定画面へ
+    document.getElementById('accWelcomeMsg').textContent = `Hi, ${acc.username}!`;
     document.getElementById('acc-name').value    = acc.name    || '';
     document.getElementById('acc-shop').value    = acc.shop    || '';
     document.getElementById('acc-email').value   = acc.email   || '';
@@ -1654,9 +1618,9 @@ function checkPass() {
     document.getElementById('acc-payment').value = acc.payment || '';
     document.getElementById('acc-newpass').value = '';
     document.getElementById('accToast').style.display = 'none';
-    document.getElementById('passErr').textContent = '';
+    document.getElementById('accFormScreen').style.display = 'block';
   } else {
-    document.getElementById('passErr').textContent = '❌ Incorrect password. Please try again.';
+    document.getElementById('loginErr').textContent = '❌ Incorrect password. Please try again.';
   }
 }
 
@@ -1664,13 +1628,14 @@ function saveAccount() {
   const acc = loadAccount();
   const newPass = document.getElementById('acc-newpass').value;
   const data = {
+    username: acc.username,
     name:     document.getElementById('acc-name').value.trim(),
     shop:     document.getElementById('acc-shop').value.trim(),
     email:    document.getElementById('acc-email').value.trim(),
     phone:    document.getElementById('acc-phone').value.trim(),
     address:  document.getElementById('acc-address').value.trim(),
     payment:  document.getElementById('acc-payment').value,
-    password: newPass ? newPass : (acc.password || '1234'),
+    password: newPass ? newPass : acc.password,
   };
   saveAccountData(data);
   const toast = document.getElementById('accToast');
@@ -1678,25 +1643,34 @@ function saveAccount() {
   setTimeout(() => { toast.style.display = 'none'; }, 2500);
 }
 
-function lockAccount() {
-  document.getElementById('accLockScreen').style.display = 'block';
-  document.getElementById('accFormScreen').style.display = 'none';
-  document.getElementById('passInput').value = '';
-  document.getElementById('passErr').textContent = '';
+function logoutAccount() {
+  // セッションを終了してログイン画面に戻す（localStorageのアカウントデータは維持）
+  document.getElementById('accFormScreen').style.display  = 'none';
+  const acc = loadAccount();
+  document.getElementById('loginGreeting').textContent = `Welcome back, ${acc.username}! Enter your password.`;
+  document.getElementById('loginPassInput').value = '';
+  document.getElementById('loginErr').textContent = '';
+  document.getElementById('accLoginScreen').style.display = 'block';
 }
+
+function resetAccountConfirm() {
+  if (confirm('This will delete your account data. Are you sure?')) {
+    localStorage.removeItem(ACC_KEY);
+    document.getElementById('accLoginScreen').style.display = 'none';
+    document.getElementById('setup-username').value = '';
+    document.getElementById('setup-pass1').value    = '';
+    document.getElementById('setup-pass2').value    = '';
+    document.getElementById('setupErr').textContent = '';
+    document.getElementById('setupToast').style.display = 'none';
+    document.getElementById('accSetupScreen').style.display = 'block';
+  }
+}
+
 
 /* ─── MODAL HELPERS ─── */
 function openModal(id) {
-  const modal = document.getElementById(id);
-  
-  // もし指定されたIDのモーダルが存在する場合だけ処理を実行する
-  if (modal) {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  } else {
-    // モーダルがない場合はコンソールに警告を出すだけで、他の機能を止めない
-    console.warn("指定されたモーダルが見つかりません: " + id);
-  }
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
@@ -1735,26 +1709,85 @@ function showPage(page) {
 }
 
 /* ─── PRODUCT FILTER ─── */
+/* ─── PRODUCT GRID RENDER (要求1・2) ─── */
+let currentCategory = 'All';
+
+function renderFilterTabs() {
+  const tabsEl = document.getElementById('filterTabs');
+  if (!tabsEl) return;
+  let html = `<button class="filter-btn active" onclick="filterCategory('All',this)">All</button>`;
+  CATEGORIES.forEach(cat => {
+    html += `<button class="filter-btn" onclick="filterCategory('${cat}',this)">${cat}</button>`;
+  });
+  tabsEl.innerHTML = html;
+}
+
+function renderProductGrid() {
+  const grid = document.getElementById('productsGrid');
+  if (!grid) return;
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  let html = '';
+  Object.values(PRODUCTS).forEach(p => {
+    const matchCat  = currentCategory === 'All' || p.tag === currentCategory;
+    const matchText = p.name.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q);
+    if (!matchCat || !matchText) return;
+    // first image for card
+    const imgUrl = (p.images && p.images[0]) ? `url('${p.images[0]}')` : '';
+    const imgStyle = imgUrl
+      ? `background-image:${imgUrl};background-size:cover;background-position:center;background-color:#eee;`
+      : `background-color:#eee;`;
+    html += `
+      <div class="product-card" data-category="${p.tag}" data-name="${p.name.toLowerCase()}"
+           data-id="${p.id}" data-price="${p.price}" data-unit="${p.unit}" data-img="${p.imgClass || ''}">
+        <div class="product-img-fixed" style="${imgStyle};cursor:pointer;" onclick="openDetail('${p.id}')"></div>
+        <div class="product-body" onclick="openDetail('${p.id}')" style="cursor:pointer;padding-bottom:8px;">
+          <span class="product-tag">${p.tag}</span>
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="product-footer">
+            <div class="product-price">$${p.price} <span>${p.unit}</span></div>
+            <div class="product-stock">Stock: ${p.stock}</div>
+          </div>
+        </div>
+        <div style="padding:0 20px 20px;">
+          <button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button>
+        </div>
+      </div>`;
+  });
+  grid.innerHTML = html || '<p style="color:var(--text-muted);padding:32px 0;text-align:center;">No products found.</p>';
+}
+
 function filterCategory(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#productsGrid .product-card').forEach(card => {
-    card.style.display = (cat === 'All' || card.dataset.category === cat) ? '' : 'none';
-  });
+  currentCategory = cat;
+  renderProductGrid();
 }
+
 function filterProducts() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('#productsGrid .product-card').forEach(card => {
-    card.style.display = card.dataset.name.includes(q) ? '' : 'none';
-  });
+  renderProductGrid();
 }
 
 /* ─── PRODUCT DATA (要求1) ─── */
+/* ════════════════════════════════════════
+   要求2: カテゴリータグ定義
+   ★ タグを追加する場合はここにカテゴリー名を追加するだけです ★
+   例: 'New Arrivals', 'Sale' なども追加できます
+════════════════════════════════════════ */
+const CATEGORIES = [
+  'Boxes',
+  'Bags',
+  'Protective Materials',
+  'Eco-Friendly',
+  'Other',
+  // ↑ ここに新しいカテゴリーを追加してください
+];
+
 const PRODUCTS = {
   'box-a': {
     id: 'box-a', name: 'Corrugated Box Size A', tag: 'Boxes',
     price: 15, unit: '/pc', imgClass: 'img-box-a', stock: 500,
-    images: ['sizeA.JPG', 'sizeA.JPG', 'sizeA.JPG'],
+    images: ['photoo/sizeA.JPG', 'photoo/sizeA.JPG', 'photoo/sizeA.JPG'],
     desc: '3-ply corrugated cardboard box, strong and durable, suitable for general packaging. Ideal for light to medium-weight products. Available in bulk.',
     specs: [
       { k: 'Material',    v: '3-ply Corrugated Cardboard' },
@@ -1769,7 +1802,7 @@ const PRODUCTS = {
   'bubble': {
     id: 'bubble', name: 'Bubble Wrap', tag: 'Protective Materials',
     price: 120, unit: '/roll', imgClass: 'img-bubble', stock: 200,
-    images: ['Bubble Wrap.JPG', 'Bubble Wrap.JPG'],
+    images: ['photoo/Bubble Wrap.JPG', 'photoo/Bubble Wrap.JPG'],
     desc: 'Large-bubble wrap roll for excellent shock absorption. Prevents product damage during shipping and storage. Ready to use right out of the box.',
     specs: [
       { k: 'Roll Size',   v: '50 cm × 50 m' },
@@ -1784,7 +1817,7 @@ const PRODUCTS = {
   'bags': {
     id: 'bags', name: 'Kraft Paper Bags', tag: 'Bags',
     price: 5, unit: '/pc', imgClass: 'img-bags', stock: 1000,
-    images: ['IMG_3754.JPG', 'IMG_3754.JPG'],
+    images: ['photoo/IMG_3754.JPG', 'photoo/IMG_3754.JPG'],
     desc: 'Eco-friendly kraft paper bags with sturdy handles. Made from recycled paper, biodegradable and strong. Perfect for retail and gifting.',
     specs: [
       { k: 'Material',   v: 'Recycled Kraft Paper' },
@@ -1799,7 +1832,7 @@ const PRODUCTS = {
   'eco': {
     id: 'eco', name: 'Eco-Friendly Packaging', tag: 'Eco-Friendly',
     price: 35, unit: '/pc', imgClass: 'img-eco', stock: 150,
-    images: ['IMG_3755.JPG', 'IMG_3755.JPG'],
+    images: ['photoo/IMG_3755.JPG', 'photoo/IMG_3755.JPG'],
     desc: 'Biodegradable packaging made from 100% recycled and renewable materials. Reduces environmental impact without compromising on protection.',
     specs: [
       { k: 'Material',     v: 'Recycled & Compostable' },
@@ -1813,7 +1846,7 @@ const PRODUCTS = {
   'cont': {
     id: 'cont', name: 'Clear Plastic Containers', tag: 'Protective Materials',
     price: 25, unit: '/pc', imgClass: 'img-cont', stock: 300,
-    images: ['IMG_3757.JPG', 'IMG_3757.JPG'],
+    images: ['photoo/IMG_3757.JPG', 'photoo/IMG_3757.JPG'],
     desc: 'Crystal-clear plastic containers perfect for display and product protection. Secure lid keeps contents safe. Stackable design for easy storage.',
     specs: [
       { k: 'Material',    v: 'PET Plastic' },
@@ -1828,7 +1861,7 @@ const PRODUCTS = {
   'box-b': {
     id: 'box-b', name: 'Corrugated Box Size B', tag: 'Boxes',
     price: 22, unit: '/pc', imgClass: 'img-box-b', stock: 320,
-    images: ['sizeB.JPG', 'sizeB.JPG'],
+    images: ['photoo/sizeB.JPG', 'photoo/sizeB.JPG'],
     desc: '5-ply heavy-duty corrugated cardboard box. Built for heavy and fragile items. Superior stacking strength and impact resistance.',
     specs: [
       { k: 'Material',    v: '5-ply Corrugated Cardboard' },
@@ -1844,7 +1877,7 @@ const PRODUCTS = {
     id: 'plastic-cup', name: 'Clear Plastic Cups', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名 
     stock: 800,
-    images: ['cup1.JPG'], // スワイプ表示させたい画像や動画のパス
+    images: ['photoo/cup1.JPG'], // スワイプ表示させたい画像や動画のパス
     desc: 'High-quality clear plastic cups perfect for cold beverages, smoothies, and iced coffee.',
     specs: [
       { k: 'Material', v: 'PET Plastic' },
@@ -1853,26 +1886,12 @@ const PRODUCTS = {
     ],
     reviews: [
     ]
-  },
+    },
   'plastic-dish': {
     id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
     stock: 800,
-    images: ['cup2.JPG', 'IMG_3729.JPG', 'IMG_3730.JPG', 'IMG_3731.JPG', 'IMG_3732.JPG', 'IMG_3759.MOV', 'IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
-    desc: 'High-quality clear plastic cups perfect for cold beverages, smoothies, and iced coffee.',
-    specs: [
-      { k: 'Material', v: 'PET Plastic' },
-      { k: 'Capacity', v: '16 oz' },
-      { k: 'Quantity', v: '50 pcs/pack' }
-    ],
-    reviews: [
-    ]
-  },
-  'papercup': {
-    id: '9', name: 'Paper Cup', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
-    price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
-    stock: 800,
-    images: ['IMG_3747.JPG'], // スワイプ表示させたい画像や動画のパス
+    images: ['photoo/cup2.JPG', 'photoo/IMG_3729.JPG', 'photoo/IMG_3730.JPG', 'photoo/IMG_3731.JPG', 'photoo/IMG_3732.JPG', 'photoo/IMG_3759.MOV', 'photoo/IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
     desc: 'High-quality clear plastic cups perfect for cold beverages, smoothies, and iced coffee.',
     specs: [
       { k: 'Material', v: 'PET Plastic' },
@@ -1883,49 +1902,6 @@ const PRODUCTS = {
     ]
   },
 };
-// モーダル自動生成プログラム
-function generateModals() {
-  const container = document.getElementById('modal-container');
-  if (!container) return;
-
-  let html = '';
-  
-  // Object.values(PRODUCTS) を使うことで、{}形式のデータでもループ回せるように修正
-  Object.values(PRODUCTS).forEach(p => {
-    html += `
-      <div id="modal-${p.id}" class="modal-overlay">
-        <div class="modal-box">
-          <button class="modal-close" onclick="closeModal('modal-${p.id}')">&times;</button>
-          
-          <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 10px;">
-            <div style="flex: 1; min-width: 250px;">
-              <img src="photoo/${p.images[0]}" style="width: 100%; border-radius: 15px; box-shadow: var(--shadow);">
-            </div>
-            
-            <div style="flex: 1.2; min-width: 250px;">
-              <h2 style="color: var(--text); margin-bottom: 5px;">${p.name}</h2>
-              <span style="display: inline-block; background: var(--pink-light); color: var(--pink-dark); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 15px;">${p.tag}</span>
-              
-              <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
-                ${p.desc}
-              </p>
-              
-              <div style="background: var(--bg); padding: 15px; border-radius: 12px; border: 1px dashed var(--pink-mid);">
-                <div style="font-size: 1.8rem; font-weight: 900; color: var(--pink);">${p.price} <span style="font-size: 0.9rem;">THB ${p.unit}</span></div>
-                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Stock: ${p.stock} units available</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-  
-  container.innerHTML = html;
-}
-
-// 最後に必ず実行する
-generateModals();
 
 /* ─── DETAIL STATE ─── */
 let detailCurrentSlide = 0;
@@ -2035,7 +2011,7 @@ function detailAddToCart() {
   if (existing) {
     existing.qty += detailQty;
   } else {
-    cart.push({ id: p.id, name: p.name, price: p.price, unit: p.unit, imgClass: p.imgClass, qty: detailQty });
+    cart.push({ id: p.id, name: p.name, price: p.price, unit: p.unit, imgUrl: (p.images && p.images[0]) ? p.images[0] : '', qty: detailQty });
   }
   updateBadge();
   renderCart();
@@ -2157,6 +2133,8 @@ function renderReviews(p) {
 }
 
 /* ─── INIT ─── */
+renderFilterTabs();
+renderProductGrid();
 renderCart();
 </script>
 </body>
