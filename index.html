@@ -1685,8 +1685,16 @@ function lockAccount() {
 
 /* ─── MODAL HELPERS ─── */
 function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  document.body.style.overflow = 'hidden';
+  const modal = document.getElementById(id);
+  
+  // もし指定されたIDのモーダルが存在する場合だけ処理を実行する
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } else {
+    // モーダルがない場合はコンソールに警告を出すだけで、他の機能を止めない
+    console.warn("指定されたモーダルが見つかりません: " + id);
+  }
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
