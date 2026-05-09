@@ -138,12 +138,12 @@
       background-size: cover; background-position: center;
       background-repeat: no-repeat; background-color: #eee;
     }
-    .img-box-a  { background-image: url('sizeA.JPG'); }
-    .img-box-b  { background-image: url('sizeB.JPG'); }
-    .img-bubble { background-image: url('Bubble Wrap.JPG'); }
-    .img-bags   { background-image: url('IMG_3754.JPG'); }
-    .img-eco    { background-image: url('IMG_3755.JPG'); }
-    .img-cont   { background-image: url('IMG_3757.JPG'); }
+    .img-box-a  { background-image: url('photoo/sizeA.JPG'); }
+    .img-box-b  { background-image: url('photoo/sizeB.JPG'); }
+    .img-bubble { background-image: url('photoo/Bubble Wrap.JPG'); }
+    .img-bags   { background-image: url('photoo/IMG_3754.JPG'); }
+    .img-eco    { background-image: url('photoo/IMG_3755.JPG'); }
+    .img-cont   { background-image: url('photoo/IMG_3757.JPG'); }
 
     /* ─── PRODUCT CARDS ─── */
     .products-grid {
@@ -1541,9 +1541,6 @@ function confirmOrder() {
   openModal('modalConfirmed');
 }
 
-/* ─── ACCOUNT (要求6) ─── */
-const ACC_KEY = 'teeouanAcc';
-
 /* ─── ACCOUNT (要求3: セットアップ→ログイン→設定) ─── */
 const ACC_KEY = 'teeouanAcc';
 
@@ -1817,7 +1814,7 @@ const PRODUCTS = {
   'bags': {
     id: 'bags', name: 'Kraft Paper Bags', tag: 'Bags',
     price: 5, unit: '/pc', imgClass: 'img-bags', stock: 1000,
-    images: ['IMG_3754.JPG', 'IMG_3754.JPG'],
+    images: ['photoo/IMG_3754.JPG', 'photoo/IMG_3754.JPG'],
     desc: 'Eco-friendly kraft paper bags with sturdy handles. Made from recycled paper, biodegradable and strong. Perfect for retail and gifting.',
     specs: [
       { k: 'Material',   v: 'Recycled Kraft Paper' },
@@ -1832,7 +1829,7 @@ const PRODUCTS = {
   'eco': {
     id: 'eco', name: 'Eco-Friendly Packaging', tag: 'Eco-Friendly',
     price: 35, unit: '/pc', imgClass: 'img-eco', stock: 150,
-    images: ['IMG_3755.JPG', 'IMG_3755.JPG'],
+    images: ['photoo/IMG_3755.JPG', 'photoo/IMG_3755.JPG'],
     desc: 'Biodegradable packaging made from 100% recycled and renewable materials. Reduces environmental impact without compromising on protection.',
     specs: [
       { k: 'Material',     v: 'Recycled & Compostable' },
@@ -1846,7 +1843,7 @@ const PRODUCTS = {
   'cont': {
     id: 'cont', name: 'Clear Plastic Containers', tag: 'Protective Materials',
     price: 25, unit: '/pc', imgClass: 'img-cont', stock: 300,
-    images: ['IMG_3757.JPG', 'IMG_3757.JPG'],
+    images: ['photoo/IMG_3757.JPG', 'photoo/IMG_3757.JPG'],
     desc: 'Crystal-clear plastic containers perfect for display and product protection. Secure lid keeps contents safe. Stackable design for easy storage.',
     specs: [
       { k: 'Material',    v: 'PET Plastic' },
@@ -1891,7 +1888,7 @@ const PRODUCTS = {
     id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
     stock: 800,
-    images: ['photoo/cup2.JPG', 'IMG_3729.JPG', 'IMG_3730.JPG', 'IMG_3731.JPG', 'IMG_3732.JPG', 'IMG_3759.MOV', 'IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
+    images: ['photoo/cup2.JPG', 'photoo/IMG_3729.JPG', 'photoo/IMG_3730.JPG', 'photoo/IMG_3731.JPG', 'photoo/IMG_3732.JPG', 'photoo/IMG_3759.MOV', 'photoo/IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
     desc: 'High-quality clear plastic cups perfect for cold beverages, smoothies, and iced coffee.',
     specs: [
       { k: 'Material', v: 'PET Plastic' },
