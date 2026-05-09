@@ -1774,8 +1774,11 @@ function filterProducts() {
 const CATEGORIES = [
   'Boxes',
   'Bags',
+  'Cups',
+  'Plates',
   'Protective Materials',
   'Eco-Friendly',
+  'Cutleries',
   'Other',
   // ↑ ここに新しいカテゴリーを追加してください
 ];
@@ -1840,8 +1843,8 @@ const PRODUCTS = {
     reviews: [
     ],
   },
-  'cont': {
-    id: 'cont', name: 'Clear Plastic Containers', tag: 'Protective Materials',
+  'cat': {
+    id: 'cat', name: 'Clear Plastic Cutlery', tag: 'Cutleries',
     price: 25, unit: '/pc', imgClass: 'img-cont', stock: 300,
     images: ['IMG_3757.JPG', 'IMG_3757.JPG'],
     desc: 'Crystal-clear plastic containers perfect for display and product protection. Secure lid keeps contents safe. Stackable design for easy storage.',
@@ -1871,7 +1874,7 @@ const PRODUCTS = {
     ],
   },
   'plastic-cup': {
-    id: 'plastic-cup', name: 'Clear Plastic Cups', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
+    id: 'plastic-cup', name: 'Clear Plastic Cups', tag: 'Eco-Friendly','Cups',
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名 
     stock: 800,
     images: ['cup1.JPG'], // スワイプ表示させたい画像や動画のパス
@@ -1885,7 +1888,7 @@ const PRODUCTS = {
     ]
     },
   'plastic-dish': {
-    id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
+    id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', 'Plates',
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
     stock: 800,
     images: ['cup2.JPG', 'IMG_3729.JPG', 'IMG_3730.JPG', 'IMG_3731.JPG', 'IMG_3732.JPG', 'IMG_3759.MOV', 'IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
@@ -1897,6 +1900,21 @@ const PRODUCTS = {
     ],
     reviews: [
     ]
+  },
+  'pacu': {
+    id: 'pacu', name: 'Paper Cup', tag: 'Cups',
+    price: 15, unit: '/pc', imgClass: 'img-box-a', stock: 500,
+    images: ['sizeA.JPG', 'sizeA.JPG', 'sizeA.JPG'],
+    desc: '3-ply corrugated cardboard box, strong and durable, suitable for general packaging. Ideal for light to medium-weight products. Available in bulk.',
+    specs: [
+      { k: 'Material',    v: '3-ply Corrugated Cardboard' },
+      { k: 'Dimensions',  v: '30 × 20 × 15 cm' },
+      { k: 'Max Load',    v: '10 kg' },
+      { k: 'MOQ',         v: '50 pcs' },
+      { k: 'Color',       v: 'Natural Brown' },
+    ],
+    reviews: [
+    ],
   },
 };
 
