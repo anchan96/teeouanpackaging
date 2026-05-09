@@ -1843,7 +1843,7 @@ const PRODUCTS = {
     ],
     reviews: [
     ]
-    },
+  },
   'plastic-dish': {
     id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
@@ -1858,13 +1858,19 @@ const PRODUCTS = {
     reviews: [
     ]
   },
-  'paper cup': {
-    id: 9, // 前の数字と重ならないようにします
-    name: "Paper Cup", tag: 'Eco-Friendly', 
-    price: "価格（例：200 - 600）", unit: '/pack', imagClass: 'img-cup', stock: 500
-    image: "IMG_3747.JPG", // アップロードした画像の名前
-    category: "bag", // カテゴリ（"bag", "tape", "box", "other" から選択）
-    badge: "New" // カードの右上に表示する文字（不要なら消してもOK）
+  'papercup': {
+    id: '9', name: 'Paper Cup', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
+    price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
+    stock: 800,
+    images: ['IMG_3747.JPG'], // スワイプ表示させたい画像や動画のパス
+    desc: 'High-quality clear plastic cups perfect for cold beverages, smoothies, and iced coffee.',
+    specs: [
+      { k: 'Material', v: 'PET Plastic' },
+      { k: 'Capacity', v: '16 oz' },
+      { k: 'Quantity', v: '50 pcs/pack' }
+    ],
+    reviews: [
+    ]
   },
 };
 
