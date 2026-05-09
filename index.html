@@ -1774,11 +1774,8 @@ function filterProducts() {
 const CATEGORIES = [
   'Boxes',
   'Bags',
-  'Cups',
-  'Plates',
   'Protective Materials',
   'Eco-Friendly',
-  'Cutleries',
   'Other',
   // ↑ ここに新しいカテゴリーを追加してください
 ];
@@ -1843,8 +1840,8 @@ const PRODUCTS = {
     reviews: [
     ],
   },
-  'cat': {
-    id: 'cat', name: 'Clear Plastic Cutlery', tag: 'Cutleries',
+  'cont': {
+    id: 'cont', name: 'Clear Plastic Containers', tag: 'Protective Materials',
     price: 25, unit: '/pc', imgClass: 'img-cont', stock: 300,
     images: ['IMG_3757.JPG', 'IMG_3757.JPG'],
     desc: 'Crystal-clear plastic containers perfect for display and product protection. Secure lid keeps contents safe. Stackable design for easy storage.',
@@ -1874,7 +1871,7 @@ const PRODUCTS = {
     ],
   },
   'plastic-cup': {
-    id: 'plastic-cup', name: 'Clear Plastic Cups', tag: 'Eco-Friendly','Cups',
+    id: 'plastic-cup', name: 'Clear Plastic Cups', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名 
     stock: 800,
     images: ['cup1.JPG'], // スワイプ表示させたい画像や動画のパス
@@ -1888,7 +1885,7 @@ const PRODUCTS = {
     ]
     },
   'plastic-dish': {
-    id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', 'Plates',
+    id: 'plastic-dish', name: 'Clear Plastic Dish', tag: 'Eco-Friendly', // 既存のタグ（Boxes, Bags, Eco-friendly, Containers）のいずれかを指定
     price: 3, unit: '/pack', imgClass: 'img-cup', // CSSで背景画像を指定する場合のクラス名
     stock: 800,
     images: ['cup2.JPG', 'IMG_3729.JPG', 'IMG_3730.JPG', 'IMG_3731.JPG', 'IMG_3732.JPG', 'IMG_3759.MOV', 'IMG_3760.MOV'], // スワイプ表示させたい画像や動画のパス
