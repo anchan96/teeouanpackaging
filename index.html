@@ -808,6 +808,8 @@
 <!-- ════════════════════════════════════════
      MODALS
 ════════════════════════════════════════ -->
+<!-- 避難所 -->
+<div id="modal-container"></div>
 
 <!-- ── Checkout Modal (要求5) ── -->
 <div class="modal-overlay" id="modalCheckout">
@@ -1881,6 +1883,44 @@ const PRODUCTS = {
     ]
   },
 };
+  // 商品詳細（モーダル）を自動で生成する関数
+function generateModals() {
+  const container = document.getElementById('modal-container');
+  if (!container) return;
+
+  let html = '';
+  products.forEach(p => {
+    html += `
+      <div id="modal-${p.id}" class="modal-overlay">
+        <div class="modal-box">
+          <button class="modal-close" onclick="closeModal('modal-${p.id}')">&times;</button>
+          <h2>${p.name}</h2>
+          <p class="modal-subtitle">Product ID: #${p.id}</p>
+          <div class="modal-divider"></div>
+          
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+              <img src="${p.image}" style="width: 100%; border-radius: 15px; box-shadow: var(--shadow);">
+            </div>
+            <div style="flex: 1.2; min-width: 200px;">
+              <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+                ${p.description || '商品の詳細情報は準備中です。'}
+              </p>
+              <div style="background: var(--bg); padding: 15px; border-radius: 12px;">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Price</span>
+                <div style="font-size: 1.6rem; font-weight: 900; color: var(--pink);">${p.price} <span style="font-size: 0.9rem;">THB</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// ページ読み込み時に実行
+generateModals();
 
 /* ─── DETAIL STATE ─── */
 let detailCurrentSlide = 0;
