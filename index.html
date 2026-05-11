@@ -31,6 +31,22 @@
     gap: 15px;             /* ボタンとロゴの間の距離 */
     margin-right: auto;    /* ここがポイント！ 左側（nav-left）を左に詰め、右側のメニューを右に押し出します */
     }
+    /* 言語スイッチ内のボタンのデザイン */
+    .lang-switch button {
+    background-color: #ffffff; /* ボタンの背景色（白） */
+    color: #ff69b4;            /* 文字の色（ピンク） */
+    border: none;              /* 枠線を消す */
+    font-weight: bold;         /* ★文字を太字にする */
+    padding: 5px 12px;         /* ボタンの内側の余白 */
+    border-radius: 15px;       /* ボタンの角を丸くする */
+    cursor: pointer;           /* マウスを乗せた時に指マークにする */
+    transition: 0.3s;          /* 色が変わる時の動きを滑らかにする */
+    }
+    /* ボタンにマウスを乗せた時（ホバー）の色変更 */
+    .lang-switch button:hover {
+        background-color: #ff69b4; /* 背景をピンクに */
+        color: #ffffff;            /* 文字を白に */
+    }
     .logo {
       display: flex; align-items: center; gap: 10px;
       font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
