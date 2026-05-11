@@ -1,203 +1,362 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tee Ouan Packaging</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --pink: #ff69b4; --pink-dark: #d4006e; --pink-mid: #e0459a;
-      --pink-light: #ffe0f0; --cream: #fefce8; --bg: #f5f7ee;
-      --white: #ffffff; --text: #2d2d2d; --text-muted: #6b6b6b;
-      --shadow: 0 4px 24px rgba(0,0,0,0.07);
-      --shadow-hover: 0 8px 36px rgba(255,105,180,0.18);
-      --radius: 20px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tee Ouan Packaging</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff69b4; --pink-dark: #d4006e; --pink-light: #ffe0f0;
+            --bg: #f8f9fa; --white: #ffffff; --text: #333;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    /* --- NAV --- */
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 40px; background: var(--white);
-      border-bottom: 1px solid #f0e0ea; position: sticky; top: 0; z-index: 1000;
-    }
-    .nav-left { display: flex; align-items: center; gap: 20px; }
-    .logo {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
-      color: var(--pink); cursor: pointer;
-    }
-    
-    /* 要求1: 言語選択ボタン */
-    .lang-switcher {
-      display: flex; gap: 5px; background: #f0f0f0; padding: 4px; border-radius: 50px;
-    }
-    .lang-btn {
-      border: none; padding: 5px 12px; border-radius: 50px; cursor: pointer;
-      font-size: 0.75rem; font-weight: 700; transition: 0.2s; background: transparent;
-    }
-    .lang-btn.active { background: var(--pink); color: white; }
+        /* --- Animations --- */
+        @keyframes slideInDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes scrollBg { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-    .nav-links { display: flex; gap: 10px; list-style: none; align-items: center; }
-    .nav-links li a {
-      text-decoration: none; font-size: 0.9rem; font-weight: 600;
-      color: var(--text); padding: 8px 15px; border-radius: 50px; cursor: pointer;
-    }
-    .nav-links li a.active { background: var(--pink-light); color: var(--pink-dark); }
+        /* --- Header & Nav --- */
+        header { background: var(--white); padding: 15px 5%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        .lang-switch button { padding: 5px 10px; border: 1px solid var(--pink); background: none; cursor: pointer; border-radius: 5px; font-size: 12px; }
+        .lang-switch button.active { background: var(--pink); color: white; }
+        nav ul { display: flex; list-style: none; gap: 15px; }
+        nav ul li a { text-decoration: none; color: var(--text); font-weight: 600; cursor: pointer; font-size: 14px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--pink); }
 
-    /* --- PRODUCT MEDIA (要求2) --- */
-    .product-media {
-      width: 100%; height: 250px; background: #eee; overflow: hidden; position: relative;
-    }
-    .product-media img, .product-media video {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-    }
+        /* --- Home: Animation (Req 10) --- */
+        .hero { height: 400px; background: #eee; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+        .hero-images { display: flex; position: absolute; width: 200%; animation: scrollBg 20s linear infinite; }
+        .hero-images img { width: 20%; height: 400px; object-fit: cover; }
+        .hero-title { position: relative; z-index: 10; font-family: 'Nunito', sans-serif; font-size: 4rem; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); animation: slideInDown 1s ease-out; }
 
-    /* --- GRID --- */
-    .products-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px; padding: 40px; max-width: 1200px; margin: 0 auto;
-    }
-    .product-card {
-      background: var(--white); border-radius: var(--radius); overflow: hidden;
-      box-shadow: var(--shadow); transition: 0.3s;
-    }
-    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-    .product-info { padding: 20px; }
-    .price-tag { color: var(--pink-dark); font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
-    
-    .btn-add {
-      width: 100%; padding: 12px; border: none; border-radius: 50px;
-      background: var(--pink); color: white; font-weight: 700; cursor: pointer;
-    }
+        /* --- Sections --- */
+        .page { display: none; padding: 40px 5%; }
+        .page.active { display: block; }
 
-    .page { display: none; }
-    .page.active { display: block; }
-  </style>
+        /* --- Products (Req 8, 9, 11, 13) --- */
+        .filter-bar { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 15px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; }
+        .filter-btn.active { background: var(--pink); color: white; border-color: var(--pink); }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .product-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img, .product-card video { width: 100%; height: 200px; object-fit: cover; }
+        .product-info { padding: 15px; }
+        .price { color: var(--pink-dark); font-weight: 700; font-size: 1.2rem; }
+
+        /* --- Product Detail Modal --- */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; border-radius: 20px; position: relative; display: flex; flex-direction: column; }
+        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; z-index: 10; }
+        .slider { position: relative; height: 400px; background: #000; }
+        .slider img, .slider video { width: 100%; height: 100%; object-fit: contain; }
+        .detail-body { padding: 30px; }
+        .review-section { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+
+        /* --- Order Page (Req 3, 4, 5) --- */
+        .cart-item { display: flex; align-items: center; background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; gap: 15px; }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; }
+        .qty-ctrl { display: flex; align-items: center; gap: 10px; }
+        .btn-qty { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #ddd; background: white; cursor: pointer; }
+        .btn-del { margin-left: auto; color: red; cursor: pointer; }
+
+        /* --- Forms --- */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        .btn-main { background: var(--pink); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; width: 100%; }
+
+        .star-rating { color: #ffcc00; cursor: pointer; font-size: 20px; }
+    </style>
 </head>
-<body>
+<body onload="initApp()">
 
-<nav>
-  <div class="nav-left">
-    <div class="lang-switcher">
-      <button class="lang-btn" id="btn-th" onclick="setLang('th')">TH</button>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+<header>
+    <div class="nav-left">
+        <div class="lang-switch">
+            <button id="btn-th" onclick="changeLang('th')">TH</button>
+            <button id="btn-en" onclick="changeLang('en')">EN</button>
+        </div>
+        <div style="font-weight: 900; color: var(--pink); font-size: 1.2rem;">TEE OUAN</div>
     </div>
-    <div class="logo" onclick="showPage('home')">📦 Tee Ouan</div>
-  </div>
-  <ul class="nav-links">
-    <li><a id="nav-home" onclick="showPage('home')" class="active">Home</a></li>
-    <li><a id="nav-products" onclick="showPage('products')">Products</a></li>
-  </ul>
-</nav>
+    <nav>
+        <ul id="main-nav">
+            <li><a onclick="showPage('home')" id="nav-home">Home</a></li>
+            <li><a onclick="showPage('products')" id="nav-products">Products</a></li>
+            <li><a onclick="showPage('order')" id="nav-order">Order</a></li>
+            <li><a onclick="showPage('about')" id="nav-about">About Us</a></li>
+            <li><a onclick="showPage('account')" id="nav-account">Account</a></li>
+        </ul>
+    </nav>
+</header>
 
 <main>
-  <section id="page-home" class="page active" style="text-align:center; padding: 100px 20px;">
-    <h1 id="hero-title">ยินดีต้อนรับ</h1>
-    <p id="hero-desc">บรรจุภัณฑ์คุณภาพดีสำหรับธุรกิจของคุณ</p>
-  </section>
+    <section id="page-home" class="page active">
+        <div class="hero">
+            <div class="hero-images">
+                <img src="https://images.unsplash.com/photo-1607349913338-fca6f7fc42d0?q=80&w=1000" alt="p1">
+                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000" alt="p2">
+                <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=1000" alt="p3">
+                <img src="https://images.unsplash.com/photo-1607349913338-fca6f7fc42d0?q=80&w=1000" alt="p1">
+                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000" alt="p2">
+            </div>
+            <h1 class="hero-title">Tee Ouan Packaging</h1>
+        </div>
+    </section>
 
-  <section id="page-products" class="page">
-    <div class="products-grid" id="product-container">
-      </div>
-  </section>
+    <section id="page-products" class="page">
+        <div class="filter-bar" id="tag-filters">
+            </div>
+        <div class="product-grid" id="product-list">
+            </div>
+    </section>
+
+    <section id="page-order" class="page">
+        <h2 id="cart-title">Your Cart</h2>
+        <div id="cart-items" style="margin: 20px 0;"></div>
+        <div id="cart-empty" style="text-align:center; display:none;">Cart is empty</div>
+        <button class="btn-main" onclick="showPayment()" id="btn-pay-now">Pay Now</button>
+    </section>
+
+    <section id="page-payment" class="page">
+        <h2 id="pay-title">Confirm Payment</h2>
+        <div id="payment-summary" style="margin: 20px 0; background: #eee; padding: 15px; border-radius: 10px;"></div>
+        <div class="form-group">
+            <label id="lbl-address">Shipping Address</label>
+            <textarea id="pay-address" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label id="lbl-method">Payment Method</label>
+            <select id="pay-method">
+                <option value="transfer">Bank Transfer</option>
+                <option value="cod">Cash on Delivery</option>
+            </select>
+        </div>
+        <button class="btn-main" onclick="alert('Order Successful!')" id="btn-confirm">Confirm Order</button>
+    </section>
+
+    <section id="page-about" class="page">
+        <h2>About Us</h2>
+        <p>Providing the best packaging solutions in Thailand.</p>
+    </section>
+
+    <section id="page-account" class="page">
+        <div id="login-box">
+            <h2 id="acc-title">Login / Register</h2>
+            <div class="form-group"><label>Username</label><input type="text" id="login-user"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="login-pass"></div>
+            <button class="btn-main" onclick="doLogin()">Login</button>
+        </div>
+        <div id="profile-box" style="display:none;">
+            <h2>Profile Settings</h2>
+            <div class="form-group"><label>Name</label><input type="text" id="p-name"></div>
+            <div class="form-group"><label>Shop Name</label><input type="text" id="p-shop"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="p-email"></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="p-phone"></div>
+            <div class="form-group"><label>Address</label><textarea id="p-addr"></textarea></div>
+            <div class="form-group"><label>Default Payment</label><select id="p-pay"><option>Transfer</option><option>COD</option></select></div>
+            <button class="btn-main" onclick="alert('Saved!')">Save Profile</button>
+        </div>
+    </section>
 </main>
 
-<script>
-  /* 要求3: 商品データの管理（ここに追加するだけでOK） */
-  const products = [
-    {
-      name: { th: "กล่องพัสดุ เบอร์ A", en: "Shipping Box Size A" },
-      desc: { th: "หนาพิเศษ รับแรงกระแทกได้ดี", en: "Extra thick, high durability" },
-      price: 15,
-      mediaType: "image", // image または video
-      mediaUrl: "photoo/sizeA.JPG"
-    },
-    {
-      name: { th: "พลาสติกกันกระแทก", en: "Bubble Wrap" },
-      desc: { th: "หน้ากว้าง 65 ซม. ยาว 100 ม.", en: "Width 65cm, Length 100m" },
-      price: 150,
-      mediaType: "video", // 動画の例
-      mediaUrl: "photoo/bubble_demo.mp4" 
-    }
-  ];
-
-  const translations = {
-    th: {
-      home: "หน้าหลัก",
-      products: "สินค้า",
-      heroTitle: "ยินดีต้อนรับสู่ Tee Ouan",
-      heroDesc: "บรรจุภัณฑ์ที่แม่ค้าออนไลน์ไว้วางใจ",
-      add: "เพิ่มลงตะกร้า"
-    },
-    en: {
-      home: "Home",
-      products: "Products",
-      heroTitle: "Welcome to Tee Ouan",
-      heroDesc: "Packaging you can trust",
-      add: "Add to Cart"
-    }
-  };
-
-  let currentLang = 'th'; // 要求1: デフォルトはタイ語
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById('btn-' + lang).classList.add('active');
-    updateUI();
-  }
-
-  function updateUI() {
-    const t = translations[currentLang];
-    document.getElementById('nav-home').innerText = t.home;
-    document.getElementById('nav-products').innerText = t.products;
-    document.getElementById('hero-title').innerText = t.heroTitle;
-    document.getElementById('hero-desc').innerText = t.heroDesc;
-    renderProducts();
-  }
-
-  function renderProducts() {
-    const container = document.getElementById('product-container');
-    container.innerHTML = '';
-
-    products.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-
-      // 要求2: 画像と動画の出し分け
-      let mediaHtml = '';
-      if(p.mediaType === 'video') {
-        mediaHtml = `<video src="${p.mediaUrl}" autoplay muted loop playsinline></video>`;
-      } else {
-        mediaHtml = `<img src="${p.mediaUrl}" alt="product">`;
-      }
-
-      card.innerHTML = `
-        <div class="product-media">${mediaHtml}</div>
-        <div class="product-info">
-          <h3>${p.name[currentLang]}</h3>
-          <p style="font-size:0.8rem; color:#666;">${p.desc[currentLang]}</p>
-          <div class="price-tag">฿${p.price}</div>
-          <button class="btn-add">${translations[currentLang].add}</button>
+<div class="modal" id="prod-modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="slider" id="modal-slider"></div>
+        <div class="detail-body">
+            <h2 id="modal-name"></h2>
+            <p id="modal-price" class="price"></p>
+            <p id="modal-desc" style="margin: 15px 0;"></p>
+            <button class="btn-main" id="btn-add-cart" onclick="addToCartFromModal()">Add to Cart</button>
+            
+            <div class="review-section">
+                <h3 id="rev-title">Reviews</h3>
+                <div id="review-list" style="margin: 15px 0;"></div>
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 10px;">
+                    <div class="star-rating" id="star-input">
+                        <span onclick="setStar(1)">⭐</span><span onclick="setStar(2)">⭐</span><span onclick="setStar(3)">⭐</span><span onclick="setStar(4)">⭐</span><span onclick="setStar(5)">⭐</span>
+                    </div>
+                    <textarea id="rev-text" placeholder="Write a comment..." rows="2" style="margin-top:10px; width:100%; border:1px solid #ddd;"></textarea>
+                    <button class="btn-main" style="margin-top:10px;" onclick="addReview()">Post Review</button>
+                </div>
+            </div>
         </div>
-      `;
-      container.appendChild(card);
-    });
-  }
+    </div>
+</div>
 
-  function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + pageId).classList.add('active');
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById('nav-' + pageId).classList.add('active');
-  }
+<script>
+    // --- Data Management (Req 11, 13) ---
+    const PRODUCTS = [
+        { id: 1, name: {th:"ถ้วยพลาสติก", en:"Plastic Cup"}, price: 50, tags: ['all', 'others'], media: ['https://images.unsplash.com/photo-1517254456976-ee8682099819?w=500'], desc: "High quality 16oz cup." },
+        { id: 2, name: {th:"กล่องกระดาษ", en:"Paper Box"}, price: 120, tags: ['all', 'boxes'], media: ['https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500'], desc: "Eco-friendly box for food." },
+        { id: 3, name: {th:"ถุงหูหิ้ว", en:"Plastic Bag"}, price: 30, tags: ['all', 'bags'], media: ['https://images.unsplash.com/photo-1605600611284-195205ef9447?w=500'], desc: "Strong plastic bags." },
+        { id: 4, name: {th:"แผ่นกันกระแทก", en:"Bubble Wrap"}, price: 200, tags: ['all', 'protective materials'], media: ['https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=500'], desc: "Full protection for your items." }
+    ];
 
-  // 初期化
-  setLang('th');
+    const TAGS = ['all', 'boxes', 'bags', 'protective materials', 'eco-friendly', 'others'];
+    
+    let currentLang = 'th';
+    let cart = [];
+    let selectedProd = null;
+    let currentStar = 5;
+    const reviews = {}; // ProductID -> Array of Reviews
+
+    const i18n = {
+        th: { home: "หน้าหลัก", products: "สินค้า", order: "รายการสั่งซื้อ", about: "เกี่ยวกับเรา", account: "บัญชี", cartTitle: "รถเข็นของคุณ", payNow: "ชำระเงินตอนนี้", confirmPay: "ยืนยันการชำระเงิน", address: "ที่อยู่จัดส่ง", method: "วิธีการชำระเงิน", addCart: "เพิ่มในรถเข็น", review: "รีวิว" },
+        en: { home: "Home", products: "Products", order: "Order", about: "About Us", account: "Account", cartTitle: "Your Cart", payNow: "Pay Now", confirmPay: "Confirm Payment", address: "Shipping Address", method: "Payment Method", addCart: "Add to Cart", review: "Reviews" }
+    };
+
+    function initApp() {
+        renderTags();
+        renderProducts('all');
+        changeLang('th');
+    }
+
+    function changeLang(lang) {
+        currentLang = lang;
+        document.getElementById('btn-th').className = lang === 'th' ? 'active' : '';
+        document.getElementById('btn-en').className = lang === 'en' ? 'active' : '';
+        
+        document.getElementById('nav-home').innerText = i18n[lang].home;
+        document.getElementById('nav-products').innerText = i18n[lang].products;
+        document.getElementById('nav-order').innerText = i18n[lang].order;
+        document.getElementById('nav-about').innerText = i18n[lang].about;
+        document.getElementById('nav-account').innerText = i18n[lang].account;
+        document.getElementById('cart-title').innerText = i18n[lang].cartTitle;
+        document.getElementById('btn-pay-now').innerText = i18n[lang].payNow;
+        document.getElementById('pay-title').innerText = i18n[lang].confirmPay;
+        document.getElementById('lbl-address').innerText = i18n[lang].address;
+        document.getElementById('lbl-method').innerText = i18n[lang].method;
+        document.getElementById('btn-confirm').innerText = i18n[lang].confirmPay;
+        document.getElementById('btn-add-cart').innerText = i18n[lang].addCart;
+        document.getElementById('rev-title').innerText = i18n[lang].review;
+        
+        renderProducts('all');
+        renderCart();
+    }
+
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-' + id).classList.add('active');
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    }
+
+    function renderTags() {
+        const bar = document.getElementById('tag-filters');
+        bar.innerHTML = TAGS.map(t => `<button class="filter-btn" onclick="renderProducts('${t}')">${t.toUpperCase()}</button>`).join('');
+    }
+
+    function renderProducts(filter) {
+        const list = document.getElementById('product-list');
+        list.innerHTML = PRODUCTS.filter(p => p.tags.includes(filter)).map(p => `
+            <div class="product-card" onclick="openProduct(${p.id})">
+                <img src="${p.media[0]}" alt="${p.name[currentLang]}">
+                <div class="product-info">
+                    <h4>${p.name[currentLang]}</h4>
+                    <p class="price">฿${p.price}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function openProduct(id) {
+        selectedProd = PRODUCTS.find(p => p.id === id);
+        document.getElementById('modal-name').innerText = selectedProd.name[currentLang];
+        document.getElementById('modal-price').innerText = '฿' + selectedProd.price;
+        document.getElementById('modal-desc').innerText = selectedProd.desc;
+        document.getElementById('modal-slider').innerHTML = `<img src="${selectedProd.media[0]}">`;
+        renderReviews(id);
+        document.getElementById('prod-modal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('prod-modal').style.display = 'none'; }
+
+    function addToCartFromModal() {
+        const existing = cart.find(c => c.id === selectedProd.id);
+        if(existing) existing.qty++;
+        else cart.push({...selectedProd, qty: 1});
+        alert('Added to cart!');
+        renderCart();
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cart-items');
+        if(cart.length === 0) {
+            container.innerHTML = '';
+            document.getElementById('cart-empty').style.display = 'block';
+            return;
+        }
+        document.getElementById('cart-empty').style.display = 'none';
+        container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <img src="${item.media[0]}">
+                <div>
+                    <h4>${item.name[currentLang]}</h4>
+                    <p>฿${item.price}</p>
+                    <div class="qty-ctrl">
+                        <button class="btn-qty" onclick="changeQty(${item.id}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="btn-qty" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                </div>
+                <span class="btn-del" onclick="removeFromCart(${item.id})">🗑️</span>
+            </div>
+        `).join('');
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(c => c.id === id);
+        item.qty += delta;
+        if(item.qty < 1) removeFromCart(id);
+        renderCart();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(c => c.id !== id);
+        renderCart();
+    }
+
+    function showPayment() {
+        if(cart.length === 0) return alert('Cart is empty');
+        showPage('payment');
+        const sum = document.getElementById('payment-summary');
+        sum.innerHTML = cart.map(i => `<p>${i.name[currentLang]} x ${i.qty} = ฿${i.price * i.qty}</p>`).join('');
+    }
+
+    function doLogin() {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('profile-box').style.display = 'block';
+    }
+
+    function setStar(n) {
+        currentStar = n;
+        const stars = document.getElementById('star-input').children;
+        for(let i=0; i<5; i++) stars[i].style.opacity = i < n ? '1' : '0.3';
+    }
+
+    function addReview() {
+        const text = document.getElementById('rev-text').value;
+        if(!text) return;
+        if(!reviews[selectedProd.id]) reviews[selectedProd.id] = [];
+        reviews[selectedProd.id].push({ star: currentStar, text: text });
+        document.getElementById('rev-text').value = '';
+        renderReviews(selectedProd.id);
+    }
+
+    function renderReviews(id) {
+        const list = document.getElementById('review-list');
+        const prodReviews = reviews[id] || [];
+        list.innerHTML = prodReviews.map(r => `
+            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                <div>${'⭐'.repeat(r.star)}</div>
+                <p>${r.text}</p>
+            </div>
+        `).join('') || '<p>No reviews yet.</p>';
+    }
 </script>
-
 </body>
 </html>
