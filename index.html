@@ -874,7 +874,7 @@
         <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
       </div>
 
-      <div class="product-card" data-category="Bags" data-name="kraft paper bags" data-id="bags" data-price="5" data-unit="/pc" data-img="img-bags">
+      <div class="product-card" data-category="Bags" data-name="Plastic bags" data-id="bags" data-price="5" data-unit="/pc" data-img="img-bags">
         <div class="product-img-fixed img-bags" onclick="openDetail('bags')" style="cursor:pointer;"></div>
         <div class="product-body" onclick="openDetail('bags')" style="cursor:pointer;padding-bottom:8px;">
           <span class="product-tag">Bags</span>
@@ -914,6 +914,17 @@
           <div class="product-name">Corrugated Box Size B</div>
           <div class="product-desc">5-ply heavy-duty corrugated box, ideal for heavy or fragile items</div>
           <div class="product-footer"><div class="product-price">$22 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
+        </div>
+        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
+      </div>
+
+      <div class="product-card" data-category="Eco-Friendly" data-name="eco-friendly plastic cups" data-id="1" data-price="40" data-unit="/pc" >
+        <div class="product-img-fixed img-1" onclick="openDetail('1')" style="cursor:pointer;"></div>
+        <div class="product-body" onclick="openDetail('1')" style="cursor:pointer;padding-bottom:8px;">
+          <span class="product-tag">Eco-Friendly</span>
+          <div class="product-name">Plastic Cups</div>
+          <div class="product-desc">eco-friendly plastic items</div>
+          <div class="product-footer"><div class="product-price">$40 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
         </div>
         <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
       </div>
@@ -1150,7 +1161,7 @@ const PRODUCTS = {
   'eco': {
     id:'eco', name:'Eco-Friendly Packaging', tag:'Eco-Friendly',
     price:35, unit:'/pc', stock:150,
-    images:['IMG_3753.JPG', 'IMG_3754.JPG', 'IMG_3755.JPG', 'IMG_3756.JPG', 'IMG_3760.mp4', 'IMG_3760.MOV'],
+    images:['IMG_3753.JPG', 'IMG_3754.JPG', 'IMG_3755.JPG', 'IMG_3756.JPG', 'IMG_3760.mp4', 'IMG_3765 2.mp4'],
     desc:'Biodegradable packaging made from recycled materials, environmentally conscious choice.',
     specs:[{k:'Material',v:'Recycled / Compostable'},{k:'Decompose',v:'6–12 months'}],
     reviews:[],
@@ -1167,6 +1178,14 @@ const PRODUCTS = {
     id:'box-b', name:'Corrugated Box Size B', tag:'Boxes',
     price:22, unit:'/pc', stock:320,
     images:['sizeB.JPG', 'sizeB2.JPG', 'sizeB3.JPG'],
+    desc:'5-ply heavy-duty corrugated box, ideal for heavy or fragile items.',
+    specs:[{k:'Material',v:'5-ply Corrugated'},{k:'Size',v:'40×30×25 cm'},{k:'Max Load',v:'25 kg'}],
+    reviews:[],
+  },
+  '1': {
+    id:'1', name:'Plastic Cups', tag:'Eco-Friendly',
+    price:40, unit:'/pc', stock:320,
+    images:['IMG_3751.JPG', 'IMG_3752.JPG', 'IMG_3761.mp4'],
     desc:'5-ply heavy-duty corrugated box, ideal for heavy or fragile items.',
     specs:[{k:'Material',v:'5-ply Corrugated'},{k:'Size',v:'40×30×25 cm'},{k:'Max Load',v:'25 kg'}],
     reviews:[],
