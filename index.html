@@ -1,1652 +1,858 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tee Ouan Packaging</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    /* ════════════════════════════════════════
-       CSS変数・リセット
-    ════════════════════════════════════════ */
-    :root {
-      --pink: #ff69b4;
-      --pink-dark: #d4006e;
-      --pink-mid: #e0459a;
-      --pink-light: #ffe0f0;
-      --cream: #fefce8;
-      --bg: #f5f7ee;
-      --white: #ffffff;
-      --text: #2d2d2d;
-      --text-muted: #6b6b6b;
-      --shadow: 0 4px 24px rgba(0,0,0,0.07);
-      --shadow-hover: 0 8px 36px rgba(255,105,180,0.18);
-      --radius: 20px;
-      --teal: #0097a7;
-      --green: #43a047;
-      --purple: #7b2fa2;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tee Ouan Packaging</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Prompt:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #e91e8c;
+    --pink-light: #f8c8e4;
+    --pink-pale: #fce4f3;
+    --purple: #4a2060;
+    --purple-light: #7b3fa0;
+    --bg-cream: #f5f3ec;
+    --bg-yellow: #faf7e6;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-gray: #666;
+    --green: #22c55e;
+    --teal: #0e9e8e;
+    --gold: #e6b800;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Sarabun', sans-serif; background: var(--bg-cream); color: var(--text-dark); }
 
-    /* ════════════════════════════════════════
-       ナビゲーション
-    ════════════════════════════════════════ */
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 56px; background: var(--white);
-      border-bottom: 1px solid #f0e0ea;
-      position: sticky; top: 0; z-index: 400;
-    }
-    .nav-left {
-      display: flex; align-items: center; gap: 15px; margin-right: auto;
-    }
-    .lang-switch button {
-      background: var(--white); color: var(--pink);
-      border: 1px solid var(--pink); font-weight: bold;
-      padding: 5px 12px; border-radius: 15px; cursor: pointer; transition: 0.3s;
-    }
-    .lang-switch button:hover,
-    .lang-switch button.active {
-      background: var(--pink); color: #fff !important;
-    }
-    .logo {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
-      color: var(--pink); cursor: pointer; flex-shrink: 0;
-    }
-    .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
-    .nav-links li a {
-      display: flex; align-items: center; gap: 5px;
-      text-decoration: none; font-size: 0.88rem; font-weight: 500;
-      color: var(--text); padding: 8px 14px; border-radius: 50px;
-      transition: background-color 0.2s, color 0.2s; white-space: nowrap; cursor: pointer;
-    }
-    .nav-links li a.active { background: var(--pink-light); color: var(--pink-dark); font-weight: 600; }
-    .nav-links li a:hover:not(.active) { background: #f5f5f5; }
-    .cart-badge {
-      background: var(--pink); color: #fff; border-radius: 50%;
-      width: 18px; height: 18px; font-size: 0.65rem; font-weight: 800;
-      display: inline-flex; align-items: center; justify-content: center;
-      margin-left: 2px; flex-shrink: 0;
-    }
-    /* ハンバーガーメニュー */
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 6px; border: none; background: transparent;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: var(--text); border-radius: 2px; transition: 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .nav-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.3); z-index: 150;
-    }
-    .nav-overlay.open { display: block; }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.07);
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-family: 'Prompt', sans-serif; font-weight: 700; color: var(--pink); font-size: 17px; text-decoration: none; }
+  .logo-icon { width: 28px; height: 28px; border: 2px solid var(--pink); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; transform: rotate(15deg); }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 14px; padding: 6px 14px; border-radius: 20px; transition: all 0.2s; display: flex; align-items: center; gap: 5px; font-weight: 500; }
+  .nav-links a:hover { background: var(--pink-pale); color: var(--pink); }
+  .nav-links a.active { background: var(--pink-light); color: var(--pink); font-weight: 600; }
+  .cart-badge { background: var(--pink); color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
 
-    /* ════════════════════════════════════════
-       ページ切り替え
-    ════════════════════════════════════════ */
-    .page { display: none; }
-    .page.active { display: block; }
+  /* LANG TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 6px; margin-left: 12px;
+    background: #f0f0f0; border-radius: 20px; padding: 3px;
+  }
+  .lang-btn { border: none; background: none; cursor: pointer; padding: 4px 10px; border-radius: 16px; font-size: 12px; font-weight: 600; color: #888; transition: all 0.2s; font-family: 'Sarabun', sans-serif; }
+  .lang-btn.active { background: var(--pink); color: white; }
 
-    /* ════════════════════════════════════════
-       モーダル
-    ════════════════════════════════════════ */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.55); z-index: 600;
-      align-items: flex-start; padding: 24px 16px; overflow-y: auto;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-box {
-      background: var(--white); border-radius: 24px; padding: 40px;
-      width: 100%; max-width: 560px; position: relative;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.22); margin: auto;
-    }
-    .modal-box h2 {
-      font-family: 'Nunito', sans-serif; font-size: 1.65rem; font-weight: 900;
-      color: var(--pink-dark); margin-bottom: 6px;
-    }
-    .modal-subtitle { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px; }
-    .modal-close {
-      position: absolute; top: 18px; right: 22px;
-      background: #f5f5f5; border: none; border-radius: 50%;
-      width: 34px; height: 34px; font-size: 1.1rem; cursor: pointer;
-      color: var(--text-muted); display: flex; align-items: center;
-      justify-content: center; transition: background-color 0.2s;
-    }
-    .modal-close:hover { background: #eee; color: var(--text); }
-    .modal-divider { border-top: 1px solid #f0f0f0; margin: 20px 0; }
-    /* 注文完了モーダル */
-    .confirmed-modal { max-width: 420px; padding: 48px 32px; }
-    .confirmed-box { text-align: center; }
-    .confirmed-icon { font-size: 4rem; margin-bottom: 20px; }
-    .confirmed-box h2 {
-      color: #43a047; font-family: 'Nunito', sans-serif;
-      font-size: 1.8rem; font-weight: 900; margin-bottom: 12px;
-    }
-    .confirmed-box p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+  /* PAGES */
+  .page { display: none; padding-top: 60px; min-height: 100vh; }
+  .page.active { display: block; }
 
-    /* ════════════════════════════════════════
-       フォーム
-    ════════════════════════════════════════ */
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block; font-size: 0.83rem; font-weight: 700;
-      color: var(--text); margin-bottom: 6px; letter-spacing: 0.02em;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 11px 16px;
-      border: 2px solid #ebebeb; border-radius: 12px;
-      font-size: 0.9rem; color: var(--text); outline: none;
-      transition: border-color 0.2s; background: #fafafa;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--pink); }
-    .form-group textarea { min-height: 80px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  /* HOME HERO */
+  .hero {
+    position: relative; height: calc(100vh - 60px); min-height: 500px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(233,30,140,0.7) 0%, rgba(74,32,96,0.6) 100%);
+    z-index: 1;
+  }
+  .hero-img-bg {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400') center/cover no-repeat;
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 2; color: white; padding: 0 20px; }
+  .hero-content h1 { font-family: 'Prompt', sans-serif; font-size: clamp(36px,6vw,72px); font-weight: 800; text-shadow: 0 2px 20px rgba(0,0,0,0.3); margin-bottom: 12px; }
+  .hero-content .tagline { font-size: clamp(14px,2vw,18px); font-weight: 700; color: white; margin-bottom: 8px; }
+  .hero-content .sub { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 30px; }
+  .btn-hero { background: var(--pink); color: white; border: none; padding: 14px 36px; border-radius: 30px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(233,30,140,0.4); }
+  .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(233,30,140,0.5); }
+  .scroll-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 2; color: white; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; letter-spacing: 2px; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
 
-    /* ════════════════════════════════════════
-       ボタン共通
-    ════════════════════════════════════════ */
-    .btn-primary, .btn-outline, .btn-white, .btn-purple, .btn-green {
-      border-radius: 50px; padding: 14px 32px; font-size: 1rem;
-      font-weight: 700; cursor: pointer; border: none;
-      transition: 0.2s; display: inline-block; text-align: center;
-    }
-    .btn-primary:hover, .btn-outline:hover, .btn-white:hover,
-    .btn-purple:hover, .btn-green:hover { transform: translateY(-2px); }
+  /* SECTIONS */
+  section { padding: 60px 40px; }
+  .section-title { font-family: 'Prompt', sans-serif; font-size: 32px; font-weight: 800; color: var(--pink); text-align: center; margin-bottom: 40px; }
 
-    .btn-primary  { background: var(--pink);    color: #fff; }
-    .btn-primary:hover { background: var(--pink-mid); }
-    .btn-outline  { background: transparent;    color: var(--pink); border: 2px solid var(--pink); padding: 12px 30px; }
-    .btn-outline:hover { background: var(--pink-light); }
-    .btn-white    { background: var(--white);   color: var(--pink); }
-    .btn-white:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-    .btn-purple   { background: #6d2e96;        color: #fff; }
-    .btn-purple:hover { background: #5a1e7a; }
-    .btn-green    { background: #43a047;        color: #fff; }
-    .btn-green:hover { background: #388e3c; }
-    .btn-full { width: 100%; }
+  /* WHY CHOOSE US */
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
+  .why-card { background: white; border-radius: 16px; padding: 30px 20px; text-align: center; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .why-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 16px; }
+  .why-icon.pink { background: var(--pink-light); }
+  .why-icon.teal { background: #d0f5f0; }
+  .why-icon.green { background: #d4f5e4; }
+  .why-icon.purple { background: #e8d8f5; }
+  .why-title { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+  .why-title.pink { color: var(--pink); }
+  .why-title.teal { color: var(--teal); }
+  .why-title.green { color: var(--green); }
+  .why-title.purple { color: var(--purple-light); }
+  .why-desc { font-size: 14px; color: var(--text-gray); line-height: 1.5; }
 
-    /* ════════════════════════════════════════
-       商品画像・カード
-    ════════════════════════════════════════ */
-    .product-img-fixed {
-      width: 100%; height: 220px;
-      background-size: cover; background-position: center; background-color: #eee;
-    }
-    /* 既存の画像クラス */
-    .img-box-a  { background-image: url('sizeA.JPG'); }
-    .img-box-b  { background-image: url('sizeB.JPG'); }
-    .img-bubble { background-image: url('Bubble Wrap.JPG'); }
-    .img-bags   { background-image: url('IMG_3754.JPG'); }
-    .img-eco    { background-image: url('IMG_3755.JPG'); }
-    .img-cont   { background-image: url('IMG_3757.JPG'); }
+  /* FEATURED PRODUCTS */
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .product-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.07); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+  .product-img { width: 100%; height: 200px; object-fit: cover; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; }
+  .product-body { padding: 16px; }
+  .category-badge { display: inline-block; background: var(--pink-light); color: var(--pink); border-radius: 20px; font-size: 12px; font-weight: 700; padding: 3px 12px; margin-bottom: 8px; }
+  .product-name { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+  .product-desc { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
+  .product-price { font-size: 20px; font-weight: 800; color: var(--pink); margin-top: 8px; }
 
-    .products-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
-      gap: 28px; max-width: 1100px; margin: 0 auto;
-    }
-    .product-card {
-      background: var(--white); border-radius: var(--radius);
-      box-shadow: var(--shadow); transition: 0.2s; overflow: hidden;
-    }
-    .product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-    .product-body { padding: 18px 20px 22px; }
-    .product-tag {
-      display: inline-block; background: var(--pink-light); color: var(--pink-dark);
-      font-size: 0.76rem; font-weight: 600; padding: 4px 12px;
-      border-radius: 50px; margin-bottom: 10px;
-    }
-    .product-name  { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 7px; }
-    .product-desc  { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-    .product-price { font-family: 'Nunito', sans-serif; font-size: 1.45rem; font-weight: 900; color: var(--pink); }
-    .product-price span { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
-    .product-stock { font-size: 0.83rem; color: var(--text-muted); }
-    .add-to-cart {
-      width: 100%; background: var(--pink); color: #fff; border: none;
-      border-radius: 50px; padding: 13px; font-size: 0.95rem; font-weight: 700;
-      cursor: pointer; font-family: 'Poppins', sans-serif;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: background-color 0.2s, transform 0.15s;
-    }
-    .add-to-cart:hover { background: var(--pink-mid); transform: translateY(-1px); }
-    .add-to-cart.added { background: #43a047 !important; }
+  /* FEATURED HEADER */
+  .featured-header { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto 24px; }
+  .featured-header h2 { font-family: 'Prompt', sans-serif; font-size: 26px; font-weight: 800; color: var(--pink); }
+  .view-all { color: var(--purple); font-weight: 700; text-decoration: none; font-size: 14px; }
+  .view-all:hover { color: var(--pink); }
 
-    /* ════════════════════════════════════════
-       カート（Ordersページ）
-    ════════════════════════════════════════ */
-    .cart-section { padding: 40px 56px 80px; }
-    .cart-inner   { max-width: 860px; margin: 0 auto; }
-    .cart-empty {
-      text-align: center; padding: 72px 24px;
-      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
-    }
-    .cart-empty-icon { font-size: 4rem; margin-bottom: 16px; }
-    .cart-empty p    { font-size: 1rem; color: var(--text-muted); margin-bottom: 24px; }
-    .cart-item {
-      background: var(--white); border-radius: var(--radius); padding: 18px 22px;
-      box-shadow: var(--shadow); display: flex; align-items: center;
-      gap: 16px; margin-bottom: 14px;
-    }
-    .cart-thumb {
-      width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0;
-      background-size: cover; background-position: center; background-color: #eee;
-    }
-    .cart-info        { flex: 1; min-width: 0; }
-    .cart-item-name   { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 3px; }
-    .cart-item-unit   { font-size: 0.8rem; color: var(--text-muted); }
-    .qty-wrap         { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .qty-btn {
-      width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--pink);
-      background: var(--white); color: var(--pink); font-size: 1.2rem; font-weight: 700;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s;
-    }
-    .qty-btn:hover    { background: var(--pink); color: #fff; }
-    .qty-num          { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 800; min-width: 28px; text-align: center; }
-    .cart-line-price  { font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 900; color: var(--pink); min-width: 72px; text-align: right; flex-shrink: 0; }
-    .cart-del         { background: none; border: none; color: #ccc; font-size: 1.3rem; cursor: pointer; flex-shrink: 0; transition: color 0.15s; }
-    .cart-del:hover   { color: #e53935; }
-    /* カートサマリー */
-    .cart-summary { background: var(--white); border-radius: var(--radius); padding: 24px 28px; box-shadow: var(--shadow); margin-top: 8px; }
-    .summary-row  { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; color: var(--text-muted); }
-    .summary-row.grand { border-top: 2px solid #f0f0f0; margin-top: 10px; padding-top: 16px; font-size: 1.05rem; font-weight: 700; color: var(--text); }
-    .grand-amount { font-family: 'Nunito', sans-serif; font-size: 1.65rem; font-weight: 900; color: var(--pink); }
-    .btn-paynow {
-      width: 100%; background: var(--pink); color: #fff; border: none;
-      border-radius: 50px; padding: 17px; font-size: 1.05rem; font-weight: 700;
-      cursor: pointer; font-family: 'Poppins', sans-serif; margin-top: 18px;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: background-color 0.2s, transform 0.15s;
-    }
-    .btn-paynow:hover { background: var(--pink-mid); transform: translateY(-2px); }
+  /* CTA */
+  .cta-section { padding: 40px; }
+  .cta-box {
+    max-width: 1100px; margin: 0 auto;
+    background: linear-gradient(135deg, #fce4f3 0%, #e8d8f5 100%);
+    border-radius: 24px; padding: 60px 40px; text-align: center;
+  }
+  .cta-box h2 { font-family: 'Prompt', sans-serif; font-size: 32px; font-weight: 800; color: var(--pink); margin-bottom: 12px; }
+  .cta-box p { color: var(--text-dark); margin-bottom: 28px; font-size: 15px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-outline { background: white; color: var(--pink); border: 2px solid var(--pink); padding: 12px 28px; border-radius: 30px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; font-size: 15px; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--pink); color: white; }
+  .btn-dark { background: var(--purple); color: white; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; font-size: 15px; transition: all 0.2s; }
+  .btn-dark:hover { background: var(--purple-light); }
 
-    /* ════════════════════════════════════════
-       チェックアウトモーダル
-    ════════════════════════════════════════ */
-    .checkout-items { background: #fafafa; border-radius: 14px; padding: 16px; margin-bottom: 4px; }
-    .co-row         { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
-    .co-row:last-child { border-bottom: none; }
-    .co-thumb       { width: 52px; height: 52px; border-radius: 10px; flex-shrink: 0; background-size: cover; background-position: center; background-color: #eee; }
-    .co-detail      { flex: 1; }
-    .co-detail strong { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text); }
-    .co-detail span   { font-size: 0.8rem; color: var(--text-muted); }
-    .co-price         { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--pink); font-size: 0.95rem; flex-shrink: 0; }
-    .co-total-row     { display: flex; justify-content: space-between; padding-top: 14px; font-weight: 700; font-size: 1rem; }
-    .co-total-row span:last-child { font-family: 'Nunito', sans-serif; font-size: 1.3rem; color: var(--pink); }
-    /* 支払い方法ボタン */
-    .pay-options    { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-    .pay-opt        { border: 2px solid #e0e0e0; border-radius: 14px; padding: 12px 10px; cursor: pointer; text-align: center; transition: all 0.15s; background: var(--white); }
-    .pay-opt:hover  { border-color: var(--pink); }
-    .pay-opt.selected { border-color: var(--pink); background: var(--pink-light); }
-    .pay-opt .pay-icon  { font-size: 1.5rem; margin-bottom: 4px; }
-    .pay-opt .pay-label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+  /* FOOTER */
+  footer { background: white; padding: 50px 40px 30px; border-top: 1px solid #eee; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 30px; }
+  .footer-brand p { font-size: 14px; color: var(--text-gray); margin-top: 10px; line-height: 1.6; }
+  .footer-col h3 { font-weight: 700; color: var(--pink); margin-bottom: 12px; font-size: 15px; }
+  .footer-col p, .footer-col a { font-size: 14px; color: var(--text-gray); line-height: 1.9; display: block; text-decoration: none; }
+  .footer-bottom { text-align: center; font-size: 13px; color: #aaa; border-top: 1px solid #eee; padding-top: 20px; max-width: 1100px; margin: 0 auto; }
 
-    /* ════════════════════════════════════════
-       アカウントモーダル
-    ════════════════════════════════════════ */
-    .acc-lock             { text-align: center; padding: 12px 0 8px; }
-    .acc-lock .lock-icon  { font-size: 3.5rem; margin-bottom: 14px; }
-    .acc-lock p           { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
-    .pass-row             { display: flex; gap: 10px; }
-    .pass-row input {
-      flex: 1; padding: 11px 16px; border: 2px solid #ebebeb; border-radius: 12px;
-      font-size: 0.9rem; outline: none; transition: border-color 0.2s; background: #fafafa;
-    }
-    .pass-row input:focus  { border-color: var(--pink); background: #fff; }
-    .err-msg              { color: #e53935; font-size: 0.82rem; margin-top: 8px; min-height: 20px; }
-    .success-toast        { background: #e8f5e9; color: #2e7d32; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; font-weight: 600; margin-bottom: 16px; display: none; }
-    .default-pass-note    { margin-top: 18px; font-size: 0.76rem; color: #bbb; text-align: center; }
-    .acc-actions          { display: flex; gap: 12px; margin-top: 4px; }
-    .btn-lock             { background: #f5f5f5; color: var(--text-muted); border: none; border-radius: 50px; padding: 14px 22px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-    .btn-lock:hover       { background: #eee; }
+  /* PRODUCTS PAGE */
+  .products-hero { background: var(--bg-yellow); padding: 60px 40px 40px; text-align: center; }
+  .products-hero h1 { font-family: 'Prompt', sans-serif; font-size: 48px; font-weight: 800; color: var(--pink); margin-bottom: 8px; }
+  .products-hero p { font-size: 16px; color: var(--text-dark); font-weight: 600; }
+  .search-bar { max-width: 500px; margin: 24px auto 0; position: relative; }
+  .search-bar input { width: 100%; padding: 14px 20px 14px 46px; border: none; border-radius: 30px; background: white; font-size: 15px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); outline: none; font-family: 'Sarabun', sans-serif; }
+  .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #aaa; }
+  .filter-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 20px 40px 0; }
+  .filter-btn { border: 2px solid #ddd; background: white; padding: 8px 20px; border-radius: 25px; cursor: pointer; font-size: 14px; font-weight: 600; font-family: 'Sarabun', sans-serif; transition: all 0.2s; }
+  .filter-btn:hover { border-color: var(--pink); color: var(--pink); }
+  .filter-btn.active { background: var(--pink); color: white; border-color: var(--pink); }
+  .products-section { padding: 40px; background: var(--bg-cream); }
 
-    /* ════════════════════════════════════════
-       ヒーロースライドショー
-    ════════════════════════════════════════ */
-    .hero {
-      position: relative; overflow: hidden;
-      height: clamp(400px, 58vw, 620px);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-track { position: absolute; inset: 0; display: flex; width: 500%; animation: heroSlide 20s linear infinite; }
-    .hero-slide { flex: 0 0 20%; background: center / cover no-repeat; }
-    .hero-slide:nth-child(1) { background-image: url('sizeA.JPG'); }
-    .hero-slide:nth-child(2) { background-image: url('Bubble Wrap.JPG'); }
-    .hero-slide:nth-child(3) { background-image: url('IMG_3754.JPG'); }
-    .hero-slide:nth-child(4) { background-image: url('IMG_3755.JPG'); }
-    .hero-slide:nth-child(5) { background-image: url('IMG_3757.JPG'); }
-    @keyframes heroSlide {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-80%); }
-    }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,80,160,0.52) 0%, rgba(60,0,50,0.72) 100%); }
-    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
-    .hero-content h1 {
-      font-family: 'Nunito', sans-serif; font-size: clamp(2.2rem, 6vw, 5rem);
-      font-weight: 900; color: #fff; letter-spacing: -1px; margin-bottom: 14px;
-      animation: titleDrop 1.1s cubic-bezier(0.22,1,0.36,1) both;
-    }
-    @keyframes titleDrop {
-      from { opacity: 0; transform: translateY(-56px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-content .tagline { font-size: clamp(0.95rem, 2.5vw, 1.2rem); font-weight: 600; color: rgba(255,255,255,0.92); margin-bottom: 10px; animation: fadeUp 1s 0.28s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero-content .desc    { font-size: clamp(0.85rem, 2vw, 1rem); color: rgba(255,255,255,0.76); margin-bottom: 36px; animation: fadeUp 1s 0.44s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero-content .hero-btns { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; animation: fadeUp 1s 0.60s cubic-bezier(0.22,1,0.36,1) both; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-scroll {
-      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 5px;
-      color: rgba(255,255,255,0.55); font-size: 0.72rem; letter-spacing: 0.1em;
-      animation: bobble 2.2s ease-in-out infinite;
-    }
-    @keyframes bobble {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%     { transform: translateX(-50%) translateY(7px); }
-    }
+  /* PRODUCT DETAIL */
+  .product-detail { padding: 20px 40px 60px; max-width: 1200px; margin: 0 auto; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--pink); font-weight: 600; font-size: 14px; cursor: pointer; margin-bottom: 30px; border: none; background: none; font-family: 'Sarabun', sans-serif; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+  .product-gallery { }
+  .main-img { width: 100%; border-radius: 16px; height: 380px; object-fit: cover; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 80px; overflow: hidden; }
+  .main-img img { width: 100%; height: 100%; object-fit: cover; }
+  .thumbnails { display: flex; gap: 10px; margin-top: 12px; }
+  .thumb { width: 80px; height: 80px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; overflow: hidden; background: #eee; }
+  .thumb.active { border-color: var(--pink); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .detail-info .cat-badge { display: inline-block; background: var(--pink-light); color: var(--pink); border-radius: 20px; font-size: 13px; font-weight: 700; padding: 4px 14px; margin-bottom: 12px; }
+  .detail-info h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+  .price-big { font-size: 36px; font-weight: 800; color: var(--pink); margin-bottom: 6px; }
+  .price-big span { font-size: 16px; font-weight: 500; color: var(--text-gray); }
+  .in-stock { display: inline-flex; align-items: center; gap: 6px; background: #dcfce7; color: #15803d; border-radius: 20px; padding: 4px 14px; font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+  .product-desc-detail { font-size: 15px; color: var(--text-gray); line-height: 1.7; margin-bottom: 20px; }
+  .spec-table { background: #f9f9f9; border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+  .spec-row { display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #eee; font-size: 14px; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key { color: var(--text-gray); }
+  .spec-val { font-weight: 700; }
+  .spec-table h3 { padding: 14px 18px; font-size: 15px; font-weight: 700; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 6px; }
+  .qty-row { display: flex; align-items: center; gap: 16px; }
+  .qty-ctrl { display: flex; align-items: center; gap: 12px; }
+  .qty-btn { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--pink); background: white; color: var(--pink); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .qty-btn:hover { background: var(--pink); color: white; }
+  .qty-num { font-size: 18px; font-weight: 700; min-width: 24px; text-align: center; }
+  .btn-cart { flex: 1; background: var(--pink); color: white; border: none; padding: 14px 28px; border-radius: 30px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; transition: all 0.2s; }
+  .btn-cart:hover { background: #c41578; transform: translateY(-2px); }
+  .review-section { max-width: 1200px; margin: 0 auto; padding: 0 40px 60px; }
+  .review-title { font-family: 'Prompt', sans-serif; font-size: 22px; font-weight: 800; color: var(--pink); margin-bottom: 20px; }
+  .review-box { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+  .rating-bar { height: 4px; background: var(--pink-light); border-radius: 2px; flex: 1; }
+  .rating-fill { height: 100%; background: var(--pink); border-radius: 2px; }
+  .stars-empty { font-size: 28px; color: #ddd; letter-spacing: 4px; }
+  .write-review { background: white; border-radius: 16px; padding: 24px; }
+  .write-review h3 { font-weight: 700; color: var(--pink); margin-bottom: 16px; font-size: 17px; }
+  .star-rate { display: flex; gap: 8px; font-size: 28px; margin-bottom: 6px; cursor: pointer; }
+  .star-rate span { color: #ddd; transition: color 0.1s; }
+  .star-rate span.lit { color: var(--gold); }
+  .review-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .review-input { border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px 16px; font-size: 14px; font-family: 'Sarabun', sans-serif; outline: none; width: 100%; }
+  .review-input:focus { border-color: var(--pink); }
+  .review-textarea { width: 100%; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px 16px; font-size: 14px; font-family: 'Sarabun', sans-serif; outline: none; resize: vertical; min-height: 100px; margin-bottom: 12px; }
+  .review-textarea:focus { border-color: var(--pink); }
+  .btn-review { background: var(--pink); color: white; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; font-size: 15px; }
 
-    /* ════════════════════════════════════════
-       フッター・ヘルプボタン
-    ════════════════════════════════════════ */
-    footer { background: var(--white); padding: 40px 56px 0; border-top: 1px solid #f0e0ea; }
-    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
-    .footer-brand p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; margin-top: 12px; }
-    .footer-col h4  { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 14px; }
-    .footer-col p   { font-size: 0.87rem; color: var(--text-muted); line-height: 2; }
-    .footer-bottom  { text-align: center; font-size: 0.82rem; color: var(--text-muted); padding: 20px 0 28px; border-top: 1px solid #f0f0f0; }
-    .help-bubble {
-      position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px;
-      background: var(--white); border-radius: 50%; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; cursor: pointer; color: var(--text-muted); border: 1px solid #eee; z-index: 300;
-    }
+  /* ORDERS */
+  .orders-hero { background: var(--bg-yellow); padding: 50px 40px 30px; text-align: center; }
+  .orders-hero h1 { font-family: 'Prompt', sans-serif; font-size: 40px; font-weight: 800; color: var(--pink); margin-bottom: 6px; }
+  .orders-hero p { color: var(--text-gray); font-size: 15px; }
+  .orders-content { max-width: 800px; margin: 30px auto 60px; padding: 0 20px; }
+  .order-item { background: white; border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .order-thumb { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; background: #eee; overflow: hidden; flex-shrink: 0; }
+  .order-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .order-info { flex: 1; }
+  .order-info h3 { font-weight: 700; font-size: 15px; }
+  .order-info p { font-size: 13px; color: var(--text-gray); }
+  .order-controls { display: flex; align-items: center; gap: 10px; }
+  .order-price { color: var(--pink); font-weight: 800; font-size: 17px; min-width: 50px; text-align: right; }
+  .trash-btn { background: none; border: none; cursor: pointer; font-size: 18px; color: #aaa; }
+  .trash-btn:hover { color: red; }
+  .order-summary { background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .summary-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; color: var(--text-gray); border-bottom: 1px solid #f0f0f0; }
+  .summary-total { display: flex; justify-content: space-between; padding: 14px 0 0; font-size: 17px; font-weight: 800; }
+  .summary-total-price { color: var(--pink); font-size: 24px; }
+  .btn-pay { width: 100%; background: var(--pink); color: white; border: none; padding: 16px; border-radius: 30px; font-size: 17px; font-weight: 700; cursor: pointer; font-family: 'Sarabun', sans-serif; margin-top: 18px; transition: all 0.2s; }
+  .btn-pay:hover { background: #c41578; }
+  .empty-cart { text-align: center; padding: 60px 20px; color: var(--text-gray); font-size: 16px; }
 
-    /* ════════════════════════════════════════
-       ホームページ各セクション
-    ════════════════════════════════════════ */
-    .why { padding: 72px 56px; background: var(--bg); }
-    .why h2 { text-align: center; font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 48px; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
-    .feature-card { background: var(--white); border-radius: var(--radius); padding: 36px 24px 32px; text-align: center; box-shadow: var(--shadow); transition: 0.2s; }
-    .feature-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-    .feature-icon { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.9rem; }
-    .feature-card:nth-child(1) .feature-icon { background: #ffe0f0; }
-    .feature-card:nth-child(2) .feature-icon { background: #e0f7fa; }
-    .feature-card:nth-child(3) .feature-icon { background: #e8f5e9; }
-    .feature-card:nth-child(4) .feature-icon { background: #ede7f6; }
-    .feature-card h3 { font-family: 'Nunito', sans-serif; font-size: 1.08rem; font-weight: 800; margin-bottom: 10px; }
-    .feature-card:nth-child(1) h3 { color: var(--pink); }
-    .feature-card:nth-child(2) h3 { color: var(--teal); }
-    .feature-card:nth-child(3) h3 { color: var(--green); }
-    .feature-card:nth-child(4) h3 { color: var(--purple); }
-    .feature-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+  /* ABOUT */
+  .about-hero { background: var(--bg-yellow); padding: 50px 40px 40px; text-align: center; }
+  .about-hero h1 { font-family: 'Prompt', sans-serif; font-size: 40px; font-weight: 800; color: var(--pink); margin-bottom: 8px; }
+  .about-hero p { font-size: 15px; color: var(--text-gray); }
+  .about-content { max-width: 1100px; margin: 0 auto; padding: 50px 40px; }
+  .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 50px; }
+  .value-card { background: white; border-radius: 16px; padding: 30px 20px; text-align: center; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .value-icon { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 16px; }
+  .value-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+  .value-desc { font-size: 14px; color: var(--text-gray); line-height: 1.6; }
+  .services-section h2 { font-family: 'Prompt', sans-serif; font-size: 28px; font-weight: 800; color: var(--pink); text-align: center; margin-bottom: 24px; }
+  .services-box { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .service-item { display: flex; align-items: flex-start; gap: 14px; }
+  .service-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .service-info h4 { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .service-info p { font-size: 13px; color: var(--text-gray); }
+  /* CONTACT */
+  .contact-section { padding: 40px; }
+  .contact-box { max-width: 1100px; margin: 0 auto; background: linear-gradient(135deg, #fce4f3 0%, #e8d8f5 100%); border-radius: 24px; padding: 50px 40px; }
+  .contact-box h2 { font-family: 'Prompt', sans-serif; font-size: 30px; font-weight: 800; color: var(--pink); text-align: center; margin-bottom: 6px; }
+  .contact-box > p { text-align: center; color: var(--text-gray); margin-bottom: 30px; font-size: 15px; }
+  .contact-inner { background: white; border-radius: 16px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+  .contact-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .contact-info h4 { font-weight: 700; margin-bottom: 6px; }
+  .contact-info p { font-size: 14px; color: var(--text-gray); line-height: 1.8; }
+  .map-embed { width: 260px; height: 160px; border-radius: 10px; overflow: hidden; background: #e8f5e9; margin-top: 8px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; color: #888; font-size: 13px; }
 
-    .featured { padding: 0 56px 60px; background: var(--bg); }
-    .featured-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
-    .featured-header h2 { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--pink); }
-    .view-all { color: var(--pink-dark); font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 4px; cursor: pointer; transition: 0.2s; }
-    .view-all:hover { gap: 8px; }
+  /* ACCOUNT */
+  .account-page { padding: 60px 40px; max-width: 600px; margin: 0 auto; }
+  .account-page h1 { font-family: 'Prompt', sans-serif; font-size: 30px; font-weight: 800; color: var(--pink); margin-bottom: 24px; }
+  .account-card { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); margin-bottom: 20px; }
 
-    .cta-section { padding: 60px 56px 72px; background: var(--bg); }
-    .cta-card { max-width: 1100px; margin: 0 auto; padding: 72px 48px; text-align: center; background: linear-gradient(135deg,#ffd6e8 0%,#e8c0f0 100%); border-radius: 28px; }
-    .cta-card h2 { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--pink-dark); margin-bottom: 16px; }
-    .cta-card p  { font-size: 1rem; color: var(--text); margin-bottom: 40px; }
-    .cta-btns    { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  /* TOAST */
+  .toast { position: fixed; bottom: 30px; right: 30px; background: var(--pink); color: white; padding: 14px 24px; border-radius: 30px; font-weight: 600; z-index: 9999; transform: translateY(100px); opacity: 0; transition: all 0.3s; box-shadow: 0 4px 20px rgba(233,30,140,0.4); }
+  .toast.show { transform: translateY(0); opacity: 1; }
 
-    /* ════════════════════════════════════════
-       Productsページ
-    ════════════════════════════════════════ */
-    .page-hero { background: var(--cream); text-align: center; padding: 60px 48px 40px; }
-    .page-hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; color: var(--pink); margin-bottom: 10px; }
-    .page-hero p  { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 32px; }
-    .search-bar {
-      max-width: 520px; margin: 0 auto 28px; display: flex; align-items: center; gap: 12px;
-      background: var(--white); border-radius: 50px; padding: 12px 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-    .search-bar input { border: none; outline: none; font-size: 0.95rem; width: 100%; color: var(--text); }
-    .filter-tabs { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .filter-btn { border: 2px solid #ddd; background: var(--white); border-radius: 50px; padding: 9px 22px; font-size: 0.92rem; font-weight: 600; cursor: pointer; color: var(--text); transition: 0.2s; }
-    .filter-btn.active { background: var(--pink); color: #fff; border-color: var(--pink); }
-    .filter-btn:hover:not(.active) { border-color: var(--pink); color: var(--pink); }
-    .products-list { padding: 40px 56px 80px; }
-
-    /* ════════════════════════════════════════
-       Ordersページ
-    ════════════════════════════════════════ */
-    .orders-hero { background: var(--cream); text-align: center; padding: 56px 48px 36px; }
-    .orders-hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(2rem,5vw,3rem); font-weight: 900; color: var(--pink); margin-bottom: 8px; }
-    .orders-hero p  { font-size: 0.97rem; color: var(--text-muted); }
-
-    /* ════════════════════════════════════════
-       Aboutページ
-    ════════════════════════════════════════ */
-    .values-section, .services-section, .contact-section { padding: 60px 56px 40px; background: var(--cream); }
-    .values-section h2, .services-section h2 { text-align: center; font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 40px; }
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
-    .value-card { background: var(--white); border-radius: var(--radius); padding: 40px 32px 36px; text-align: center; box-shadow: var(--shadow); transition: 0.2s; }
-    .value-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
-    .value-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-size: 2.2rem; }
-    .services-card { max-width: 1100px; margin: 0 auto; background: var(--white); border-radius: var(--radius); padding: 44px 48px; box-shadow: var(--shadow); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 32px 48px; }
-    .service-item, .contact-item { display: flex; align-items: flex-start; gap: 18px; }
-    .service-icon, .contact-icon { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
-    /* アイコン背景色ユーティリティ */
-    .bg-pink-light   { background: #ffe0f0; }
-    .bg-teal-light   { background: #e0f7fa; }
-    .bg-green-light  { background: #e8f5e9; }
-    .bg-purple-light { background: #ede7f6; }
-    .bg-pink         { background: var(--pink); }
-    /* サービスアイコン用（既存クラス維持） */
-    .si-pink   { background: var(--pink); }
-    .si-teal   { background: #00bcd4; }
-    .si-green  { background: #4caf50; }
-    .si-purple { background: #9c27b0; }
-    .ci-pink   { background: #ffe0f0; }
-    .ci-teal   { background: #e0f7fa; }
-    .ci-green  { background: #e8f5e9; }
-    .ci-purple { background: #ede7f6; }
-    .contact-gradient { max-width: 1100px; margin: 0 auto; background: linear-gradient(135deg,#ffd6e8 0%,#e8c0f0 100%); border-radius: 28px; padding: 48px 56px 0; overflow: hidden; }
-    .contact-gradient h2 { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 800; color: var(--pink-dark); text-align: center; margin-bottom: 10px; }
-    .contact-info-grid { background: var(--white); border-radius: 20px 20px 0 0; padding: 40px 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 32px; }
-    .service-text h4, .service-text p { font-size: 1.05rem; }
-    .service-text p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
-
-    /* ════════════════════════════════════════
-       商品詳細ページ
-    ════════════════════════════════════════ */
-    .detail-back { display: inline-flex; align-items: center; gap: 8px; color: var(--pink-dark); font-weight: 700; font-size: 0.92rem; cursor: pointer; padding: 8px 0; margin-bottom: 20px; background: none; border: none; transition: gap 0.2s; }
-    .detail-back:hover { gap: 12px; }
-    .detail-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto; align-items: start; }
-    .detail-page-inner { padding: 32px 56px 80px; }
-    /* スライダー */
-    .detail-slider { position: relative; border-radius: 20px; overflow: hidden; background: #f0f0f0; }
-    .detail-slides-wrap { overflow: hidden; border-radius: 20px; }
-    .detail-slides { display: flex; transition: transform 0.45s cubic-bezier(0.22,1,0.36,1); }
-    .detail-slide  { flex: 0 0 100%; height: 380px; background: #f8f8f8 center / contain no-repeat; }
-    .detail-arrow  { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.14); z-index: 2; transition: 0.15s; }
-    .detail-arrow:hover { background: var(--white); transform: translateY(-50%) scale(1.1); }
-    .detail-arrow.prev { left: 10px; }
-    .detail-arrow.next { right: 10px; }
-    .detail-dots   { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-    .detail-dot    { width: 8px; height: 8px; border-radius: 50%; background: #ddd; cursor: pointer; transition: 0.2s; }
-    .detail-dot.active { background: var(--pink); transform: scale(1.3); }
-    .detail-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-    .detail-thumb  { width: 64px; height: 64px; border-radius: 10px; cursor: pointer; background: #eee center / cover no-repeat; border: 2px solid transparent; transition: 0.2s; flex-shrink: 0; }
-    .detail-thumb.active { border-color: var(--pink); transform: scale(1.07); }
-    /* 商品情報 */
-    .detail-info { padding: 8px 0; }
-    .detail-tag   { display: inline-block; background: var(--pink-light); color: var(--pink-dark); font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 50px; margin-bottom: 14px; }
-    .detail-name  { font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 900; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
-    .detail-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-    .detail-price { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--pink); }
-    .detail-unit  { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
-    .detail-stock-badge { display: inline-flex; align-items: center; gap: 6px; background: #e8f5e9; color: #2e7d32; border-radius: 50px; padding: 4px 14px; font-size: 0.82rem; font-weight: 700; margin-bottom: 20px; }
-    .detail-desc  { font-size: 0.93rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
-    .detail-specs { background: #fafafa; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; }
-    .detail-specs h4 { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
-    .spec-row      { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.87rem; }
-    .spec-row:last-child { border-bottom: none; }
-    .spec-key      { color: var(--text-muted); }
-    .spec-val      { font-weight: 600; color: var(--text); }
-    .detail-order-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-    .detail-qty-wrap  { display: flex; align-items: center; gap: 10px; background: #f5f5f5; border-radius: 50px; padding: 6px 16px; }
-    .detail-add-btn   { flex: 1; background: var(--pink); color: #fff; border: none; border-radius: 50px; padding: 14px 24px; font-size: 1rem; font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
-    .detail-add-btn:hover { background: var(--pink-mid); transform: translateY(-2px); }
-    .detail-add-btn.added { background: #43a047; }
-    /* レビューエリア */
-    .detail-reviews    { max-width: 1100px; margin: 48px auto 0; }
-    .detail-reviews h3 { font-family: 'Nunito', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 24px; }
-    .review-summary, .review-card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px; }
-    .review-summary  { display: flex; align-items: center; gap: 20px; padding: 20px 28px; }
-    .review-avg      { font-family: 'Nunito', sans-serif; font-size: 3.2rem; font-weight: 900; color: var(--pink); line-height: 1; }
-    .review-stars    { font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 4px; }
-    .review-count    { font-size: 0.82rem; color: var(--text-muted); }
-    .review-card     { padding: 20px 24px; margin-bottom: 14px; }
-    .review-header   { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .review-avatar   { width: 40px; height: 40px; border-radius: 50%; background: var(--pink-light); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: var(--pink-dark); flex-shrink: 0; }
-    .review-meta     { flex: 1; }
-    .review-name     { font-weight: 700; font-size: 0.92rem; color: var(--text); }
-    .review-date     { font-size: 0.78rem; color: var(--text-muted); }
-    .review-stars-sm { font-size: 0.95rem; letter-spacing: 1px; }
-    .review-text     { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
-    /* レビュー投稿フォーム */
-    .review-form-wrap { background: var(--white); border-radius: 20px; padding: 28px 32px; box-shadow: var(--shadow); margin-top: 28px; }
-    .review-form-wrap h4 { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 20px; }
-    .star-picker { display: flex; gap: 6px; margin-bottom: 16px; flex-direction: row-reverse; justify-content: flex-end; }
-    .star-picker input { display: none; }
-    .star-picker label { font-size: 2rem; cursor: pointer; color: #ddd; transition: 0.15s; }
-    .star-picker label:hover,
-    .star-picker label:hover ~ label,
-    .star-picker input:checked ~ label { color: #f5a623; }
-    .star-picker label:hover { transform: scale(1.2); }
-    .star-hint { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px; }
-    .review-input, .review-textarea { width: 100%; padding: 11px 16px; border: 2px solid #ebebeb; border-radius: 12px; font-size: 0.9rem; font-family: 'Poppins', sans-serif; color: var(--text); outline: none; transition: 0.2s; background: #fafafa; }
-    .review-input:focus, .review-textarea:focus { border-color: var(--pink); background: #fff; }
-    .review-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-    .review-textarea { resize: vertical; min-height: 90px; margin-bottom: 14px; }
-    .review-submit   { background: var(--pink); color: #fff; border: none; border-radius: 50px; padding: 13px 32px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .review-submit:hover { background: var(--pink-mid); transform: translateY(-2px); }
-    .review-success  { display: none; background: #e8f5e9; color: #2e7d32; border-radius: 12px; padding: 12px 18px; font-size: 0.88rem; font-weight: 600; margin-top: 12px; }
-    .review-err      { color: #e53935; font-size: 0.8rem; margin-top: 6px; min-height: 18px; }
-
-    /* ════════════════════════════════════════
-       レスポンシブ
-    ════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      nav, .hero, footer, .services-card, .contact-gradient, .contact-info-grid,
-      .why, .featured, .cta-section, .products-list, .cart-section,
-      .values-section, .services-section, .contact-section,
-      .detail-page-inner { padding-left: 32px; padding-right: 32px; }
-      nav  { padding-top: 14px; padding-bottom: 14px; }
-      .hero { padding-top: 60px; padding-bottom: 70px; }
-      .footer-grid { gap: 32px; }
-    }
-    @media (max-width: 768px) {
-      nav, .hero, .why, .featured, .cta-section, .page-hero, .products-list,
-      .orders-hero, .cart-section, .values-section, .services-section,
-      .contact-section, .contact-gradient, .contact-info-grid,
-      footer, .modal-box, .detail-page-inner { padding-left: 20px; padding-right: 20px; }
-
-      .hamburger { display: flex; }
-      .nav-links {
-        position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
-        background: var(--white); flex-direction: column; gap: 4px;
-        padding: 80px 20px 32px; box-shadow: -4px 0 24px rgba(0,0,0,0.12);
-        z-index: 500; transition: right 0.3s ease;
-      }
-      .nav-links.open { right: 0; }
-      .nav-links li a { padding: 12px 18px; font-size: 1rem; }
-
-      .hero-btns, .cta-btns, .acc-actions { flex-direction: column; align-items: stretch; gap: 16px; }
-      .features-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      .products-grid, .values-grid, .services-grid, .contact-info-grid, .footer-grid, .form-row { grid-template-columns: 1fr; }
-
-      .cart-item     { flex-wrap: wrap; gap: 12px; }
-      .qty-wrap      { order: 3; }
-      .cart-line-price { order: 4; }
-      .cart-del      { order: 5; }
-
-      .cta-card h2, .values-section h2, .services-section h2, .contact-gradient h2 { font-size: 1.7rem; }
-      .detail-layout { grid-template-columns: 1fr; gap: 28px; }
-      .detail-slide  { height: 260px; }
-      .detail-name   { font-size: 1.5rem; }
-      .detail-price  { font-size: 1.8rem; }
-      .detail-order-row { flex-wrap: wrap; flex-direction: column; align-items: stretch; }
-    }
-    @media (max-width: 480px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .feature-card  { display: flex; align-items: center; gap: 16px; text-align: left; padding: 20px; }
-      .feature-icon  { margin: 0; flex-shrink: 0; }
-      .logo          { font-size: 1rem; }
-      .review-name-row { grid-template-columns: 1fr; }
-      .review-form-wrap { padding: 22px 18px; }
-    }
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    section { padding: 40px 16px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .review-inputs { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: repeat(2,1fr); }
+    .products-hero, .orders-hero, .about-hero { padding: 40px 16px 20px; }
+    .product-detail, .review-section { padding: 16px 16px 40px; }
+    .contact-section { padding: 20px 16px; }
+    .contact-box { padding: 30px 16px; }
+    .about-content { padding: 30px 16px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
-     モーダル
-════════════════════════════════════════ -->
-
-<!-- チェックアウトモーダル -->
-<div class="modal-overlay" id="modalCheckout">
-  <div class="modal-box" style="max-width:580px;">
-    <button class="modal-close" onclick="closeModal('modalCheckout')">✕</button>
-    <h2>💳 Confirm & Pay</h2>
-    <p class="modal-subtitle">Review your order and enter payment details.</p>
-
-    <div class="checkout-items" id="coItems"></div>
-    <div class="co-total-row" id="coTotal">
-      <span>Total</span><span>$0</span>
-    </div>
-
-    <hr class="modal-divider"/>
-
-    <div class="form-group">
-      <label>💳 Payment Method</label>
-      <div class="pay-options">
-        <div class="pay-opt" id="pay-bank"      onclick="selectPay('bank')">      <div class="pay-icon">🏦</div><div class="pay-label">Bank Transfer</div></div>
-        <div class="pay-opt" id="pay-promptpay" onclick="selectPay('promptpay')"> <div class="pay-icon">📱</div><div class="pay-label">PromptPay</div></div>
-        <div class="pay-opt" id="pay-cod"       onclick="selectPay('cod')">       <div class="pay-icon">💵</div><div class="pay-label">Cash on Delivery</div></div>
-        <div class="pay-opt" id="pay-card"      onclick="selectPay('card')">      <div class="pay-icon">💳</div><div class="pay-label">Credit Card</div></div>
-      </div>
-    </div>
-
-    <hr class="modal-divider"/>
-
-    <div class="form-group"><label>📦 Recipient Name</label><input type="text"  id="co-name"    placeholder="Full name"/></div>
-    <div class="form-group"><label>📞 Phone Number</label>  <input type="tel"   id="co-phone"   placeholder="0XX-XXX-XXXX"/></div>
-    <div class="form-group"><label>📍 Delivery Address</label><textarea id="co-address" rows="3" placeholder="House number, street, district, city…"></textarea></div>
-
-    <button class="btn-green btn-full" style="border-radius:50px;padding:16px;margin-top:6px;font-size:1rem;font-weight:700;" onclick="confirmOrder()">✅ Place Order</button>
-  </div>
-</div>
-
-<!-- 注文完了モーダル -->
-<div class="modal-overlay" id="modalConfirmed">
-  <div class="modal-box confirmed-modal">
-    <div class="confirmed-box">
-      <div class="confirmed-icon">🎉</div>
-      <h2>Order Placed!</h2>
-      <p>Thank you! We'll process your order and contact you soon.</p>
-      <button class="btn-primary btn-full" onclick="closeModal('modalConfirmed'); clearCart();">Continue Shopping</button>
-    </div>
-  </div>
-</div>
-
-<!-- アカウントモーダル -->
-<div class="modal-overlay" id="modalAccount">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modalAccount')">✕</button>
-    <h2>👤 Account</h2>
-    <p class="modal-subtitle">Manage your profile and saved preferences.</p>
-
-    <!-- ロック画面 -->
-    <div id="accLockScreen">
-      <div class="acc-lock">
-        <div class="lock-icon">🔒</div>
-        <p>Enter your password to access account settings.</p>
-        <div class="pass-row">
-          <input type="password" id="passInput" placeholder="Password…" onkeydown="if(event.key==='Enter')checkPass()"/>
-          <button class="btn-primary" style="padding:11px 24px;font-size:0.9rem;" onclick="checkPass()">Enter</button>
-        </div>
-        <div class="err-msg" id="passErr"></div>
-        <p class="default-pass-note">Default password: <strong>1234</strong></p>
-      </div>
-    </div>
-
-    <!-- 設定画面 -->
-    <div id="accFormScreen" style="display:none;">
-      <div class="success-toast" id="accToast">✅ Saved successfully!</div>
-      <div class="form-row">
-        <div class="form-group"><label>👤 Name</label>         <input type="text"  id="acc-name"  placeholder="Your name"/></div>
-        <div class="form-group"><label>🏪 Shop / Company</label><input type="text"  id="acc-shop"  placeholder="Shop name"/></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>✉️ Email</label><input type="email" id="acc-email" placeholder="email@example.com"/></div>
-        <div class="form-group"><label>📞 Phone</label><input type="tel"   id="acc-phone" placeholder="0XX-XXX-XXXX"/></div>
-      </div>
-      <div class="form-group"><label>📍 Delivery Address</label><textarea id="acc-address" rows="3" placeholder="Default delivery address…"></textarea></div>
-      <div class="form-group">
-        <label>💳 Preferred Payment</label>
-        <select id="acc-payment">
-          <option value="">-- Select --</option>
-          <option value="bank">Bank Transfer</option>
-          <option value="promptpay">PromptPay</option>
-          <option value="cod">Cash on Delivery</option>
-          <option value="card">Credit Card</option>
-        </select>
-      </div>
-      <hr class="modal-divider"/>
-      <div class="form-group">
-        <label>🔑 Change Password <small style="font-weight:400;color:#bbb;">(leave blank to keep current)</small></label>
-        <input type="password" id="acc-newpass" placeholder="New password…"/>
-      </div>
-      <div class="acc-actions">
-        <button class="btn-primary btn-full" onclick="saveAccount()">Save Changes</button>
-        <button class="btn-lock" onclick="lockAccount()">🔒 Lock</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════
-     ナビゲーション
-════════════════════════════════════════ -->
-<div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
+<!-- NAV -->
 <nav>
-  <div class="nav-left">
-    <div class="lang-switch">
-      <button id="btn-th" onclick="changeLang('th')">TH</button>
-      <button id="btn-en" onclick="changeLang('en')">EN</button>
+  <a class="logo" onclick="showPage('home')">
+    <div class="logo-icon">📦</div>
+    Tee Ouan Packaging
+  </a>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" id="nav-home" class="active"><span>🏠</span> <span data-th="หน้าแรก" data-en="Home">หน้าแรก</span></a>
+    <a href="#" onclick="showPage('products')" id="nav-products"><span>📦</span> <span data-th="สินค้า" data-en="Products">สินค้า</span></a>
+    <a href="#" onclick="showPage('orders')" id="nav-orders"><span>🛒</span> <span data-th="คำสั่งซื้อ" data-en="Orders">คำสั่งซื้อ</span> <span class="cart-badge" id="cart-count">0</span></a>
+    <a href="#" onclick="showPage('about')" id="nav-about"><span>ℹ️</span> <span data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</span></a>
+    <a href="#" onclick="showPage('account')" id="nav-account"><span>👤</span> <span data-th="บัญชี" data-en="Account">บัญชี</span></a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('th')" id="btn-th">ไทย</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
     </div>
-    <span class="logo" onclick="showPage('home')">
-      <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-        <path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/>
-        <path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/>
-      </svg>
-      Tee Ouan Packaging
-    </span>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a id="nav-home"     onclick="showPage('home')"     class="active">🏠 Home</a></li>
-    <li><a id="nav-products" onclick="showPage('products')">📦 Products</a></li>
-    <li><a id="nav-orders"   onclick="showPage('orders')">🛒 Orders<span class="cart-badge" id="cartBadge" style="display:none;">0</span></a></li>
-    <li><a id="nav-about"    onclick="showPage('about')">ℹ️ About Us</a></li>
-    <li><a id="nav-account"  onclick="openAccountModal()">👤 Account</a></li>
-  </ul>
 </nav>
 
-<!-- ════════════════════════════════════════
-     HOME
-════════════════════════════════════════ -->
-<div id="page-home" class="page active">
-  <section class="hero">
-    <div class="hero-track">
-      <div class="hero-slide"></div><div class="hero-slide"></div>
-      <div class="hero-slide"></div><div class="hero-slide"></div><div class="hero-slide"></div>
-    </div>
-    <div class="hero-overlay"></div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-img-bg"></div>
+    <div class="hero-bg"></div>
     <div class="hero-content">
       <h1>Tee Ouan Packaging</h1>
-      <p class="tagline">Quality Packaging Supplier – Complete Solutions</p>
-      <p class="desc">Wide variety of products, affordable prices, with express delivery service</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('products')">View All Products</button>
+      <p class="tagline" data-th="ผู้จัดจำหน่ายบรรจุภัณฑ์คุณภาพ – ครบครัน ครบวงจร" data-en="Quality Packaging Supplier – Complete Solutions">ผู้จัดจำหน่ายบรรจุภัณฑ์คุณภาพ – ครบครัน ครบวงจร</p>
+      <p class="sub" data-th="สินค้าหลากหลาย ราคาย่อมเยา ส่งด่วนทั่วประเทศ" data-en="Wide variety of products, affordable prices, express delivery service">สินค้าหลากหลาย ราคาย่อมเยา ส่งด่วนทั่วประเทศ</p>
+      <button class="btn-hero" onclick="showPage('products')" data-th="ดูสินค้าทั้งหมด" data-en="View All Products">ดูสินค้าทั้งหมด</button>
+    </div>
+    <div class="scroll-hint">
+      <span>▼</span>
+      <span style="font-size:10px;letter-spacing:3px" data-th="เลื่อนลง" data-en="SCROLL">SCROLL</span>
+    </div>
+  </div>
+
+  <!-- WHY CHOOSE US -->
+  <section style="background:var(--bg-cream)">
+    <h2 class="section-title" data-th="ทำไมต้องเลือกเรา" data-en="Why Choose Us">ทำไมต้องเลือกเรา</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon pink">📦</div>
+        <div class="why-title pink" data-th="สินค้าหลากหลาย" data-en="Wide Variety">สินค้าหลากหลาย</div>
+        <p class="why-desc" data-th="บรรจุภัณฑ์ทุกประเภทเพื่อตอบโจทย์ทุกความต้องการ" data-en="All types of packaging to meet every need">บรรจุภัณฑ์ทุกประเภทเพื่อตอบโจทย์ทุกความต้องการ</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon teal">🥇</div>
+        <div class="why-title teal" data-th="คุณภาพสูง" data-en="High Quality">คุณภาพสูง</div>
+        <p class="why-desc" data-th="คัดเลือกสินค้าพรีเมียมอย่างพิถีพิถัน" data-en="Carefully selected premium products">คัดเลือกสินค้าพรีเมียมอย่างพิถีพิถัน</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon green">🚚</div>
+        <div class="why-title green" data-th="ส่งด่วน" data-en="Fast Delivery">ส่งด่วน</div>
+        <p class="why-desc" data-th="บริการจัดส่งด่วนทั่วประเทศ" data-en="Express delivery nationwide">บริการจัดส่งด่วนทั่วประเทศ</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon purple">💜</div>
+        <div class="why-title purple" data-th="บริการดีเยี่ยม" data-en="Great Service">บริการดีเยี่ยม</div>
+        <p class="why-desc" data-th="ให้คำปรึกษาและดูแลลูกค้าอย่างใกล้ชิด" data-en="Consultation and close customer care">ให้คำปรึกษาและดูแลลูกค้าอย่างใกล้ชิด</p>
       </div>
     </div>
-    <div class="hero-scroll">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M7 10l5 5 5-5"/></svg>
-      SCROLL
-    </div>
   </section>
 
-  <section class="why">
-    <h2>Why Choose Us</h2>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon">📦</div><h3>Wide Variety</h3><p>All types of packaging to meet every need</p></div>
-      <div class="feature-card"><div class="feature-icon">🏅</div><h3>High Quality</h3><p>Carefully selected premium products</p></div>
-      <div class="feature-card"><div class="feature-icon">🚚</div><h3>Fast Delivery</h3><p>Express delivery nationwide</p></div>
-      <div class="feature-card"><div class="feature-icon">💜</div><h3>Great Service</h3><p>Consultation and close customer care</p></div>
-    </div>
-  </section>
-
-  <section class="featured">
+  <!-- FEATURED PRODUCTS -->
+  <section style="background:var(--bg-cream); padding-top:0">
     <div class="featured-header">
-      <h2>Featured Products</h2>
-      <span class="view-all" onclick="showPage('products')">View All →</span>
+      <h2 data-th="สินค้าแนะนำ" data-en="Featured Products">สินค้าแนะนำ</h2>
+      <a href="#" class="view-all" onclick="showPage('products')" data-th="ดูทั้งหมด →" data-en="View All →">ดูทั้งหมด →</a>
     </div>
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-img-fixed img-box-a"></div>
-        <div class="product-body">
-          <span class="product-tag">Boxes</span>
-          <div class="product-name">Corrugated Box Size A</div>
-          <div class="product-desc">3-ply corrugated cardboard box, strong and durable</div>
-          <div class="product-footer"><div class="product-price">$15 <span>/pc</span></div><div class="product-stock">Stock: 500</div></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img-fixed img-bubble"></div>
-        <div class="product-body">
-          <span class="product-tag">Protective Materials</span>
-          <div class="product-name">Bubble Wrap</div>
-          <div class="product-desc">Bubble wrap for shock protection, prevents product damage</div>
-          <div class="product-footer"><div class="product-price">$120 <span>/roll</span></div><div class="product-stock">Stock: 200</div></div>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-img-fixed img-bags"></div>
-        <div class="product-body">
-          <span class="product-tag">Bags</span>
-          <div class="product-name">Kraft Paper Bags</div>
-          <div class="product-desc">Eco-friendly kraft paper bags with handles, strong and durable</div>
-          <div class="product-footer"><div class="product-price">$5 <span>/pc</span></div><div class="product-stock">Stock: 1000</div></div>
-        </div>
-      </div>
-    </div>
+    <div class="products-grid" id="featured-grid"></div>
   </section>
 
-  <section class="cta-section">
-    <div class="cta-card">
-      <h2>Ready to Order?</h2>
-      <p>Our team is ready to provide consultation and assistance 24/7</p>
-      <div class="cta-btns">
-        <button class="btn-white"  onclick="showPage('products')">Browse Products</button>
-        <button class="btn-purple" onclick="showPage('about')">About Us</button>
+  <!-- CTA -->
+  <div class="cta-section" style="background:var(--bg-cream)">
+    <div class="cta-box">
+      <h2 data-th="พร้อมสั่งซื้อแล้วหรือยัง?" data-en="Ready to Order?">พร้อมสั่งซื้อแล้วหรือยัง?</h2>
+      <p data-th="ทีมงานของเรายินดีให้คำปรึกษาและช่วยเหลือคุณตลอด 24 ชั่วโมง" data-en="Our team is ready to provide consultation and assistance 24/7">ทีมงานของเรายินดีให้คำปรึกษาและช่วยเหลือคุณตลอด 24 ชั่วโมง</p>
+      <div class="cta-buttons">
+        <button class="btn-outline" onclick="showPage('products')" data-th="เลือกดูสินค้า" data-en="Browse Products">เลือกดูสินค้า</button>
+        <button class="btn-dark" onclick="showPage('about')" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</button>
       </div>
     </div>
-  </section>
+  </div>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo" onclick="showPage('home')"><svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg> Tee Ouan Packaging</span>
-        <p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p>
+        <div class="logo" style="display:inline-flex;gap:8px;align-items:center;font-family:Prompt,sans-serif;font-weight:700;color:var(--pink);font-size:16px">
+          <div class="logo-icon">📦</div> Tee Ouan Packaging
+        </div>
+        <p data-th="ผู้จัดจำหน่ายบรรจุภัณฑ์คุณภาพ สินค้าหลากหลาย ราคาย่อมเยา บริการส่งด่วน" data-en="Quality packaging supplier with diverse products, affordable prices, and express delivery service">ผู้จัดจำหน่ายบรรจุภัณฑ์คุณภาพ สินค้าหลากหลาย ราคาย่อมเยา บริการส่งด่วน</p>
       </div>
-      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 0814800003<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
-      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Sat: 7:00 AM - 7:00 PM<br>Sun: 7:00 AM - 5:30 PM</p></div>
+      <div class="footer-col">
+        <h3 data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</h3>
+        <p>📞 0814800003</p>
+        <p>✉️ info@teeouanpackaging.com</p>
+        <p>💬 LINE: @teeouanpack</p>
+      </div>
+      <div class="footer-col">
+        <h3 data-th="เวลาทำการ" data-en="Business Hours">เวลาทำการ</h3>
+        <p data-th="จ–ส: 7:00 – 19:00 น." data-en="Mon–Sat: 7:00 AM – 7:00 PM">จ–ส: 7:00 – 19:00 น.</p>
+        <p data-th="อา: 7:00 – 17:30 น." data-en="Sun: 7:00 AM – 5:30 PM">อา: 7:00 – 17:30 น.</p>
+      </div>
     </div>
-    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
+    <div class="footer-bottom">© 2026 Tee Ouan Packaging — <span data-th="สงวนลิขสิทธิ์" data-en="All rights reserved">สงวนลิขสิทธิ์</span></div>
   </footer>
 </div>
 
-<!-- ════════════════════════════════════════
-     PRODUCTS
-════════════════════════════════════════ -->
-<div id="page-products" class="page">
-  <section class="page-hero">
-    <h1>Our Products</h1>
-    <p>Choose the right packaging for you</p>
+<!-- PRODUCTS PAGE -->
+<div class="page" id="page-products">
+  <div class="products-hero">
+    <h1 data-th="สินค้าของเรา" data-en="Our Products">สินค้าของเรา</h1>
+    <p data-th="เลือกบรรจุภัณฑ์ที่เหมาะกับคุณ" data-en="Choose the right packaging for you">เลือกบรรจุภัณฑ์ที่เหมาะกับคุณ</p>
     <div class="search-bar">
-      <span style="font-size:1.1rem;color:#aaa;">🔍</span>
-      <input type="text" placeholder="Search products..." id="searchInput" oninput="filterProducts()"/>
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="" oninput="filterProducts()" data-th-placeholder="ค้นหาสินค้า..." data-en-placeholder="Search products...">
     </div>
-    <div class="filter-tabs">
-      <button class="filter-btn active" onclick="filterCategory('All',this)">All</button>
-      <button class="filter-btn" onclick="filterCategory('Boxes',this)">Boxes</button>
-      <button class="filter-btn" onclick="filterCategory('Bags',this)">Bags</button>
-      <button class="filter-btn" onclick="filterCategory('Protective Materials',this)">Protective Materials</button>
-      <button class="filter-btn" onclick="filterCategory('Eco-Friendly',this)">Eco-Friendly</button>
-    </div>
-  </section>
-
-  <section class="products-list">
-    <div class="products-grid" id="productsGrid">
-
-      <div class="product-card" data-category="Boxes" data-name="corrugated box size a" data-id="box-a" data-price="15" data-unit="/pc" data-img="img-box-a">
-        <div class="product-img-fixed img-box-a" onclick="openDetail('box-a')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('box-a')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Boxes</span>
-          <div class="product-name">Corrugated Box Size A</div>
-          <div class="product-desc">3-ply corrugated cardboard box, strong and durable, suitable for general packaging</div>
-          <div class="product-footer"><div class="product-price">$15 <span>/pc</span></div><div class="product-stock">Stock: 500</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Protective Materials" data-name="bubble wrap" data-id="bubble" data-price="120" data-unit="/roll" data-img="img-bubble">
-        <div class="product-img-fixed img-bubble" onclick="openDetail('bubble')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('bubble')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Protective Materials</span>
-          <div class="product-name">Bubble Wrap</div>
-          <div class="product-desc">Bubble wrap for shock protection, prevents product damage, ready to use</div>
-          <div class="product-footer"><div class="product-price">$120 <span>/roll</span></div><div class="product-stock">Stock: 200</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Bags" data-name="Plastic bags" data-id="bags" data-price="5" data-unit="/pc" data-img="img-bags">
-        <div class="product-img-fixed img-bags" onclick="openDetail('bags')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('bags')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Bags</span>
-          <div class="product-name">Kraft Paper Bags</div>
-          <div class="product-desc">Eco-friendly kraft paper bags with handles, strong and durable</div>
-          <div class="product-footer"><div class="product-price">$5 <span>/pc</span></div><div class="product-stock">Stock: 1000</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Eco-Friendly" data-name="eco-friendly packaging" data-id="eco" data-price="35" data-unit="/pc" data-img="img-eco">
-        <div class="product-img-fixed img-eco" onclick="openDetail('eco')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('eco')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Eco-Friendly</span>
-          <div class="product-name">Eco-Friendly Packaging</div>
-          <div class="product-desc">Biodegradable packaging made from recycled materials, environmentally conscious choice</div>
-          <div class="product-footer"><div class="product-price">$35 <span>/pc</span></div><div class="product-stock">Stock: 150</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Protective Materials" data-name="clear plastic containers" data-id="cont" data-price="25" data-unit="/pc" data-img="img-cont">
-        <div class="product-img-fixed img-cont" onclick="openDetail('cont')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('cont')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Protective Materials</span>
-          <div class="product-name">Clear Plastic Containers</div>
-          <div class="product-desc">Transparent plastic containers for display and protection of products</div>
-          <div class="product-footer"><div class="product-price">$25 <span>/pc</span></div><div class="product-stock">Stock: 300</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Boxes" data-name="corrugated box size b" data-id="box-b" data-price="22" data-unit="/pc" data-img="img-box-b">
-        <div class="product-img-fixed img-box-b" onclick="openDetail('box-b')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('box-b')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Boxes</span>
-          <div class="product-name">Corrugated Box Size B</div>
-          <div class="product-desc">5-ply heavy-duty corrugated box, ideal for heavy or fragile items</div>
-          <div class="product-footer"><div class="product-price">$22 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-      <div class="product-card" data-category="Eco-Friendly" data-name="eco-friendly plastic cups" data-id="1" data-price="40" data-unit="/pc" data-img="IMG_3752.JPG">
-        <div class="product-img-fixed img-1" onclick="openDetail('1')" style="cursor:pointer;"></div>
-        <div class="product-body" onclick="openDetail('1')" style="cursor:pointer;padding-bottom:8px;">
-          <span class="product-tag">Eco-Friendly</span>
-          <div class="product-name">Plastic Cups</div>
-          <div class="product-desc">eco-friendly plastic items</div>
-          <div class="product-footer"><div class="product-price">$40 <span>/pc</span></div><div class="product-stock">Stock: 320</div></div>
-        </div>
-        <div style="padding:0 20px 20px;"><button class="add-to-cart" onclick="addToCart(this)">🛒 Add to Cart</button></div>
-      </div>
-
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><span class="logo" onclick="showPage('home')"><svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg> Tee Ouan Packaging</span><p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p></div>
-      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 0814800003<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
-      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Sat: 7:00 AM - 7:00 PM<br>Sun: 7:00 AM - 5:30 PM</p></div>
-    </div>
-    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
-  </footer>
+  </div>
+  <div class="filter-tabs" id="filter-tabs">
+    <button class="filter-btn active" onclick="filterCat('all',this)" data-th="ทั้งหมด" data-en="All">ทั้งหมด</button>
+    <button class="filter-btn" onclick="filterCat('boxes',this)" data-th="กล่อง" data-en="Boxes">กล่อง</button>
+    <button class="filter-btn" onclick="filterCat('bags',this)" data-th="ถุง" data-en="Bags">ถุง</button>
+    <button class="filter-btn" onclick="filterCat('protective',this)" data-th="วัสดุป้องกัน" data-en="Protective Materials">วัสดุป้องกัน</button>
+    <button class="filter-btn" onclick="filterCat('eco',this)" data-th="รักษ์โลก" data-en="Eco-Friendly">รักษ์โลก</button>
+    <button class="filter-btn" onclick="filterCat('other',this)" data-th="อื่นๆ" data-en="Other">อื่นๆ</button>
+  </div>
+  <div class="products-section">
+    <div class="products-grid" id="all-products-grid"></div>
+  </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     PRODUCT DETAIL
-════════════════════════════════════════ -->
-<div id="page-detail" class="page">
-  <div class="detail-page-inner">
-    <button class="detail-back" onclick="showPage('products')">← Back to Products</button>
-
-    <div class="detail-layout">
-      <!-- 画像スライダー -->
-      <div>
-        <div class="detail-slider">
-          <div class="detail-slides-wrap"><div class="detail-slides" id="detailSlides"></div></div>
-          <button class="detail-arrow prev" onclick="slideDetail(-1)">‹</button>
-          <button class="detail-arrow next" onclick="slideDetail(1)">›</button>
-        </div>
-        <div class="detail-dots"   id="detailDots"></div>
-        <div class="detail-thumbs" id="detailThumbs"></div>
+<!-- PRODUCT DETAIL PAGE -->
+<div class="page" id="page-detail">
+  <div class="product-detail">
+    <button class="back-btn" onclick="showPage('products')">← <span data-th="กลับไปยังสินค้า" data-en="Back to Products">กลับไปยังสินค้า</span></button>
+    <div class="detail-grid">
+      <div class="product-gallery">
+        <div class="main-img" id="detail-main-img"><img id="detail-img" src="" alt=""></div>
+        <div class="thumbnails" id="detail-thumbs"></div>
       </div>
-
-      <!-- 商品情報 -->
       <div class="detail-info">
-        <span class="detail-tag"  id="detailTag"></span>
-        <div  class="detail-name" id="detailName"></div>
-        <div class="detail-price-row">
-          <span class="detail-price" id="detailPrice"></span>
-          <span class="detail-unit"  id="detailUnit"></span>
+        <div class="cat-badge" id="detail-cat"></div>
+        <h1 id="detail-name"></h1>
+        <div class="price-big" id="detail-price"></div>
+        <div class="in-stock">✅ <span data-th="มีสินค้า (500 ชิ้น)" data-en="In Stock (500 available)">มีสินค้า (500 ชิ้น)</span></div>
+        <p class="product-desc-detail" id="detail-desc"></p>
+        <div class="spec-table">
+          <h3>📋 <span data-th="รายละเอียดสินค้า" data-en="Product Details">รายละเอียดสินค้า</span></h3>
+          <div id="detail-specs"></div>
         </div>
-        <div class="detail-stock-badge" id="detailStock"><span>✅</span><span></span></div>
-        <div class="detail-desc" id="detailDesc"></div>
-        <div class="detail-specs"><h4>📋 Product Details</h4><div id="detailSpecs"></div></div>
-        <div class="detail-order-row">
-          <div class="detail-qty-wrap">
-            <button class="qty-btn" onclick="detailQtyChange(-1)">−</button>
-            <span class="qty-num" id="detailQtyNum">1</span>
-            <button class="qty-btn" onclick="detailQtyChange(1)">+</button>
+        <div class="qty-row">
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-num" id="qty-display">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
           </div>
-          <button class="detail-add-btn" id="detailAddBtn" onclick="detailAddToCart()">🛒 Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- レビュー -->
-    <div class="detail-reviews">
-      <h3>⭐ Customer Reviews</h3>
-      <div class="review-summary" id="reviewSummary"></div>
-      <div id="reviewList"></div>
-      <div class="review-form-wrap">
-        <h4>✏️ Write a Review</h4>
-        <div class="star-picker" id="starPicker">
-          <input type="radio" name="reviewStar" id="s5" value="5"/><label for="s5">★</label>
-          <input type="radio" name="reviewStar" id="s4" value="4"/><label for="s4">★</label>
-          <input type="radio" name="reviewStar" id="s3" value="3"/><label for="s3">★</label>
-          <input type="radio" name="reviewStar" id="s2" value="2"/><label for="s2">★</label>
-          <input type="radio" name="reviewStar" id="s1" value="1"/><label for="s1">★</label>
-        </div>
-        <div class="star-hint" id="starHint">Tap a star to rate</div>
-        <div class="review-name-row">
-          <input type="text" class="review-input" id="reviewAuthor" placeholder="Your name (required)"/>
-          <input type="text" class="review-input" id="reviewTitle"  placeholder="Review title (optional)"/>
-        </div>
-        <textarea class="review-textarea" id="reviewText" placeholder="Share your experience with this product…"></textarea>
-        <div class="review-err" id="reviewErr"></div>
-        <button class="review-submit" onclick="submitReview()">Post Review</button>
-        <div class="review-success" id="reviewSuccess">✅ Thank you! Your review has been posted.</div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><span class="logo" onclick="showPage('home')"><svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg> Tee Ouan Packaging</span><p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p></div>
-      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 0814800003<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
-      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Sat: 7:00 AM - 7:00 PM<br>Sun: 7:00 AM - 5:30 PM</p></div>
-    </div>
-    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
-  </footer>
-</div>
-
-<!-- ════════════════════════════════════════
-     ORDERS (カート)
-════════════════════════════════════════ -->
-<div id="page-orders" class="page">
-  <section class="orders-hero">
-    <h1>🛒 My Orders</h1>
-    <p>Items you've added — adjust quantities and pay when ready.</p>
-  </section>
-
-  <div class="cart-section">
-    <div class="cart-inner">
-      <div id="cartItemsContainer"></div>
-      <div id="cartSummaryBox" style="display:none;">
-        <div class="cart-summary">
-          <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">$0</span></div>
-          <div class="summary-row grand"><span>Total</span><span class="grand-amount" id="summaryTotal">$0</span></div>
-          <button class="btn-paynow" onclick="openCheckout()">💳 Pay Now</button>
+          <button class="btn-cart" onclick="addToCart()" data-th="🛒 เพิ่มลงตะกร้า" data-en="🛒 Add to Cart">🛒 เพิ่มลงตะกร้า</button>
         </div>
       </div>
     </div>
   </div>
-
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><span class="logo" onclick="showPage('home')"><svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg> Tee Ouan Packaging</span><p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p></div>
-      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 0814800003<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
-      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Sat: 7:00 AM - 7:00 PM<br>Sun: 7:00 AM - 5:30 PM</p></div>
+  <div class="review-section">
+    <p class="review-title">⭐ <span data-th="รีวิวจากลูกค้า" data-en="Customer Reviews">รีวิวจากลูกค้า</span></p>
+    <div class="review-box">
+      <span style="font-size:24px;color:#ddd">—</span>
+      <span style="color:var(--text-gray);font-size:14px" data-th="0 รีวิว" data-en="0 reviews">0 รีวิว</span>
     </div>
-    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
-  </footer>
+    <p style="color:var(--text-gray);font-size:14px;margin-bottom:20px" data-th="ยังไม่มีรีวิว เป็นคนแรกที่รีวิว!" data-en="No reviews yet. Be the first to review!">ยังไม่มีรีวิว เป็นคนแรกที่รีวิว!</p>
+    <div class="write-review">
+      <h3>✏️ <span data-th="เขียนรีวิว" data-en="Write a Review">เขียนรีวิว</span></h3>
+      <div class="star-rate" id="star-rate">
+        <span onclick="setStars(1)">★</span>
+        <span onclick="setStars(2)">★</span>
+        <span onclick="setStars(3)">★</span>
+        <span onclick="setStars(4)">★</span>
+        <span onclick="setStars(5)">★</span>
+      </div>
+      <p style="font-size:12px;color:#aaa;margin-bottom:16px" data-th="แตะดาวเพื่อให้คะแนน" data-en="Tap a star to rate">แตะดาวเพื่อให้คะแนน</p>
+      <div class="review-inputs">
+        <input class="review-input" type="text" data-th-placeholder="ชื่อของคุณ (จำเป็น)" data-en-placeholder="Your name (required)" placeholder="ชื่อของคุณ (จำเป็น)">
+        <input class="review-input" type="text" data-th-placeholder="หัวข้อรีวิว (ไม่บังคับ)" data-en-placeholder="Review title (optional)" placeholder="หัวข้อรีวิว (ไม่บังคับ)">
+      </div>
+      <textarea class="review-textarea" data-th-placeholder="แบ่งปันประสบการณ์ของคุณกับสินค้านี้..." data-en-placeholder="Share your experience with this product..." placeholder="แบ่งปันประสบการณ์ของคุณกับสินค้านี้..."></textarea>
+      <button class="btn-review" onclick="showToast(currentLang==='th'?'ขอบคุณสำหรับรีวิว!':'Thank you for your review!')" data-th="โพสต์รีวิว" data-en="Post Review">โพสต์รีวิว</button>
+    </div>
+  </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     ABOUT
-════════════════════════════════════════ -->
-<div id="page-about" class="page">
-  <section class="values-section">
-    <h2>Our Values</h2>
+<!-- ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div class="orders-hero">
+    <h1>🛒 <span data-th="คำสั่งซื้อของฉัน" data-en="My Orders">คำสั่งซื้อของฉัน</span></h1>
+    <p data-th="สินค้าที่เพิ่มไว้ — ปรับจำนวนและชำระเงินเมื่อพร้อม" data-en="Items you've added — adjust quantities and pay when ready.">สินค้าที่เพิ่มไว้ — ปรับจำนวนและชำระเงินเมื่อพร้อม</p>
+  </div>
+  <div class="orders-content">
+    <div id="cart-items"></div>
+    <div class="order-summary" id="order-summary" style="display:none">
+      <div class="summary-row">
+        <span data-th="ยอดรวม" data-en="Subtotal">ยอดรวม</span>
+        <span id="subtotal-val"></span>
+      </div>
+      <div class="summary-total">
+        <span data-th="รวมทั้งสิ้น" data-en="Total">รวมทั้งสิ้น</span>
+        <span class="summary-total-price" id="total-val"></span>
+      </div>
+      <button class="btn-pay" onclick="showToast(currentLang==='th'?'กำลังดำเนินการชำระเงิน...':'Processing payment...')" data-th="💳 ชำระเงิน" data-en="💳 Pay Now">💳 ชำระเงิน</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <h1 data-th="เกี่ยวกับ Tee Ouan Packaging" data-en="About Tee Ouan Packaging">เกี่ยวกับ Tee Ouan Packaging</h1>
+    <p data-th="พันธมิตรด้านบรรจุภัณฑ์ที่คุณวางใจได้" data-en="Your trusted packaging partner">พันธมิตรด้านบรรจุภัณฑ์ที่คุณวางใจได้</p>
+  </div>
+  <div class="about-content">
+    <h2 class="section-title" data-th="คุณค่าของเรา" data-en="Our Values">คุณค่าของเรา</h2>
     <div class="values-grid">
-      <div class="value-card"><div class="value-icon">🎯</div><h3>Customer Focused</h3><p>We listen and understand customer needs to deliver the best solutions</p></div>
-      <div class="value-card"><div class="value-icon">🏅</div><h3>Premium Quality</h3><p>Every product undergoes strict quality selection and inspection</p></div>
-      <div class="value-card"><div class="value-icon">👥</div><h3>Professional Team</h3><p>Knowledgeable and experienced team ready to consult and serve</p></div>
-    </div>
-  </section>
-
-  <section class="services-section">
-    <h2>Our Services</h2>
-    <div class="services-card">
-      <div class="services-grid">
-        <div class="service-item"><div class="service-icon si-pink">📦</div><div class="service-text"><h4>Wide Product Range</h4><p>All types of packaging from boxes, bags, films to protective materials</p></div></div>
-        <div class="service-item"><div class="service-icon si-teal">🏅</div><div class="service-text"><h4>Free Consultation</h4><p>Advice on choosing the right packaging for your business</p></div></div>
-        <div class="service-item"><div class="service-icon si-green">👥</div><div class="service-text"><h4>Custom Design</h4><p>Design and produce custom packaging with logo printing</p></div></div>
-        <div class="service-item"><div class="service-icon si-purple">⏰</div><div class="service-text"><h4>Express Delivery Nationwide</h4><p>Fast delivery service covering all areas across the country</p></div></div>
+      <div class="value-card">
+        <div class="value-icon" style="background:var(--pink-light)">🎯</div>
+        <div class="value-title" style="color:var(--pink)" data-th="มุ่งเน้นลูกค้า" data-en="Customer Focused">มุ่งเน้นลูกค้า</div>
+        <p class="value-desc" data-th="เราฟังและเข้าใจความต้องการของลูกค้าเพื่อมอบโซลูชันที่ดีที่สุด" data-en="We listen and understand customer needs to deliver the best solutions">เราฟังและเข้าใจความต้องการของลูกค้าเพื่อมอบโซลูชันที่ดีที่สุด</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background:#d0f5f0">🥇</div>
+        <div class="value-title" style="color:var(--teal)" data-th="คุณภาพระดับพรีเมียม" data-en="Premium Quality">คุณภาพระดับพรีเมียม</div>
+        <p class="value-desc" data-th="สินค้าทุกชิ้นผ่านการคัดเลือกและตรวจสอบคุณภาพอย่างเข้มงวด" data-en="Every product undergoes strict quality selection and inspection">สินค้าทุกชิ้นผ่านการคัดเลือกและตรวจสอบคุณภาพอย่างเข้มงวด</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background:#e0eaff">👥</div>
+        <div class="value-title" style="color:#5070c0" data-th="ทีมงานมืออาชีพ" data-en="Professional Team">ทีมงานมืออาชีพ</div>
+        <p class="value-desc" data-th="ทีมงานที่มีความรู้และประสบการณ์พร้อมให้คำปรึกษาและบริการ" data-en="Knowledgeable and experienced team ready to consult and serve">ทีมงานที่มีความรู้และประสบการณ์พร้อมให้คำปรึกษาและบริการ</p>
       </div>
     </div>
-  </section>
-
-  <section class="contact-section">
-    <div class="contact-gradient">
-      <h2>Contact Us</h2>
-      <p style="text-align:center;color:var(--text-muted);margin-bottom:36px;">Ready to serve and answer your questions</p>
-      <div class="contact-info-grid">
-        <div class="contact-item">
-          <div class="contact-icon ci-pink">📞</div>
-          <div><h4>Phone</h4><p>081-480-003<br>094-530-6500</p></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon ci-purple">⏰</div>
-          <div><h4>Business Hours</h4>
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:0.87rem;color:var(--text-muted);">
-              <span>Mon - Sat:</span><span>7:00 AM - 7:00 PM</span>
-              <span>Sun:</span><span>7:00 AM - 5:30 PM</span>
+    <div class="services-section">
+      <h2 data-th="บริการของเรา" data-en="Our Services">บริการของเรา</h2>
+      <div class="services-box">
+        <div class="services-grid">
+          <div class="service-item">
+            <div class="service-icon" style="background:var(--pink-light)">📦</div>
+            <div class="service-info">
+              <h4 data-th="สินค้าครบครัน" data-en="Wide Product Range">สินค้าครบครัน</h4>
+              <p data-th="บรรจุภัณฑ์ทุกประเภท กล่อง ถุง ฟิล์ม วัสดุป้องกัน" data-en="All types of packaging from boxes, bags, films to protective materials">บรรจุภัณฑ์ทุกประเภท กล่อง ถุง ฟิล์ม วัสดุป้องกัน</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon" style="background:#d0f5f0">🥇</div>
+            <div class="service-info">
+              <h4 data-th="ให้คำปรึกษาฟรี" data-en="Free Consultation">ให้คำปรึกษาฟรี</h4>
+              <p data-th="แนะนำการเลือกบรรจุภัณฑ์ที่เหมาะกับธุรกิจของคุณ" data-en="Advice on choosing the right packaging for your business">แนะนำการเลือกบรรจุภัณฑ์ที่เหมาะกับธุรกิจของคุณ</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon" style="background:#d4f5e4">🎨</div>
+            <div class="service-info">
+              <h4 data-th="ออกแบบเฉพาะ" data-en="Custom Design">ออกแบบเฉพาะ</h4>
+              <p data-th="รับออกแบบบรรจุภัณฑ์ตามความต้องการของลูกค้า" data-en="Custom packaging design per customer requirements">รับออกแบบบรรจุภัณฑ์ตามความต้องการของลูกค้า</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon" style="background:#e8d8f5">🚀</div>
+            <div class="service-info">
+              <h4 data-th="ส่งด่วนทั่วประเทศ" data-en="Express Delivery Nationwide">ส่งด่วนทั่วประเทศ</h4>
+              <p data-th="บริการจัดส่งรวดเร็วถึงมือคุณทั่วประเทศ" data-en="Fast delivery service across the country">บริการจัดส่งรวดเร็วถึงมือคุณทั่วประเทศ</p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <div class="contact-box">
+      <h2 data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</h2>
+      <p data-th="พร้อมให้บริการและตอบคำถามของคุณ" data-en="Ready to serve and answer your questions">พร้อมให้บริการและตอบคำถามของคุณ</p>
+      <div class="contact-inner">
         <div class="contact-item">
-          <div class="contact-icon ci-green">📍</div>
-          <div>
-            <h4>Address</h4>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.546338371279!2d102.8425778!3d16.447851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31228b000c297601%3A0x42eebb925a431975!2z4LiV4Li14LmL4Lit4LmJ4Lin4LiZ4Lia4Lij4Lij4LiI4Li44Lig4Lix4LiT4LiR4LmMICjguYDguJrguKXguKXguYwpIOC4quC4suC4guC4suC4guC4reC4meC5geC4geC5iOC4mQ!5e0!3m2!1sja!2sth!4v1778165563895!5m2!1sja!2sth"
-              width="100%" height="220" style="border:0;border-radius:16px;margin-top:10px;margin-bottom:8px;"
-              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <p>123/45 Rama 4 Road<br>Khlong Toei, Bangkok 10110</p>
+          <div class="contact-icon" style="background:var(--pink-light)">📞</div>
+          <div class="contact-info">
+            <h4 data-th="โทรศัพท์" data-en="Phone">โทรศัพท์</h4>
+            <p>081-480-003<br>094-530-6500</p>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-icon ci-teal">✉️</div>
-          <div><h4>Email</h4><p>info@teeouanpackaging.com<br>sales@teeouanpackaging.com</p></div>
+          <div class="contact-icon" style="background:#fff3cd">⏰</div>
+          <div class="contact-info">
+            <h4 data-th="เวลาทำการ" data-en="Business Hours">เวลาทำการ</h4>
+            <p data-th="จ–ส: 7:00 – 19:00 น.<br>อา: 7:00 – 17:30 น." data-en="Mon–Sat: 7:00 AM – 7:00 PM<br>Sun: 7:00 AM – 5:30 PM">จ–ส: 7:00 – 19:00 น.<br>อา: 7:00 – 17:30 น.</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:#d4f5e4">📍</div>
+          <div class="contact-info">
+            <h4 data-th="ที่อยู่" data-en="Address">ที่อยู่</h4>
+            <div class="map-embed">🗺️ Google Maps</div>
+            <p style="margin-top:8px" data-th="123/45 ถนนพระราม 4<br>คลองเตย กรุงเทพฯ 10110" data-en="123/45 Rama 4 Road<br>Khlong Toei, Bangkok 10110">123/45 ถนนพระราม 4<br>คลองเตย กรุงเทพฯ 10110</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:#ddeeff">✉️</div>
+          <div class="contact-info">
+            <h4 data-th="อีเมล" data-en="Email">อีเมล</h4>
+            <p>info@teeouanpackaging.com<br>sales@teeouanpackaging.com</p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><span class="logo" onclick="showPage('home')"><svg width="26" height="26" viewBox="0 0 40 40" fill="none"><path d="M20 6L34 14V26L20 34L6 26V14L20 6Z" stroke="#ff69b4" stroke-width="2.5" fill="none"/><path d="M20 6L20 34M6 14L34 14M6 26L34 26" stroke="#ff69b4" stroke-width="1.5" opacity="0.4"/></svg> Tee Ouan Packaging</span><p>Quality packaging supplier with diverse products, affordable prices, and express delivery service</p></div>
-      <div class="footer-col"><h4>Contact Us</h4><p>Phone: 0814800003<br>Email: info@teeouanpackaging.com<br>LINE: @teeouanpack</p></div>
-      <div class="footer-col"><h4>Business Hours</h4><p>Mon - Sat: 7:00 AM - 7:00 PM<br>Sun: 7:00 AM - 5:30 PM</p></div>
-    </div>
-    <div class="footer-bottom">© 2026 Tee Ouan Packaging — All rights reserved</div>
-  </footer>
+  </div>
 </div>
 
-<div class="help-bubble" title="Help">?</div>
+<!-- ACCOUNT PAGE -->
+<div class="page" id="page-account">
+  <div class="account-page">
+    <h1 data-th="บัญชีของฉัน" data-en="My Account">บัญชีของฉัน</h1>
+    <div class="account-card">
+      <p style="color:var(--text-gray);font-size:15px" data-th="กรุณาเข้าสู่ระบบเพื่อดูข้อมูลบัญชีของคุณ" data-en="Please log in to view your account information.">กรุณาเข้าสู่ระบบเพื่อดูข้อมูลบัญชีของคุณ</p>
+      <br>
+      <button class="btn-hero" style="font-size:14px;padding:10px 28px" onclick="showToast(currentLang==='th'?'ฟีเจอร์นี้กำลังพัฒนา':'This feature is coming soon!')" data-th="เข้าสู่ระบบ" data-en="Log In">เข้าสู่ระบบ</button>
+    </div>
+  </div>
+</div>
 
-<!-- ════════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════════ -->
 <script>
-/* ────────────────────────────────────────
-   商品データ
-   ※ images[] に画像・動画パスを追加可能
-──────────────────────────────────────── */
-const PRODUCTS = {
-  'box-a': {
-    id:'box-a', name:'Corrugated Box Size A', tag:'Boxes',
-    price:15, unit:'/pc', stock:500,
-    images:['sizeA.JPG'],
-    desc:'3-ply corrugated cardboard box, strong and durable, suitable for general packaging.',
-    specs:[{k:'Material',v:'3-ply Corrugated'},{k:'Size',v:'30×20×15 cm'},{k:'Max Load',v:'10 kg'},{k:'MOQ',v:'50 pcs'}],
-    reviews:[{name:'Somchai K.',rating:5,date:'Mar 2026',text:'Strong and well-made.'},{name:'Nipa W.',rating:4,date:'Feb 2026',text:'Good quality for the price.'}],
-  },
-  'bubble': {
-    id:'bubble', name:'Bubble Wrap', tag:'Protective Materials',
-    price:120, unit:'/roll', stock:200,
-    images:['Bubble Wrap.JPG'],
-    desc:'Bubble wrap for shock protection, prevents product damage, ready to use.',
-    specs:[{k:'Roll Size',v:'50cm × 50m'},{k:'Bubble',v:'10mm'},{k:'Material',v:'LDPE'}],
-    reviews:[{name:'Malee R.',rating:5,date:'Apr 2026',text:'Great protection!'}],
-  },
-  'bags': {
-    id:'bags', name:'Plastic Bags', tag:'Bags',
-    price:5, unit:'/pc', stock:1000,
-    images:['IMG_3738.JPG', 'IMG_3739.JPG', 'IMG_3740.JPG', 'IMG_3741.JPG', 'IMG_3742.JPG'],
-    desc:'Eco-friendly kraft paper bags with handles, strong and durable.',
-    specs:[{k:'Material',v:'Kraft Paper'},{k:'Size',v:'25×35×10 cm'},{k:'Max Load',v:'5 kg'}],
-    reviews:[],
-  },
-  'eco': {
-    id:'eco', name:'Eco-Friendly Packaging', tag:'Eco-Friendly',
-    price:35, unit:'/pc', stock:150,
-    images:['IMG_3753.JPG', 'IMG_3754.JPG', 'IMG_3755.JPG', 'IMG_3756.JPG', 'IMG_3760.mp4', 'IMG_3765 2.mp4'],
-    desc:'Biodegradable packaging made from recycled materials, environmentally conscious choice.',
-    specs:[{k:'Material',v:'Recycled / Compostable'},{k:'Decompose',v:'6–12 months'}],
-    reviews:[],
-  },
-  'cont': {
-    id:'cont', name:'Clear Plastic Containers', tag:'Protective Materials',
-    price:25, unit:'/pc', stock:300,
-    images:['IMG_3757.JPG', 'IMG_3758.JPG'],
-    desc:'Transparent plastic containers for display and protection of products.',
-    specs:[{k:'Material',v:'PET Plastic'},{k:'Capacity',v:'1 Litre'},{k:'Lid',v:'Snap-lock'}],
-    reviews:[],
-  },
-  'box-b': {
-    id:'box-b', name:'Corrugated Box Size B', tag:'Boxes',
-    price:22, unit:'/pc', stock:320,
-    images:['sizeB.JPG', 'sizeB2.JPG', 'sizeB3.JPG'],
-    desc:'5-ply heavy-duty corrugated box, ideal for heavy or fragile items.',
-    specs:[{k:'Material',v:'5-ply Corrugated'},{k:'Size',v:'40×30×25 cm'},{k:'Max Load',v:'25 kg'}],
-    reviews:[],
-  },
-  '1': {
-    id:'1', name:'Plastic Cups', tag:'Eco-Friendly',
-    price:40, unit:'/pc', stock:320,
-    images:['IMG_3751.JPG', 'IMG_3752.JPG', 'IMG_3761.mp4'],
-    desc:'5-ply heavy-duty corrugated box, ideal for heavy or fragile items.',
-    specs:[{k:'Material',v:'5-ply Corrugated'},{k:'Size',v:'40×30×25 cm'},{k:'Max Load',v:'25 kg'}],
-    reviews:[],
-  },
-};
-
-/* ────────────────────────────────────────
-   状態変数
-──────────────────────────────────────── */
-let cart              = [];
-let currentLang       = 'en';
-let selectedPayMethod = '';
-let detailProductId   = null;
-let detailCurrentSlide = 0;
-let detailQty         = 1;
-
-/* ────────────────────────────────────────
-   言語切り替え（ボタン表示のみ）
-──────────────────────────────────────── */
-function changeLang(lang) {
-  currentLang = lang;
-  document.getElementById('btn-th').classList.toggle('active', lang === 'th');
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-}
-
-/* ────────────────────────────────────────
-   ページ遷移
-──────────────────────────────────────── */
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  const navEl = document.getElementById('nav-' + page);
-  if (navEl) navEl.classList.add('active');
-  window.scrollTo(0, 0);
-  closeMenu();
-  if (page === 'orders') renderCart();
-}
-
-/* ────────────────────────────────────────
-   フィルター
-──────────────────────────────────────── */
-function filterCategory(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#productsGrid .product-card').forEach(card => {
-    card.style.display = (cat === 'All' || card.dataset.category === cat) ? '' : 'none';
-  });
-}
-function filterProducts() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  document.querySelectorAll('#productsGrid .product-card').forEach(card => {
-    card.style.display = card.dataset.name.includes(q) ? '' : 'none';
-  });
-}
-
-/* ────────────────────────────────────────
-   カート
-──────────────────────────────────────── */
-function addToCart(btn) {
-  const card   = btn.closest('.product-card');
-  const id     = card.dataset.id;
-  const name   = card.querySelector('.product-name').textContent.trim();
-  const price  = parseFloat(card.dataset.price);
-  const unit   = card.dataset.unit;
-  const p      = PRODUCTS[id];
-  const imgUrl = p && p.images && p.images[0] ? p.images[0] : '';
-
-  const existing = cart.find(i => i.id === id);
-  if (existing) { existing.qty++; }
-  else { cart.push({ id, name, price, unit, imgUrl, qty: 1 }); }
-
-  const orig = btn.innerHTML;
-  btn.innerHTML = '✅ Added!';
-  btn.classList.add('added');
-  setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('added'); }, 1300);
-
-  updateBadge();
-  renderCart();
-}
-
-function changeQty(id, delta) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-  updateBadge();
-  renderCart();
-}
-
-function removeItem(id) {
-  cart = cart.filter(i => i.id !== id);
-  updateBadge();
-  renderCart();
-}
-
-function updateBadge() {
-  const total = cart.reduce((s, i) => s + i.qty, 0);
-  const badge = document.getElementById('cartBadge');
-  badge.style.display = total > 0 ? 'inline-flex' : 'none';
-  badge.textContent   = total > 99 ? '99+' : total;
-}
-
-function renderCart() {
-  const container  = document.getElementById('cartItemsContainer');
-  const summaryBox = document.getElementById('cartSummaryBox');
-  if (!container) return;
-
-  if (cart.length === 0) {
-    container.innerHTML = `
-      <div class="cart-empty">
-        <div class="cart-empty-icon">🛒</div>
-        <p>Your cart is empty.<br>Add items from the Products page!</p>
-        <button class="btn-primary" onclick="showPage('products')">Browse Products</button>
-      </div>`;
-    summaryBox.style.display = 'none';
-    return;
-  }
-
-  let html = '', subtotal = 0;
-  cart.forEach(item => {
-    const line = item.price * item.qty;
-    subtotal += line;
-    html += `
-      <div class="cart-item">
-        <div class="cart-thumb" style="background-image:url('${item.imgUrl}');background-size:cover;background-position:center;"></div>
-        <div class="cart-info">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-unit">$${item.price}${item.unit}</div>
-        </div>
-        <div class="qty-wrap">
-          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
-          <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
-        </div>
-        <div class="cart-line-price">$${line.toLocaleString()}</div>
-        <button class="cart-del" onclick="removeItem('${item.id}')">🗑</button>
-      </div>`;
-  });
-
-  container.innerHTML = html;
-  document.getElementById('summarySubtotal').textContent = '$' + subtotal.toLocaleString();
-  document.getElementById('summaryTotal').textContent    = '$' + subtotal.toLocaleString();
-  summaryBox.style.display = 'block';
-}
-
-function clearCart() {
-  cart = [];
-  updateBadge();
-  renderCart();
-  showPage('home');
-}
-
-/* ────────────────────────────────────────
-   チェックアウト
-──────────────────────────────────────── */
-function openCheckout() {
-  if (!cart.length) return;
-
-  let html = '', total = 0;
-  cart.forEach(item => {
-    const line = item.price * item.qty;
-    total += line;
-    html += `
-      <div class="co-row">
-        <div class="co-thumb" style="background-image:url('${item.imgUrl}');background-size:cover;background-position:center;"></div>
-        <div class="co-detail"><strong>${item.name}</strong><span>× ${item.qty}</span></div>
-        <div class="co-price">$${line.toLocaleString()}</div>
-      </div>`;
-  });
-
-  document.getElementById('coItems').innerHTML = html;
-  document.getElementById('coTotal').innerHTML = `<span>Total</span><span>$${total.toLocaleString()}</span>`;
-
-  const acc = loadAccount();
-  if (acc.address) document.getElementById('co-address').value = acc.address;
-  if (acc.name)    document.getElementById('co-name').value    = acc.name;
-  if (acc.phone)   document.getElementById('co-phone').value   = acc.phone;
-  if (acc.payment) selectPay(acc.payment);
-
-  openModal('modalCheckout');
-}
-
-function selectPay(method) {
-  selectedPayMethod = method;
-  ['bank','promptpay','cod','card'].forEach(m => {
-    document.getElementById('pay-' + m).classList.toggle('selected', m === method);
-  });
-}
-
-function confirmOrder() {
-  if (!selectedPayMethod)                                  { alert('Please select a payment method.');  return; }
-  if (!document.getElementById('co-name').value.trim())   { alert('Please enter recipient name.');     return; }
-  if (!document.getElementById('co-phone').value.trim())  { alert('Please enter phone number.');       return; }
-  if (!document.getElementById('co-address').value.trim()){ alert('Please enter delivery address.');   return; }
-  closeModal('modalCheckout');
-  openModal('modalConfirmed');
-}
-
-/* ────────────────────────────────────────
-   商品詳細
-──────────────────────────────────────── */
-function openDetail(id) {
-  const p = PRODUCTS[id];
-  if (!p) return;
-  detailProductId    = id;
-  detailCurrentSlide = 0;
-  detailQty          = 1;
-
-  document.getElementById('detailTag').textContent   = p.tag;
-  document.getElementById('detailName').textContent  = p.name;
-  document.getElementById('detailPrice').textContent = '$' + p.price;
-  document.getElementById('detailUnit').textContent  = p.unit;
-  document.getElementById('detailStock').innerHTML   = `<span>✅</span><span>In Stock (${p.stock})</span>`;
-  document.getElementById('detailDesc').textContent  = p.desc;
-  document.getElementById('detailQtyNum').textContent = '1';
-  document.getElementById('detailSpecs').innerHTML   = (p.specs || []).map(s =>
-    `<div class="spec-row"><span class="spec-key">${s.k}</span><span class="spec-val">${s.v}</span></div>`).join('');
-
-  const slidesEl = document.getElementById('detailSlides');
-  const dotsEl   = document.getElementById('detailDots');
-  const thumbsEl = document.getElementById('detailThumbs');
-  slidesEl.innerHTML = dotsEl.innerHTML = thumbsEl.innerHTML = '';
-
-  (p.images || []).forEach((src, i) => {
-    const isVideo = /\.(mov|mp4|webm|ogg)$/i.test(src);
-    // スライド
-    const s = document.createElement('div');
-    s.className = 'detail-slide';
-    if (isVideo) {
-      const v = document.createElement('video');
-      v.src = src; v.controls = true; v.playsInline = true; v.preload = 'metadata';
-      v.style.cssText = 'width:100%;height:100%;object-fit:contain;';
-      s.appendChild(v);
-    } else {
-      s.style.backgroundImage = `url('${src}')`;
+  // DATA
+  const products = [
+    {
+      id:1, cat:'boxes',
+      th:{ name:'กล่องลูกฟูกขนาด A', desc:'กล่องลูกฟูก 3 ชั้น แข็งแรงทนทาน เหมาะสำหรับบรรจุสินค้าทั่วไป รองรับสินค้าน้ำหนักเบาถึงปานกลาง สั่งได้ทีละมาก', catLabel:'กล่อง',
+        specs:[['วัสดุ','ลูกฟูก 3 ชั้น'],['ขนาด','30×20×15 ซม.'],['รับน้ำหนัก','10 กก.'],['MOQ','50 ชิ้น'],['สี','น้ำตาลธรรมชาติ']] },
+      en:{ name:'Corrugated Box Size A', desc:'3-ply corrugated cardboard box, strong and durable, suitable for general packaging. Ideal for light to medium-weight products. Available in bulk.', catLabel:'Boxes',
+        specs:[['Material','3-ply Corrugated Cardboard'],['Dimensions','30×20×15 cm'],['Max Load','10 kg'],['MOQ','50 pcs'],['Color','Natural Brown']] },
+      price:15, emoji:'📦',
+      images:['https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600','https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600','https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600']
+    },
+    {
+      id:2, cat:'protective',
+      th:{ name:'บับเบิ้ลแรป', desc:'บับเบิ้ลแรปฟองใหญ่ ป้องกันการกระแทกได้ดีเยี่ยม เหมาะสำหรับห่อสินค้าแตกหักได้', catLabel:'วัสดุป้องกัน',
+        specs:[['วัสดุ','พลาสติก PE'],['ขนาดฟอง','2 ซม.'],['ความกว้าง','1 เมตร'],['MOQ','1 ม้วน']] },
+      en:{ name:'Bubble Wrap', desc:'Large-bubble wrap roll for excellent shock absorption. Ideal for wrapping fragile items.', catLabel:'Protective Materials',
+        specs:[['Material','PE Plastic'],['Bubble Size','2 cm'],['Width','1 meter'],['MOQ','1 roll']] },
+      price:120, emoji:'🫧',
+      images:['https://images.unsplash.com/photo-1609766418204-94aae0ecfdfc?w=600','https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600']
+    },
+    {
+      id:3, cat:'bags',
+      th:{ name:'ถุงกระดาษคราฟท์', desc:'ถุงกระดาษคราฟท์รักษ์โลก ทนทาน มีหูหิ้ว เหมาะสำหรับร้านค้าและธุรกิจทั่วไป', catLabel:'ถุง',
+        specs:[['วัสดุ','กระดาษคราฟท์'],['ขนาด','25×30 ซม.'],['ความหนา','120 แกรม'],['MOQ','100 ใบ']] },
+      en:{ name:'Kraft Paper Bags', desc:'Eco-friendly kraft paper bags with sturdy handles, suitable for retail and general business use.', catLabel:'Bags',
+        specs:[['Material','Kraft Paper'],['Size','25×30 cm'],['Thickness','120 gsm'],['MOQ','100 pcs']] },
+      price:5, emoji:'🛍️',
+      images:['https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600','https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600']
+    },
+    {
+      id:4, cat:'eco',
+      th:{ name:'กล่องกระดาษรักษ์โลก', desc:'กล่องกระดาษรีไซเคิล ย่อยสลายได้ 100% ลดการใช้พลาสติก', catLabel:'รักษ์โลก',
+        specs:[['วัสดุ','กระดาษรีไซเคิล'],['ขนาด','20×15×10 ซม.'],['MOQ','50 ใบ']] },
+      en:{ name:'Eco Paper Box', desc:'100% biodegradable recycled paper box. Reduce plastic usage.', catLabel:'Eco-Friendly',
+        specs:[['Material','Recycled Paper'],['Size','20×15×10 cm'],['MOQ','50 pcs']] },
+      price:18, emoji:'♻️',
+      images:['https://images.unsplash.com/photo-1533779183510-8f55a55f8d44?w=600']
+    },
+    {
+      id:5, cat:'bags',
+      th:{ name:'ถุงซิปล็อค', desc:'ถุงซิปล็อคใสคุณภาพสูง กันความชื้น เหมาะสำหรับบรรจุอาหารและของใช้', catLabel:'ถุง',
+        specs:[['วัสดุ','PE ใส'],['ขนาด','15×20 ซม.'],['MOQ','100 ใบ']] },
+      en:{ name:'Zip Lock Bags', desc:'High-quality clear zip lock bags, moisture-proof, suitable for food and general items.', catLabel:'Bags',
+        specs:[['Material','Clear PE'],['Size','15×20 cm'],['MOQ','100 pcs']] },
+      price:8, emoji:'🪣',
+      images:['https://images.unsplash.com/photo-1627484986430-a8e55a86dd4e?w=600']
+    },
+    {
+      id:6, cat:'other',
+      th:{ name:'เทปกาวใส', desc:'เทปกาวใสมาตรฐาน ใช้สำหรับปิดกล่องและห่อของทั่วไป', catLabel:'อื่นๆ',
+        specs:[['ความกว้าง','4.8 ซม.'],['ความยาว','45 เมตร'],['MOQ','12 ม้วน']] },
+      en:{ name:'Clear Packing Tape', desc:'Standard clear packing tape for sealing boxes and general wrapping.', catLabel:'Other',
+        specs:[['Width','4.8 cm'],['Length','45 m'],['MOQ','12 rolls']] },
+      price:25, emoji:'📎',
+      images:['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600']
     }
-    slidesEl.appendChild(s);
-    // ドット
-    const d = document.createElement('div');
-    d.className = 'detail-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goToSlide(i);
-    dotsEl.appendChild(d);
-    // サムネイル
-    const t = document.createElement('div');
-    t.className = 'detail-thumb' + (i === 0 ? ' active' : '');
-    t.style.backgroundImage = isVideo ? '' : `url('${src}')`;
-    if (isVideo) t.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:8px;color:#fff;font-size:1.6rem;">▶</div>';
-    t.style.position = 'relative';
-    t.onclick = () => goToSlide(i);
-    thumbsEl.appendChild(t);
-  });
+  ];
 
-  const btn = document.getElementById('detailAddBtn');
-  btn.textContent = '🛒 Add to Cart';
-  btn.classList.remove('added');
+  let currentLang = 'th';
+  let cart = [];
+  let currentProduct = null;
+  let currentQty = 1;
+  let currentCat = 'all';
+  let starRating = 0;
 
-  renderReviews(p);
-  showPage('detail');
-}
-
-function goToSlide(i) {
-  const p = PRODUCTS[detailProductId];
-  if (!p) return;
-  document.querySelectorAll('#detailSlides video').forEach(v => { v.pause(); v.currentTime = 0; });
-  detailCurrentSlide = Math.max(0, Math.min(i, (p.images || []).length - 1));
-  document.getElementById('detailSlides').style.transform = `translateX(-${detailCurrentSlide * 100}%)`;
-  document.querySelectorAll('.detail-dot').forEach((d, idx)  => d.classList.toggle('active', idx === detailCurrentSlide));
-  document.querySelectorAll('.detail-thumb').forEach((t, idx) => t.classList.toggle('active', idx === detailCurrentSlide));
-}
-function slideDetail(dir) { const p = PRODUCTS[detailProductId]; if (p) goToSlide(detailCurrentSlide + dir); }
-
-// スワイプ対応
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { if (e.target.closest('.detail-slider')) touchStartX = e.touches[0].clientX; }, { passive: true });
-document.addEventListener('touchend',   e => { if (!e.target.closest('.detail-slider')) return; if (Math.abs(touchStartX - e.changedTouches[0].clientX) > 40) slideDetail(touchStartX > e.changedTouches[0].clientX ? 1 : -1); });
-
-function detailQtyChange(delta) {
-  detailQty = Math.max(1, detailQty + delta);
-  document.getElementById('detailQtyNum').textContent = detailQty;
-}
-function detailAddToCart() {
-  const p = PRODUCTS[detailProductId];
-  if (!p) return;
-  const imgUrl   = p.images && p.images[0] ? p.images[0] : '';
-  const existing = cart.find(i => i.id === p.id);
-  if (existing) { existing.qty += detailQty; }
-  else { cart.push({ id: p.id, name: p.name, price: p.price, unit: p.unit, imgUrl, qty: detailQty }); }
-  updateBadge();
-  renderCart();
-  const btn = document.getElementById('detailAddBtn');
-  btn.textContent = `✅ Added (×${detailQty})!`;
-  btn.classList.add('added');
-  setTimeout(() => { btn.textContent = '🛒 Add to Cart'; btn.classList.remove('added'); }, 1500);
-}
-
-/* ────────────────────────────────────────
-   レビュー
-──────────────────────────────────────── */
-const STAR_LABELS = ['','Poor','Fair','Good','Great','Excellent!'];
-
-document.querySelectorAll('.star-picker input').forEach(inp => {
-  inp.addEventListener('change', () => {
-    const v = parseInt(inp.value);
-    document.getElementById('starHint').textContent = `${v} ★ — ${STAR_LABELS[v]}`;
-  });
-});
-
-function renderReviews(p) {
-  const key    = 'reviews_' + p.id;
-  let stored   = [];
-  try { stored = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
-
-  const all = [...stored];
-  (p.reviews || []).forEach(r => { if (!stored.some(s => s.name === r.name && s.text === r.text)) all.push(r); });
-
-  const avg   = all.length ? (all.reduce((s, r) => s + r.rating, 0) / all.length).toFixed(1) : '–';
-  const stars = n => '⭐'.repeat(Math.round(n) || 0);
-
-  document.getElementById('reviewSummary').innerHTML = `
-    <div class="review-avg">${avg}</div>
-    <div>
-      <div class="review-stars">${stars(parseFloat(avg))}</div>
-      <div class="review-count">${all.length} reviews</div>
-    </div>`;
-
-  document.getElementById('reviewList').innerHTML = all.map(r => `
-    <div class="review-card">
-      <div class="review-header">
-        <div class="review-avatar">${r.name[0].toUpperCase()}</div>
-        <div class="review-meta">
-          <div class="review-name">${r.name}</div>
-          <div class="review-date">${r.date}</div>
-        </div>
-        <div class="review-stars-sm">${stars(r.rating)}</div>
-      </div>
-      ${r.title ? `<div style="font-size:0.82rem;font-weight:700;margin-bottom:4px;">"${r.title}"</div>` : ''}
-      <div class="review-text">${r.text}</div>
-    </div>`).join('') || '<p style="color:var(--text-muted);font-size:0.9rem;padding:12px 0;">No reviews yet.</p>';
-}
-
-function submitReview() {
-  const author = document.getElementById('reviewAuthor').value.trim();
-  const text   = document.getElementById('reviewText').value.trim();
-  const starEl = document.querySelector('.star-picker input:checked');
-  const errEl  = document.getElementById('reviewErr');
-
-  if (!starEl) { errEl.textContent = '⚠️ Please select a star rating.'; return; }
-  if (!author) { errEl.textContent = '⚠️ Please enter your name.';      return; }
-  if (!text)   { errEl.textContent = '⚠️ Please write a comment.';      return; }
-  errEl.textContent = '';
-
-  const p   = PRODUCTS[detailProductId];
-  if (!p) return;
-  const key = 'reviews_' + p.id;
-  let stored = [];
-  try { stored = JSON.parse(localStorage.getItem(key) || '[]'); } catch {}
-
-  const newRev = {
-    name:   author,
-    title:  document.getElementById('reviewTitle').value.trim(),
-    rating: parseInt(starEl.value),
-    date:   new Date().toLocaleString('en-US', { month: 'short', year: 'numeric' }),
-    text,
-  };
-  stored.unshift(newRev);
-  p.reviews.unshift(newRev);
-  localStorage.setItem(key, JSON.stringify(stored));
-  renderReviews(p);
-
-  // フォームリセット
-  document.getElementById('reviewAuthor').value = '';
-  document.getElementById('reviewTitle').value  = '';
-  document.getElementById('reviewText').value   = '';
-  document.querySelectorAll('.star-picker input').forEach(i => i.checked = false);
-  document.getElementById('starHint').textContent = 'Tap a star to rate';
-
-  const ok = document.getElementById('reviewSuccess');
-  ok.style.display = 'block';
-  setTimeout(() => ok.style.display = 'none', 3000);
-}
-
-/* ────────────────────────────────────────
-   アカウント
-──────────────────────────────────────── */
-const ACC_KEY = 'teeouanAcc';
-function loadAccount()          { try { return JSON.parse(localStorage.getItem(ACC_KEY) || '{}'); } catch { return {}; } }
-function saveAccountData(data)  { localStorage.setItem(ACC_KEY, JSON.stringify(data)); }
-
-function openAccountModal() {
-  document.getElementById('accLockScreen').style.display = 'block';
-  document.getElementById('accFormScreen').style.display = 'none';
-  document.getElementById('passInput').value             = '';
-  document.getElementById('passErr').textContent         = '';
-  openModal('modalAccount');
-}
-function checkPass() {
-  const entered = document.getElementById('passInput').value;
-  const acc     = loadAccount();
-  if (entered === (acc.password || '1234')) {
-    document.getElementById('accLockScreen').style.display = 'none';
-    document.getElementById('accFormScreen').style.display = 'block';
-    document.getElementById('acc-name').value    = acc.name    || '';
-    document.getElementById('acc-shop').value    = acc.shop    || '';
-    document.getElementById('acc-email').value   = acc.email   || '';
-    document.getElementById('acc-phone').value   = acc.phone   || '';
-    document.getElementById('acc-address').value = acc.address || '';
-    document.getElementById('acc-payment').value = acc.payment || '';
-    document.getElementById('acc-newpass').value = '';
-  } else {
-    document.getElementById('passErr').textContent = '❌ Incorrect password.';
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-th').classList.toggle('active', lang==='th');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    // Update all data-th/data-en text
+    document.querySelectorAll('[data-th]').forEach(el => {
+      const t = el.getAttribute('data-'+lang);
+      if(t) el.innerHTML = t;
+    });
+    // Placeholders
+    document.querySelectorAll('[data-th-placeholder]').forEach(el => {
+      const t = el.getAttribute('data-'+lang+'-placeholder');
+      if(t) el.placeholder = t;
+    });
+    renderAllProducts();
+    renderFeatured();
+    renderCart();
   }
-}
-function saveAccount() {
-  const acc   = loadAccount();
-  const newPw = document.getElementById('acc-newpass').value;
-  saveAccountData({
-    name:     document.getElementById('acc-name').value.trim(),
-    shop:     document.getElementById('acc-shop').value.trim(),
-    email:    document.getElementById('acc-email').value.trim(),
-    phone:    document.getElementById('acc-phone').value.trim(),
-    address:  document.getElementById('acc-address').value.trim(),
-    payment:  document.getElementById('acc-payment').value,
-    password: newPw || acc.password || '1234',
-  });
-  const t = document.getElementById('accToast');
-  t.style.display = 'block';
-  setTimeout(() => t.style.display = 'none', 2500);
-}
-function lockAccount() {
-  document.getElementById('accLockScreen').style.display = 'block';
-  document.getElementById('accFormScreen').style.display = 'none';
-  document.getElementById('passInput').value             = '';
-  document.getElementById('passErr').textContent         = '';
-}
 
-/* ────────────────────────────────────────
-   モーダル共通
-──────────────────────────────────────── */
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-  if (!document.querySelector('.modal-overlay.open')) document.body.style.overflow = '';
-}
-// 背景クリックで閉じる
-document.querySelectorAll('.modal-overlay').forEach(el => {
-  el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); });
-});
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+name).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+    document.getElementById('nav-'+name)?.classList.add('active');
+    window.scrollTo(0,0);
+    if(name==='orders') renderCart();
+  }
 
-/* ────────────────────────────────────────
-   ナビゲーション
-──────────────────────────────────────── */
-function toggleMenu() {
-  ['navLinks','hamburger','navOverlay'].forEach(id => document.getElementById(id).classList.toggle('open'));
-}
-function closeMenu() {
-  ['navLinks','hamburger','navOverlay'].forEach(id => document.getElementById(id).classList.remove('open'));
-}
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2500);
+  }
+
+  function getCatLabel(p) {
+    return currentLang==='th' ? p.th.catLabel : p.en.catLabel;
+  }
+  function getName(p) { return currentLang==='th' ? p.th.name : p.en.name; }
+  function getDesc(p) { return currentLang==='th' ? p.th.desc : p.en.desc; }
+
+  function renderFeatured() {
+    const g = document.getElementById('featured-grid');
+    g.innerHTML = products.slice(0,3).map(p=>productCard(p)).join('');
+  }
+
+  function renderAllProducts() {
+    const search = (document.getElementById('search-input')?.value||'').toLowerCase();
+    let filtered = products.filter(p=> {
+      const match = currentCat==='all' || p.cat===currentCat;
+      const term = getName(p).toLowerCase()+getDesc(p).toLowerCase();
+      return match && (!search || term.includes(search));
+    });
+    document.getElementById('all-products-grid').innerHTML = filtered.map(p=>productCard(p)).join('');
+  }
+
+  function productCard(p) {
+    const img = p.images[0];
+    return `<div class="product-card" onclick="openProduct(${p.id})">
+      <div class="product-img" style="background:#f5f5f5">
+        <img src="${img}" alt="${getName(p)}" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="product-body">
+        <span class="category-badge">${getCatLabel(p)}</span>
+        <div class="product-name">${getName(p)}</div>
+        <p class="product-desc">${getDesc(p).substring(0,60)}...</p>
+        <div class="product-price">฿${p.price}<span style="font-size:13px;color:#aaa;font-weight:400">/pc</span></div>
+      </div>
+    </div>`;
+  }
+
+  function filterCat(cat, btn) {
+    currentCat = cat;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAllProducts();
+  }
+
+  function filterProducts() { renderAllProducts(); }
+
+  function openProduct(id) {
+    currentProduct = products.find(p=>p.id===id);
+    currentQty = 1;
+    const p = currentProduct;
+    document.getElementById('detail-cat').textContent = getCatLabel(p);
+    document.getElementById('detail-name').textContent = getName(p);
+    document.getElementById('detail-price').innerHTML = `฿${p.price} <span>/pc</span>`;
+    document.getElementById('detail-desc').textContent = getDesc(p);
+    document.getElementById('qty-display').textContent = 1;
+    const specs = currentLang==='th' ? p.th.specs : p.en.specs;
+    const skeyLabel = currentLang==='th' ? ['วัสดุ','ขนาด','รับน้ำหนัก','MOQ','สี','ความกว้าง','ความยาว','ขนาดฟอง','ความหนา','ความหนา'] : specs.map(s=>s[0]);
+    document.getElementById('detail-specs').innerHTML = specs.map(s=>`<div class="spec-row"><span class="spec-key">${s[0]}</span><span class="spec-val">${s[1]}</span></div>`).join('');
+    const mainImg = document.getElementById('detail-img');
+    mainImg.src = p.images[0];
+    const thumbsEl = document.getElementById('detail-thumbs');
+    thumbsEl.innerHTML = p.images.map((img,i)=>`<div class="thumb ${i===0?'active':''}" onclick="setThumb(this,'${img}')"><img src="${img}"></div>`).join('');
+    showPage('detail');
+  }
+
+  function setThumb(el, src) {
+    document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('detail-img').src = src;
+  }
+
+  function changeQty(d) {
+    currentQty = Math.max(1, currentQty+d);
+    document.getElementById('qty-display').textContent = currentQty;
+  }
+
+  function addToCart() {
+    if(!currentProduct) return;
+    const existing = cart.find(c=>c.id===currentProduct.id);
+    if(existing) existing.qty += currentQty;
+    else cart.push({id:currentProduct.id, qty:currentQty});
+    updateCartBadge();
+    const msg = currentLang==='th' ? `เพิ่ม ${getName(currentProduct)} ลงตะกร้าแล้ว!` : `${getName(currentProduct)} added to cart!`;
+    showToast(msg);
+  }
+
+  function updateCartBadge() {
+    const total = cart.reduce((a,c)=>a+c.qty,0);
+    document.getElementById('cart-count').textContent = total;
+  }
+
+  function renderCart() {
+    const el = document.getElementById('cart-items');
+    const summary = document.getElementById('order-summary');
+    if(cart.length===0) {
+      el.innerHTML = `<div class="empty-cart"><p style="font-size:40px">🛒</p><p>${currentLang==='th'?'ยังไม่มีสินค้าในตะกร้า':'Your cart is empty'}</p></div>`;
+      summary.style.display='none'; return;
+    }
+    el.innerHTML = cart.map(c=>{
+      const p = products.find(x=>x.id===c.id);
+      return `<div class="order-item">
+        <div class="order-thumb"><img src="${p.images[0]}" alt=""></div>
+        <div class="order-info">
+          <h3>${getName(p)}</h3>
+          <p>฿${p.price}/pc</p>
+        </div>
+        <div class="order-controls">
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="cartQty(${p.id},-1)">−</button>
+            <span class="qty-num">${c.qty}</span>
+            <button class="qty-btn" onclick="cartQty(${p.id},1)">+</button>
+          </div>
+          <span class="order-price">฿${p.price*c.qty}</span>
+          <button class="trash-btn" onclick="removeCart(${p.id})">🗑️</button>
+        </div>
+      </div>`;
+    }).join('');
+    const subtotal = cart.reduce((a,c)=>{const p=products.find(x=>x.id===c.id);return a+p.price*c.qty;},0);
+    document.getElementById('subtotal-val').textContent = '฿'+subtotal;
+    document.getElementById('total-val').textContent = '฿'+subtotal;
+    summary.style.display='block';
+  }
+
+  function cartQty(id,d) {
+    const item = cart.find(c=>c.id===id);
+    if(!item) return;
+    item.qty = Math.max(1,item.qty+d);
+    updateCartBadge(); renderCart();
+  }
+
+  function removeCart(id) {
+    cart = cart.filter(c=>c.id!==id);
+    updateCartBadge(); renderCart();
+  }
+
+  function setStars(n) {
+    starRating = n;
+    document.querySelectorAll('#star-rate span').forEach((s,i)=>{
+      s.classList.toggle('lit', i<n);
+    });
+  }
+
+  // INIT
+  renderFeatured();
+  renderAllProducts();
 </script>
 </body>
 </html>
