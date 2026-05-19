@@ -853,6 +853,35 @@
   // INIT
   renderFeatured();
   renderAllProducts();
+
+  <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>音の読み込みテスト</title>
+</head>
+<body>
+
+    <!-- 画面にはボタンだけを用意 -->
+    <button id="play-btn">効果音を鳴らす</button>
+
+    <script>
+        // ① ボタン要素を取得
+        const button = document.getElementById('play-btn');
+
+        // ② オーディオファイルを読み込む（load()で準備完了状態にする）
+        const clickSound = new Audio('Onoma-Pop03-1(High).mp3');
+        clickSound.load(); 
+
+        // ③ ボタンが押されたら再生する
+        button.addEventListener('click', () => {
+            clickSound.currentTime = 0; // 連続クリック対策
+            clickSound.play();          // 再生
+        });
+    </script>
+
+</body>
+</html>
 </script>
 </body>
 </html>
